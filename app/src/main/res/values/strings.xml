@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">My Debug Application</string>
+    <string name="title_device_info">Device</string>
+    <string name="title_app_info">App</string>
+    <string name="title_hard_info">Hard</string>
+    <string name="title_other_info">Other</string>
+
+    <string name="default_log_text">Log is &#x2026;</string>
+
+    <!-- screen name -->
+    <string name="screen_name_device_info">Device Info</string>
+    <string name="screen_name_application_info">Application Info</string>
+    <string name="screen_name_application_list">Application List</string>
+    <string name="screen_name_application_detail">Application Detail</string>
+    <string name="screen_name_hardware_info">Hardware Info</string>
+    <string name="screen_name_sensor_info">Sensor Info</string>
+    <string name="screen_name_sensor_detail">Sensor Detail</string>
+    <string name="screen_name_camera_detail">Camera Detail</string>
+    <string name="screen_name_other_info">Other Info</string>
+    <string name="screen_name_log_detail">Log Detail</string>
+</resources>
