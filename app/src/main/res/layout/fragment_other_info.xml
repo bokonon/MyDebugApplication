@@ -24,6 +24,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         ads:adSize="BANNER"
-        ads:adUnitId="@string/other_info_bottom_unit_id" />
+        ads:adUnitId="@string/other_info_bottom_unit_id"
+        android:layout_marginBottom="8dp"/>
 
 </android.support.constraint.ConstraintLayout>

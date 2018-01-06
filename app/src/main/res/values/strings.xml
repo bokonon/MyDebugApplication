@@ -5,7 +5,7 @@
     <string name="title_hard_info">Hard</string>
     <string name="title_other_info">Other</string>
 
-    <string name="default_log_text">Log is &#x2026;</string>
+    <string name="default_log_text">Loading &#x2026;</string>
 
     <!-- screen name -->
     <string name="screen_name_device_info">Device Info</string>

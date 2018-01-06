@@ -2,10 +2,10 @@ package jp.co.yuji.mydebugapplication.presentation.view.fragment
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.text.method.ScrollingMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import jp.co.yuji.mydebugapplication.R
 import jp.co.yuji.mydebugapplication.presentation.presenter.LogDetailPresenter
 import kotlinx.android.synthetic.main.fragment_log_detail.view.*
@@ -23,15 +23,20 @@ class LogDetailFragment : BaseFragment() {
 
     private val presenter = LogDetailPresenter()
 
+    private var progressBar: ProgressBar? = null
+
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         val view = inflater!!.inflate(R.layout.fragment_log_detail, container, false)
-        view.log_text.movementMethod = ScrollingMovementMethod.getInstance()
+
+        progressBar = view.progressBar
+        progressBar?.visibility = View.VISIBLE
 
         presenter.getLog(object : LogDetailPresenter.OnGetLogListener {
             override fun onGetLog(log: String) {
                 view.log_text.text = log
+                progressBar?.visibility = View.GONE
             }
         })
 
