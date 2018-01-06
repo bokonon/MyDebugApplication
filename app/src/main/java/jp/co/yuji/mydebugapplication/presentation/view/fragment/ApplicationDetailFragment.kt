@@ -11,10 +11,8 @@ import android.view.ViewGroup
 import jp.co.yuji.mydebugapplication.R
 import jp.co.yuji.mydebugapplication.domain.model.CommonDto
 import jp.co.yuji.mydebugapplication.presentation.view.adapter.ApplicationDetailRecyclerViewAdapter
-import kotlinx.android.synthetic.main.fragment_device_info.view.*
+import kotlinx.android.synthetic.main.fragment_app_detail.view.*
 import java.util.*
-
-
 
 /**
  * Created by yuji on 2018/01/01.
