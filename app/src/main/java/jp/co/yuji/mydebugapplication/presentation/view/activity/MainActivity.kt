@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.FragmentManager
 import android.support.v7.app.AppCompatActivity
+import com.google.android.gms.ads.MobileAds
 import jp.co.yuji.mydebugapplication.R
 import jp.co.yuji.mydebugapplication.presentation.view.fragment.ApplicationInfoFragment
 import jp.co.yuji.mydebugapplication.presentation.view.fragment.DeviceInfoFragment
@@ -49,5 +50,7 @@ class MainActivity : AppCompatActivity() {
         // init view
         val fragment = DeviceInfoFragment.newInstance()
         supportFragmentManager.beginTransaction().replace(R.id.container, fragment).commit()
+
+        MobileAds.initialize(this, getString(R.string.app_id))
     }
 }

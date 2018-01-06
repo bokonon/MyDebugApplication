@@ -8,9 +8,10 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.google.android.gms.ads.AdRequest
 import jp.co.yuji.mydebugapplication.R
 import jp.co.yuji.mydebugapplication.presentation.view.adapter.OtherInfoRecyclerViewAdapter
-import kotlinx.android.synthetic.main.fragment_device_info.view.*
+import kotlinx.android.synthetic.main.fragment_other_info.view.*
 import java.util.*
 
 
@@ -52,6 +53,10 @@ class OtherInfoFragment : BaseFragment() {
 
         val itemDecoration = DividerItemDecoration(activity, DividerItemDecoration.VERTICAL)
         view.recyclerView.addItemDecoration(itemDecoration)
+
+        // ad
+        val adRequest = AdRequest.Builder().build()
+        view.adView.loadAd(adRequest)
 
         return view
     }

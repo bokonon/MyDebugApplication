@@ -6,14 +6,23 @@ apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 26
+
+    def Properties properties = new Properties()
+    properties.load(project.rootProject.file("local.properties").newDataInputStream())
+
     defaultConfig {
         applicationId "jp.co.yuji.mydebugapplication"
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 2
-        versionName "1.1"
+        versionCode 3
+        versionName "1.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary= true
+
+        resValue "string", "app_id", properties.getProperty("app_id", "")
+        resValue "string", "app_info_bottom_unit_id", properties.getProperty("app_info_bottom_unit_id", "")
+        resValue "string", "hardware_info_bottom_unit_id", properties.getProperty("hardware_info_bottom_unit_id", "")
+        resValue "string", "other_info_bottom_unit_id", properties.getProperty("other_info_bottom_unit_id", "")
     }
     buildTypes {
         release {
@@ -33,4 +42,5 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    compile 'com.google.android.gms:play-services-ads:11.8.0'
 }
