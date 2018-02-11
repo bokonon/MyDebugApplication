@@ -16,7 +16,8 @@ class GetAppListUseCase {
     }
 
     fun getApplicationList(context: Context, actionType: ApplicationInfoFragment.ActionType, listener: OnGetApplicationListListener) {
-        val task = GetAppListTask (context, actionType, object : GetAppListTask.OnGetApplicationListListener {
+        val packageManager = context.packageManager
+        val task = GetAppListTask (packageManager, actionType, object : GetAppListTask.OnGetApplicationListListener {
             override fun onGetApplicationList(appList: List<ApplicationListDto>) {
                 listener.onGetApplicationList(appList)
             }

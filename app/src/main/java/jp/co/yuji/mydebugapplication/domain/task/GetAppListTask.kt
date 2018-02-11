@@ -1,6 +1,5 @@
 package jp.co.yuji.mydebugapplication.domain.task
 
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.AsyncTask
@@ -12,7 +11,7 @@ import java.util.*
 /**
  * Created by yuji on 2018/01/04.
  */
-class GetAppListTask(private val context: Context, private val actionType: ApplicationInfoFragment.ActionType, private val listener: OnGetApplicationListListener) : AsyncTask<Void, Void, List<ApplicationListDto>>() {
+class GetAppListTask(private val packageManager: PackageManager, private val actionType: ApplicationInfoFragment.ActionType, private val listener: OnGetApplicationListListener) : AsyncTask<Void, Void, List<ApplicationListDto>>() {
 
     interface OnGetApplicationListListener {
         fun onGetApplicationList(cameraList : List<ApplicationListDto>)
@@ -54,7 +53,6 @@ class GetAppListTask(private val context: Context, private val actionType: Appli
     }
 
     private fun addInstalledAppList(list: ArrayList<ApplicationListDto>) {
-        val packageManager = context.packageManager
         val applicationInfoList = packageManager.getInstalledApplications(PackageManager.GET_META_DATA)
         for (applicationInfo in applicationInfoList) {
             val packageName = applicationInfo.packageName
@@ -65,8 +63,6 @@ class GetAppListTask(private val context: Context, private val actionType: Appli
     }
 
     private fun addLauncherApp(list: ArrayList<ApplicationListDto>, intent: Intent) {
-        val packageManager = context.packageManager
-
         val resolverInfoList = packageManager.queryIntentActivities(intent, 0)
         for (resolverInfo in resolverInfoList) {
             try {

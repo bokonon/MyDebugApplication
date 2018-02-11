@@ -32,6 +32,7 @@ class OtherInfoFragment : BaseFragment() {
             val type = Type.find(position)
             when (type) {
                 Type.LOG -> fragment = LogDetailFragment.newInstance()
+                Type.WiFi -> fragment = WiFiInfoListFragment.newInstance()
             }
             if (fragment != null) {
                 activity.supportFragmentManager.beginTransaction()
@@ -76,7 +77,8 @@ class OtherInfoFragment : BaseFragment() {
     }
 
     enum class Type(val title: String, val position: Int)  {
-        LOG("Log", 0);
+        LOG("Log", 0),
+        WiFi("WiFi", 1);
 
         companion object {
             @Nullable
