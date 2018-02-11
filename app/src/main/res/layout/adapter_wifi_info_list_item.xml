@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="4dp">
+
+    <!-- ssid -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ssid_text"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:textStyle="bold"/>
+
+    <!-- bssid -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/mac_address_text"
+        app:layout_constraintTop_toBottomOf="@id/ssid_text"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <!-- capabilities -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/capabilities_text"
+        app:layout_constraintTop_toBottomOf="@id/mac_address_text"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <!-- frequency MHz -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/frequency_text"
+        app:layout_constraintTop_toBottomOf="@id/capabilities_text"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <!-- level dBm -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/level_text"
+        app:layout_constraintTop_toBottomOf="@id/frequency_text"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+</android.support.constraint.ConstraintLayout>
