@@ -41,10 +41,32 @@ class GetLogTask(private val listener: OnGetLogListener) : AsyncTask<Void, Void,
 
         val command = "logcat -d"
 
-        val process = Runtime.getRuntime().exec(command)
-        val bufferReader = BufferedReader(InputStreamReader(process.inputStream), 1024)
+        var inputStreamReader : InputStreamReader? = null
+        var bufferReader : BufferedReader? = null
+        try {
+            val process = Runtime.getRuntime().exec(command)
+            inputStreamReader = InputStreamReader(process.inputStream)
+            bufferReader = BufferedReader(inputStreamReader, 1024)
 
-        return bufferReader.readText()
+            return bufferReader.readText()
+        }
+        catch (e: Exception) {
+            return e.message.toString()
+        }
+        finally {
+            try {
+                if (inputStreamReader != null) {
+                    inputStreamReader.close()
+                }
+                if (bufferReader != null) {
+                    bufferReader.close()
+                }
+            }
+            catch (e: Exception) {
+                return e.message.toString()
+            }
+
+        }
     }
 
 }
