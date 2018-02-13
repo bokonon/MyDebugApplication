@@ -20,8 +20,13 @@
     <string name="screen_name_log_detail">Log Detail</string>
     <string name="screen_name_wifi_info_list">WiFi Info List</string>
     <string name="screen_name_wifi_info_detail">WiFi Info Detail</string>
+    <string name="screen_name_adb_shell">Adb Shell</string>
 
     <!-- WiFi info -->
     <string name="wifi_info_level_unit_text">%1$d dBm</string>
     <string name="wifi_info_frequency_unit_text">%1$d MHz</string>
+
+    <!-- Adb Shell -->
+    <string name="adb_shell_edit_text_hint">input shell command</string>
+    <string name="adb_shell_execute_button_text">execute</string>
 </resources>

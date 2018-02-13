@@ -32,7 +32,8 @@ class OtherInfoFragment : BaseFragment() {
             val type = Type.find(position)
             when (type) {
                 Type.LOG -> fragment = LogDetailFragment.newInstance()
-                Type.WiFi -> fragment = WiFiInfoListFragment.newInstance()
+                Type.WI_FI -> fragment = WiFiInfoListFragment.newInstance()
+                Type.ADB_SHELL -> fragment = AdbShellFragment.newInstance()
             }
             if (fragment != null) {
                 activity.supportFragmentManager.beginTransaction()
@@ -78,7 +79,8 @@ class OtherInfoFragment : BaseFragment() {
 
     enum class Type(val title: String, val position: Int)  {
         LOG("Log", 0),
-        WiFi("WiFi", 1);
+        WI_FI("WiFi", 1),
+        ADB_SHELL("Adb Shell", 2);
 
         companion object {
             @Nullable
