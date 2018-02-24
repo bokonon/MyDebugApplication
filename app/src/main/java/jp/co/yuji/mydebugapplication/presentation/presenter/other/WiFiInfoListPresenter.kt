@@ -1,4 +1,4 @@
-package jp.co.yuji.mydebugapplication.presentation.presenter
+package jp.co.yuji.mydebugapplication.presentation.presenter.other
 
 import android.content.Context
 import android.net.wifi.ScanResult
@@ -13,7 +13,7 @@ class WiFiInfoListPresenter {
         fun onGetWiFiInfoList(wifiInfoList : List<ScanResult>)
     }
 
-    fun getWiFiInfoList(context: Context, listener: WiFiInfoListPresenter.OnGetWiFiInfoListListener) {
+    fun getWiFiInfoList(context: Context, listener: OnGetWiFiInfoListListener) {
         val useCase = GetWiFiInfoListUseCase()
         useCase.getWiFiInfoList(context, object : GetWiFiInfoListUseCase.OnGetWiFiInfoListListener {
             override fun onGetWiFiInfoList(wifiInfoList : List<ScanResult>) {

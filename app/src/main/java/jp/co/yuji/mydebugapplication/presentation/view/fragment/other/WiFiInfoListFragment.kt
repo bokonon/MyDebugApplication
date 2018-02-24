@@ -1,4 +1,4 @@
-package jp.co.yuji.mydebugapplication.presentation.view.fragment
+package jp.co.yuji.mydebugapplication.presentation.view.fragment.other
 
 import android.net.wifi.ScanResult
 import android.os.Bundle
@@ -10,8 +10,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import jp.co.yuji.mydebugapplication.R
-import jp.co.yuji.mydebugapplication.presentation.presenter.WiFiInfoListPresenter
+import jp.co.yuji.mydebugapplication.presentation.presenter.other.WiFiInfoListPresenter
 import jp.co.yuji.mydebugapplication.presentation.view.adapter.WiFiInfoListRecyclerViewAdapter
+import jp.co.yuji.mydebugapplication.presentation.view.fragment.BaseFragment
 import kotlinx.android.synthetic.main.fragment_app_list.view.*
 import java.util.*
 

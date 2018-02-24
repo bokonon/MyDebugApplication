@@ -1,4 +1,4 @@
-package jp.co.yuji.mydebugapplication.presentation.view.fragment
+package jp.co.yuji.mydebugapplication.presentation.view.fragment.device
 
 import android.app.ActivityManager
 import android.content.Context
@@ -15,6 +15,7 @@ import android.view.WindowManager
 import jp.co.yuji.mydebugapplication.R
 import jp.co.yuji.mydebugapplication.domain.model.CommonDto
 import jp.co.yuji.mydebugapplication.presentation.view.adapter.DeviceInfoRecyclerViewAdapter
+import jp.co.yuji.mydebugapplication.presentation.view.fragment.BaseFragment
 import kotlinx.android.synthetic.main.fragment_device_info.view.*
 import java.util.*
 

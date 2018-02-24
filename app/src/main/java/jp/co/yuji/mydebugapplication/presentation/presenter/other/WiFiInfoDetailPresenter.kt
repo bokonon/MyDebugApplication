@@ -1,4 +1,4 @@
-package jp.co.yuji.mydebugapplication.presentation.presenter
+package jp.co.yuji.mydebugapplication.presentation.presenter.other
 
 import android.content.Context
 import android.net.wifi.ScanResult

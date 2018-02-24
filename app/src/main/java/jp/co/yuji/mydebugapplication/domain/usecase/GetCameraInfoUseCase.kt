@@ -6,7 +6,7 @@ import jp.co.yuji.mydebugapplication.domain.model.CommonDto
 import jp.co.yuji.mydebugapplication.domain.task.GetCameraInfoTask
 
 /**
- * Created by yuji on 2018/01/04.
+ * Get Camera Info UseCase.
  */
 class GetCameraInfoUseCase {
 

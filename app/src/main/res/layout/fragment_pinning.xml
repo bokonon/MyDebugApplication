@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_horizontal_margin">
+
+        <TextView
+            android:id="@+id/pinningTitleTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/pinning_category_title_text"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+        <View
+            android:id="@+id/pinningTitleTextViewDivider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorGray"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/pinningTitleTextView"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+        <Button
+            android:id="@+id/startPinningButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/start_pinning"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/pinningTitleTextViewDivider"
+            app:layout_constraintRight_toRightOf="@id/pinningTitleTextViewDivider"/>
+
+        <Button
+            android:id="@+id/stopPinningButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/stop_pinning"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/startPinningButton"
+            app:layout_constraintRight_toRightOf="@id/startPinningButton"/>
+
+        <Button
+            android:id="@+id/startPinningActivityButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/start_pinning_activity"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/stopPinningButton"
+            app:layout_constraintRight_toRightOf="@id/stopPinningButton"/>
+
+        <!--<TextView-->
+            <!--android:id="@+id/lockTaskTitleTextView"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:paddingLeft="8dp"-->
+            <!--android:paddingRight="8dp"-->
+            <!--android:layout_marginTop="8dp"-->
+            <!--android:text="@string/lock_task_category_title_text"-->
+            <!--app:layout_constraintTop_toBottomOf="@id/startPinningActivityButton"-->
+            <!--app:layout_constraintLeft_toLeftOf="parent"-->
+            <!--app:layout_constraintRight_toRightOf="parent"/>-->
+
+        <!--<View-->
+            <!--android:id="@+id/lockTaskTitleTextViewDivider"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="1dp"-->
+            <!--android:background="@color/colorGray"-->
+            <!--android:layout_marginLeft="8dp"-->
+            <!--android:layout_marginRight="8dp"-->
+            <!--android:layout_marginTop="8dp"-->
+            <!--app:layout_constraintTop_toBottomOf="@id/lockTaskTitleTextView"-->
+            <!--app:layout_constraintLeft_toLeftOf="parent"-->
+            <!--app:layout_constraintRight_toRightOf="parent"/>-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/isDeviceOwnerTextView"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:paddingLeft="8dp"-->
+            <!--android:paddingRight="8dp"-->
+            <!--android:layout_marginTop="8dp"-->
+            <!--app:layout_constraintTop_toBottomOf="@id/lockTaskTitleTextViewDivider"-->
+            <!--app:layout_constraintLeft_toLeftOf="parent"-->
+            <!--app:layout_constraintRight_toRightOf="parent"/>-->
+
+        <!--<Button-->
+            <!--android:id="@+id/clearDeviceOwnerButton"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/clear_device_owner"-->
+            <!--android:layout_marginTop="8dp"-->
+            <!--app:layout_constraintTop_toBottomOf="@id/isDeviceOwnerTextView"-->
+            <!--app:layout_constraintRight_toRightOf="@id/lockTaskTitleTextViewDivider"/>-->
+
+        <!--<Button-->
+            <!--android:id="@+id/startLockTaskButton"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/start_lock_task"-->
+            <!--android:layout_marginTop="8dp"-->
+            <!--app:layout_constraintTop_toBottomOf="@id/clearDeviceOwnerButton"-->
+            <!--app:layout_constraintRight_toRightOf="@id/lockTaskTitleTextViewDivider"/>-->
+
+        <!--<Button-->
+            <!--android:id="@+id/stopLockTaskButton"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/stop_lock_task"-->
+            <!--android:layout_marginTop="8dp"-->
+            <!--app:layout_constraintTop_toBottomOf="@id/startLockTaskButton"-->
+            <!--app:layout_constraintRight_toRightOf="@id/startLockTaskButton"/>-->
+
+        <!--<Button-->
+            <!--android:id="@+id/startLockTaskActivityButton"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/start_lock_task_activity"-->
+            <!--android:layout_marginTop="8dp"-->
+            <!--app:layout_constraintTop_toBottomOf="@id/stopLockTaskButton"-->
+            <!--app:layout_constraintRight_toRightOf="@id/stopLockTaskButton"/>-->
+
+        <!--<View-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="24dp"-->
+            <!--app:layout_constraintTop_toBottomOf="@id/startLockTaskActivityButton"/>-->
+
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>

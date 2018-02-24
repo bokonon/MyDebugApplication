@@ -1,4 +1,4 @@
-package jp.co.yuji.mydebugapplication.presentation.view.fragment
+package jp.co.yuji.mydebugapplication.presentation.view.fragment.hard
 
 import android.content.Context
 import android.hardware.Sensor
@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import jp.co.yuji.mydebugapplication.R
 import jp.co.yuji.mydebugapplication.presentation.view.adapter.SensorInfoRecyclerViewAdapter
+import jp.co.yuji.mydebugapplication.presentation.view.fragment.BaseFragment
 import kotlinx.android.synthetic.main.fragment_sensor_info.view.*
 import java.util.*
 

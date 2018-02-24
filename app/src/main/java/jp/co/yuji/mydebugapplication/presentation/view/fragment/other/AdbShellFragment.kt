@@ -1,4 +1,4 @@
-package jp.co.yuji.mydebugapplication.presentation.view.fragment
+package jp.co.yuji.mydebugapplication.presentation.view.fragment.other
 
 import android.content.Context
 import android.os.Bundle
@@ -10,6 +10,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.TextView
 import jp.co.yuji.mydebugapplication.R
+import jp.co.yuji.mydebugapplication.presentation.view.fragment.BaseFragment
 import kotlinx.android.synthetic.main.fragment_adb_shell.view.*
 import java.io.BufferedReader
 import java.io.InputStreamReader

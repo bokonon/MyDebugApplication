@@ -5,7 +5,7 @@ import android.content.pm.PackageManager
 import android.os.AsyncTask
 import android.provider.Settings
 import jp.co.yuji.mydebugapplication.domain.model.ApplicationListDto
-import jp.co.yuji.mydebugapplication.presentation.view.fragment.ApplicationInfoFragment
+import jp.co.yuji.mydebugapplication.presentation.view.fragment.app.ApplicationInfoFragment
 import java.util.*
 
 /**

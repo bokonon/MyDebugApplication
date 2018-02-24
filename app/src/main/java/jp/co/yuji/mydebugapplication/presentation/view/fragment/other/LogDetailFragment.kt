@@ -1,4 +1,4 @@
-package jp.co.yuji.mydebugapplication.presentation.view.fragment
+package jp.co.yuji.mydebugapplication.presentation.view.fragment.other
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -7,7 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import jp.co.yuji.mydebugapplication.R
-import jp.co.yuji.mydebugapplication.presentation.presenter.LogDetailPresenter
+import jp.co.yuji.mydebugapplication.presentation.presenter.other.LogDetailPresenter
+import jp.co.yuji.mydebugapplication.presentation.view.fragment.BaseFragment
 import kotlinx.android.synthetic.main.fragment_log_detail.view.*
 
 /**

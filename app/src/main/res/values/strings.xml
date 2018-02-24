@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">My Debug Application</string>
+    <string name="my_device_admin">MyDeviceAdmin</string>
+    <string name="my_device_admin_description">MyDeviceAdmin</string>
     <string name="title_device_info">Device</string>
     <string name="title_app_info">App</string>
     <string name="title_hard_info">Hard</string>
@@ -21,6 +23,8 @@
     <string name="screen_name_wifi_info_list">WiFi Info List</string>
     <string name="screen_name_wifi_info_detail">WiFi Info Detail</string>
     <string name="screen_name_adb_shell">Adb Shell</string>
+    <string name="screen_name_pinning">Pinning</string>
+    <string name="screen_name_lock_task">LockTask</string>
 
     <!-- WiFi info -->
     <string name="wifi_info_level_unit_text">%1$d dBm</string>
@@ -29,4 +33,24 @@
     <!-- Adb Shell -->
     <string name="adb_shell_edit_text_hint">input shell command</string>
     <string name="adb_shell_execute_button_text">execute</string>
+
+    <!-- Pinning -->
+    <string name="pinning_category_title_text">Pinning</string>
+    <string name="lock_task_category_title_text">LockTask</string>
+    <string name="start_pinning">Start Pinning</string>
+    <string name="stop_pinning">Stop Pinning</string>
+    <string name="start_pinning_activity">Start Pinning Activity</string>
+    <string name="finish_pinning_activity">Finish Pinning Activity</string>
+
+    <string name="clear_device_owner">Clear Device Owner</string>
+    <string name="start_lock_task">Start LockTask</string>
+    <string name="stop_lock_task">Stop LockTask</string>
+    <string name="start_lock_task_activity">Start LockTask Activity</string>
+    <string name="finish_lock_task_activity">Finish LockTask Activity</string>
+
+    <string name="is_device_owner_status_true">This app is a DeviceOwner.</string>
+    <string name="is_device_owner_status_false">This app is not a DeviceOwner.</string>
+
+    <!-- error -->
+    <string name="error_support_api_level_21">This function is valid at Api level 21 or higher.</string>
 </resources>

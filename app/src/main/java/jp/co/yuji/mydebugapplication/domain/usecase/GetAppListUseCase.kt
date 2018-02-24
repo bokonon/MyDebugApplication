@@ -4,7 +4,7 @@ import android.content.Context
 import android.os.AsyncTask
 import jp.co.yuji.mydebugapplication.domain.model.ApplicationListDto
 import jp.co.yuji.mydebugapplication.domain.task.GetAppListTask
-import jp.co.yuji.mydebugapplication.presentation.view.fragment.ApplicationInfoFragment
+import jp.co.yuji.mydebugapplication.presentation.view.fragment.app.ApplicationInfoFragment
 
 /**
  * Created by yuji on 2018/01/04.

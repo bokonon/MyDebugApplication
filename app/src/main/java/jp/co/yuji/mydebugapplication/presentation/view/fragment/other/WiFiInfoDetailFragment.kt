@@ -1,4 +1,4 @@
-package jp.co.yuji.mydebugapplication.presentation.view.fragment
+package jp.co.yuji.mydebugapplication.presentation.view.fragment.other
 
 import android.net.wifi.ScanResult
 import android.os.Bundle
@@ -10,8 +10,9 @@ import android.view.View
 import android.view.ViewGroup
 import jp.co.yuji.mydebugapplication.R
 import jp.co.yuji.mydebugapplication.domain.model.CommonDto
-import jp.co.yuji.mydebugapplication.presentation.presenter.WiFiInfoDetailPresenter
+import jp.co.yuji.mydebugapplication.presentation.presenter.other.WiFiInfoDetailPresenter
 import jp.co.yuji.mydebugapplication.presentation.view.adapter.WiFiInfoDetailRecyclerViewAdapter
+import jp.co.yuji.mydebugapplication.presentation.view.fragment.BaseFragment
 import kotlinx.android.synthetic.main.fragment_app_detail.view.*
 
 /**
@@ -40,7 +41,7 @@ class WiFiInfoDetailFragment : BaseFragment() {
         val view = inflater!!.inflate(R.layout.fragment_wifi_info_detail, container, false)
 
         view.recyclerView.layoutManager = LinearLayoutManager(activity)
-        val scanResult = arguments.getParcelable<ScanResult>(WiFiInfoDetailFragment.ARG_KEY)
+        val scanResult = arguments.getParcelable<ScanResult>(ARG_KEY)
         val adapter = WiFiInfoDetailRecyclerViewAdapter(activity, getWiFiInfoDetail(scanResult))
         view.recyclerView.adapter = adapter
 
