@@ -1,4 +1,4 @@
-package jp.co.yuji.mydebugapplication.presentation.view.fragment
+package jp.co.yuji.mydebugapplication.presentation.view.fragment.app
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -10,8 +10,9 @@ import android.view.ViewGroup
 import android.widget.ProgressBar
 import jp.co.yuji.mydebugapplication.R
 import jp.co.yuji.mydebugapplication.domain.model.ApplicationListDto
-import jp.co.yuji.mydebugapplication.presentation.presenter.ApplicationListPresenter
+import jp.co.yuji.mydebugapplication.presentation.presenter.app.ApplicationListPresenter
 import jp.co.yuji.mydebugapplication.presentation.view.adapter.ApplicationListRecyclerViewAdapter
+import jp.co.yuji.mydebugapplication.presentation.view.fragment.BaseFragment
 import kotlinx.android.synthetic.main.fragment_app_list.view.*
 import java.util.*
 

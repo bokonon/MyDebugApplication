@@ -4,6 +4,7 @@ import android.annotation.TargetApi
 import android.content.Context
 import android.graphics.SurfaceTexture
 import android.hardware.Camera
+import android.hardware.camera2.CameraAccessException
 import android.hardware.camera2.CameraCharacteristics
 import android.hardware.camera2.CameraManager
 import android.os.AsyncTask
@@ -12,7 +13,7 @@ import jp.co.yuji.mydebugapplication.domain.model.CommonDto
 import java.util.*
 
 /**
- * Created by yuji on 2018/01/04.
+ * Get Camera Info Task.
  */
 class GetCameraInfoTask(private val context: Context, private val listener: OnGetCameraInfoListener) : AsyncTask<Void, Void, List<CommonDto>>() {
 
@@ -44,29 +45,38 @@ class GetCameraInfoTask(private val context: Context, private val listener: OnGe
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private fun addCamera2Info(list : ArrayList<CommonDto>) {
         val manager = context.getSystemService(Context.CAMERA_SERVICE) as CameraManager
-        for (cameraId in manager.cameraIdList) {
-            list.add(CommonDto("camera id", cameraId))
-            val characteristics = manager.getCameraCharacteristics(cameraId)
-            val facing = characteristics.get(CameraCharacteristics.LENS_FACING)
-            if (facing != null) {
-                when (facing) {
-                    CameraCharacteristics.LENS_FACING_BACK -> list.add(CommonDto("lens facing", "BACK"))
-                    CameraCharacteristics.LENS_FACING_FRONT -> list.add(CommonDto("lens facing", "FRONT"))
-                    CameraCharacteristics.LENS_FACING_EXTERNAL -> list.add(CommonDto("lens facing", "EXTERNAL"))
-                }
+        try {
+            val cameraIdList = manager.cameraIdList
+            if (cameraIdList == null) {
+                list.add(CommonDto("camera id", "not available"))
+                return
             }
-            val map = characteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP)
-            if (map != null) {
-                val previewSizes = map.getOutputSizes(SurfaceTexture::class.java)
-                (0 until previewSizes.size).mapTo(list) {
-                    var title = ""
-                    if (it == 0) {
-                        title = "preview size"
+            for (cameraId in cameraIdList) {
+                list.add(CommonDto("camera id", cameraId))
+                val characteristics = manager.getCameraCharacteristics(cameraId)
+                val facing = characteristics.get(CameraCharacteristics.LENS_FACING)
+                if (facing != null) {
+                    when (facing) {
+                        CameraCharacteristics.LENS_FACING_BACK -> list.add(CommonDto("lens facing", "BACK"))
+                        CameraCharacteristics.LENS_FACING_FRONT -> list.add(CommonDto("lens facing", "FRONT"))
+                        CameraCharacteristics.LENS_FACING_EXTERNAL -> list.add(CommonDto("lens facing", "EXTERNAL"))
                     }
-                    CommonDto(title, previewSizes[it].width.toString() + " X " + previewSizes[it].height.toString())
                 }
-            }
+                val map = characteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP)
+                if (map != null) {
+                    val previewSizes = map.getOutputSizes(SurfaceTexture::class.java)
+                    (0 until previewSizes.size).mapTo(list) {
+                        var title = ""
+                        if (it == 0) {
+                            title = "preview size"
+                        }
+                        CommonDto(title, previewSizes[it].width.toString() + " X " + previewSizes[it].height.toString())
+                    }
+                }
 
+            }
+        } catch (e : CameraAccessException) {
+            println(e.message)
         }
     }
 

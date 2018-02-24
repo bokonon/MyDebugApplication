@@ -22,4 +22,8 @@ abstract class BaseFragment : Fragment() {
     private fun setTitle(stringRes: Int) {
         activity.title = activity.getString(stringRes)
     }
+
+    fun setTitleLazy(stringRes: Int) {
+        activity.title = activity.getString(stringRes)
+    }
 }

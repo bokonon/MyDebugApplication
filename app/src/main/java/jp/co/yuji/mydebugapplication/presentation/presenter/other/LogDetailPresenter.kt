@@ -1,4 +1,4 @@
-package jp.co.yuji.mydebugapplication.presentation.presenter
+package jp.co.yuji.mydebugapplication.presentation.presenter.other
 
 import jp.co.yuji.mydebugapplication.domain.usecase.GetLogUseCase
 

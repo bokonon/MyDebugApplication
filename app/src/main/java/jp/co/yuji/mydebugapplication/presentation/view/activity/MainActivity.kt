@@ -6,10 +6,10 @@ import android.support.v4.app.FragmentManager
 import android.support.v7.app.AppCompatActivity
 import com.google.android.gms.ads.MobileAds
 import jp.co.yuji.mydebugapplication.R
-import jp.co.yuji.mydebugapplication.presentation.view.fragment.ApplicationInfoFragment
-import jp.co.yuji.mydebugapplication.presentation.view.fragment.DeviceInfoFragment
-import jp.co.yuji.mydebugapplication.presentation.view.fragment.HardwareInfoFragment
-import jp.co.yuji.mydebugapplication.presentation.view.fragment.OtherInfoFragment
+import jp.co.yuji.mydebugapplication.presentation.view.fragment.app.ApplicationInfoFragment
+import jp.co.yuji.mydebugapplication.presentation.view.fragment.device.DeviceInfoFragment
+import jp.co.yuji.mydebugapplication.presentation.view.fragment.hard.HardwareInfoFragment
+import jp.co.yuji.mydebugapplication.presentation.view.fragment.other.OtherInfoFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {

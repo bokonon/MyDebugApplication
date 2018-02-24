@@ -1,4 +1,4 @@
-package jp.co.yuji.mydebugapplication.presentation.view.fragment
+package jp.co.yuji.mydebugapplication.presentation.view.fragment.app
 
 import android.os.Build
 import android.os.Bundle
@@ -11,17 +11,18 @@ import android.view.ViewGroup
 import jp.co.yuji.mydebugapplication.R
 import jp.co.yuji.mydebugapplication.domain.model.CommonDto
 import jp.co.yuji.mydebugapplication.presentation.view.adapter.ApplicationDetailRecyclerViewAdapter
+import jp.co.yuji.mydebugapplication.presentation.view.fragment.BaseFragment
 import kotlinx.android.synthetic.main.fragment_app_detail.view.*
 import java.util.*
 
 /**
- * Created by yuji on 2018/01/01.
+ * Application Detail Fragment.
  */
 class ApplicationDetailFragment : BaseFragment() {
 
     companion object {
 
-        val ARG_KEY = "arg_key"
+        const val ARG_KEY = "arg_key"
 
         fun newInstance(packageName : String) : Fragment {
             val fragment = ApplicationDetailFragment()
@@ -38,7 +39,7 @@ class ApplicationDetailFragment : BaseFragment() {
         val view = inflater!!.inflate(R.layout.fragment_app_detail, container, false)
 
         view.recyclerView.layoutManager = LinearLayoutManager(activity)
-        val packageName = arguments.getString(ApplicationDetailFragment.ARG_KEY)
+        val packageName = arguments.getString(ARG_KEY)
         val adapter = ApplicationDetailRecyclerViewAdapter(activity, getApplicationDetail(packageName))
         view.recyclerView.adapter = adapter
 

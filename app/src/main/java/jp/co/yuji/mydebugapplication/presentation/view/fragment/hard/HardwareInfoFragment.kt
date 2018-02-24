@@ -1,4 +1,4 @@
-package jp.co.yuji.mydebugapplication.presentation.view.fragment
+package jp.co.yuji.mydebugapplication.presentation.view.fragment.hard
 
 import android.os.Bundle
 import android.support.annotation.Nullable
@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import com.google.android.gms.ads.AdRequest
 import jp.co.yuji.mydebugapplication.R
 import jp.co.yuji.mydebugapplication.presentation.view.adapter.HardwareInfoRecyclerViewAdapter
+import jp.co.yuji.mydebugapplication.presentation.view.fragment.BaseFragment
 import kotlinx.android.synthetic.main.fragment_hard_info.view.*
 import java.util.*
 

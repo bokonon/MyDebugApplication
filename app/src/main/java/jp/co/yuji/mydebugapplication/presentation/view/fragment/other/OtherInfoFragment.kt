@@ -1,4 +1,4 @@
-package jp.co.yuji.mydebugapplication.presentation.view.fragment
+package jp.co.yuji.mydebugapplication.presentation.view.fragment.other
 
 import android.os.Bundle
 import android.support.annotation.Nullable
@@ -11,12 +11,13 @@ import android.view.ViewGroup
 import com.google.android.gms.ads.AdRequest
 import jp.co.yuji.mydebugapplication.R
 import jp.co.yuji.mydebugapplication.presentation.view.adapter.OtherInfoRecyclerViewAdapter
+import jp.co.yuji.mydebugapplication.presentation.view.fragment.BaseFragment
 import kotlinx.android.synthetic.main.fragment_other_info.view.*
 import java.util.*
 
 
 /**
- * Created by yuji on 2017/12/29.
+ * Other Info Fragment.
  */
 class OtherInfoFragment : BaseFragment() {
 
@@ -34,6 +35,7 @@ class OtherInfoFragment : BaseFragment() {
                 Type.LOG -> fragment = LogDetailFragment.newInstance()
                 Type.WI_FI -> fragment = WiFiInfoListFragment.newInstance()
                 Type.ADB_SHELL -> fragment = AdbShellFragment.newInstance()
+                Type.PINNING -> fragment = PinningFragment.newInstance()
             }
             if (fragment != null) {
                 activity.supportFragmentManager.beginTransaction()
@@ -80,7 +82,8 @@ class OtherInfoFragment : BaseFragment() {
     enum class Type(val title: String, val position: Int)  {
         LOG("Log", 0),
         WI_FI("WiFi", 1),
-        ADB_SHELL("Adb Shell", 2);
+        ADB_SHELL("Adb Shell", 2),
+        PINNING("Pinning", 3);
 
         companion object {
             @Nullable

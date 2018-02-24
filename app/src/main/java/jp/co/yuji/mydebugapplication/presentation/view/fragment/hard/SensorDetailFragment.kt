@@ -1,4 +1,4 @@
-package jp.co.yuji.mydebugapplication.presentation.view.fragment
+package jp.co.yuji.mydebugapplication.presentation.view.fragment.hard
 
 import android.content.Context
 import android.hardware.Sensor
@@ -13,6 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import jp.co.yuji.mydebugapplication.R
+import jp.co.yuji.mydebugapplication.presentation.view.fragment.BaseFragment
 import kotlinx.android.synthetic.main.fragment_sensor_detail.view.*
 
 
@@ -72,7 +73,7 @@ class SensorDetailFragment : BaseFragment() {
         super.onCreateView(inflater, container, savedInstanceState)
         val view = inflater!!.inflate(R.layout.fragment_sensor_detail, container, false)
         sensorManager = activity.getSystemService(Context.SENSOR_SERVICE) as SensorManager
-        sensorType = arguments.getInt(SensorDetailFragment.ARG_KEY)
+        sensorType = arguments.getInt(ARG_KEY)
         sensorList = sensorManager?.getSensorList(sensorType)
         sensor = sensorList?.get(0)
 

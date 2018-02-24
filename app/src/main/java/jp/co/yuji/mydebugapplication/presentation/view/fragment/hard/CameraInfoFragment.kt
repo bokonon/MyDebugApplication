@@ -1,4 +1,4 @@
-package jp.co.yuji.mydebugapplication.presentation.view.fragment
+package jp.co.yuji.mydebugapplication.presentation.view.fragment.hard
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -9,13 +9,14 @@ import android.view.ViewGroup
 import android.widget.ProgressBar
 import jp.co.yuji.mydebugapplication.R
 import jp.co.yuji.mydebugapplication.domain.model.CommonDto
-import jp.co.yuji.mydebugapplication.presentation.presenter.CameraInfoPresenter
+import jp.co.yuji.mydebugapplication.presentation.presenter.hard.CameraInfoPresenter
 import jp.co.yuji.mydebugapplication.presentation.view.adapter.CameraInfoRecyclerViewAdapter
+import jp.co.yuji.mydebugapplication.presentation.view.fragment.BaseFragment
 import kotlinx.android.synthetic.main.fragment_camera_info.view.*
 import java.util.*
 
 /**
- * Created by yuji on 2018/01/04.
+ * Camera Info Fragment.
  */
 class CameraInfoFragment : BaseFragment() {
 

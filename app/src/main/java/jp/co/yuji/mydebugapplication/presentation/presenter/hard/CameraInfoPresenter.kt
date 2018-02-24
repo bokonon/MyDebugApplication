@@ -1,11 +1,11 @@
-package jp.co.yuji.mydebugapplication.presentation.presenter
+package jp.co.yuji.mydebugapplication.presentation.presenter.hard
 
 import android.content.Context
 import jp.co.yuji.mydebugapplication.domain.model.CommonDto
 import jp.co.yuji.mydebugapplication.domain.usecase.GetCameraInfoUseCase
 
 /**
- * Created by yuji on 2018/01/04.
+ * Camera Info Presenter.
  */
 class CameraInfoPresenter {
 
