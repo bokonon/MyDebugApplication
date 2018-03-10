@@ -1,8 +1,11 @@
 package jp.co.yuji.mydebugapplication.presentation.view.fragment.other
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.net.wifi.ScanResult
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
@@ -22,6 +25,7 @@ import java.util.*
 class WiFiInfoListFragment : BaseFragment() {
 
     companion object {
+        const val PERMISSIONS_REQUEST_CODE_ACCESS_COARSE_LOCATION = 0
         fun newInstance() : Fragment {
             return WiFiInfoListFragment()
         }
@@ -60,7 +64,15 @@ class WiFiInfoListFragment : BaseFragment() {
         val itemDecoration = DividerItemDecoration(activity, DividerItemDecoration.VERTICAL)
         view.recyclerView.addItemDecoration(itemDecoration)
 
-        addWiFiList(list)
+        if (ContextCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            val permissions: Array<String> = arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION)
+            requestPermissions(
+                    permissions,
+                    PERMISSIONS_REQUEST_CODE_ACCESS_COARSE_LOCATION)
+        } else {
+            addWiFiList(list)
+        }
 
         return view
     }
@@ -69,10 +81,22 @@ class WiFiInfoListFragment : BaseFragment() {
         return R.string.screen_name_wifi_info_list
     }
 
-    private fun addWiFiList(list : ArrayList<ScanResult>) {
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        if (requestCode == PERMISSIONS_REQUEST_CODE_ACCESS_COARSE_LOCATION
+                && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            addWiFiList(adapter?.getItems())
+        } else {
+            progressBar?.visibility = View.GONE
+        }
+
+    }
+
+    private fun addWiFiList(list : ArrayList<ScanResult>?) {
         presenter.getWiFiInfoList(activity, object: WiFiInfoListPresenter.OnGetWiFiInfoListListener {
             override fun onGetWiFiInfoList(wifiInfoList: List<ScanResult>) {
-                list.addAll(wifiInfoList)
+                list?.addAll(wifiInfoList)
                 adapter?.notifyDataSetChanged()
                 progressBar?.visibility = View.GONE
             }
