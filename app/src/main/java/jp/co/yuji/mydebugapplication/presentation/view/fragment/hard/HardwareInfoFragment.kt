@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.fragment_hard_info.view.*
 import java.util.*
 
 /**
- * Created by yuji on 2018/01/04.
+ * Hardware Info Fragment.
  */
 class HardwareInfoFragment : BaseFragment() {
 
@@ -33,6 +33,7 @@ class HardwareInfoFragment : BaseFragment() {
             when (type) {
                 Type.SENSOR -> fragment = SensorInfoFragment.newInstance()
                 Type.CAMERA -> fragment = CameraInfoFragment.newInstance()
+                Type.CPU -> fragment = CpuInfoFragment.newInstance()
             }
             if (fragment != null) {
                 activity.supportFragmentManager.beginTransaction()
@@ -78,7 +79,8 @@ class HardwareInfoFragment : BaseFragment() {
 
     enum class Type(val title: String, val position: Int)  {
         SENSOR("Sensor", 0),
-        CAMERA("Camera", 1);
+        CAMERA("Camera", 1),
+        CPU("CPU", 2);
 
         companion object {
             @Nullable

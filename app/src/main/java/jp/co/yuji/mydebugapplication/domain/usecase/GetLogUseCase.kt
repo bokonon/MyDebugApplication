@@ -4,7 +4,7 @@ import android.os.AsyncTask
 import jp.co.yuji.mydebugapplication.domain.task.GetLogTask
 
 /**
- * Created by yuji on 2018/01/02.
+ * Get Log UseCase.
  */
 class GetLogUseCase {
 

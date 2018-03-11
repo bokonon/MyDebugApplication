@@ -12,7 +12,7 @@ import jp.co.yuji.mydebugapplication.presentation.view.fragment.BaseFragment
 import kotlinx.android.synthetic.main.fragment_log_detail.view.*
 
 /**
- * Created by yuji on 2018/01/04.
+ * Log Detail Fragment.
  */
 class LogDetailFragment : BaseFragment() {
 

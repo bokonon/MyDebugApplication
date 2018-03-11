@@ -5,7 +5,7 @@ import java.io.BufferedReader
 import java.io.InputStreamReader
 
 /**
- * Created by yuji on 2018/01/02.
+ * Get Log Task.
  */
 class GetLogTask(private val listener: OnGetLogListener) : AsyncTask<Void, Void, String>() {
 

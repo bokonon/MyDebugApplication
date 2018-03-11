@@ -3,7 +3,7 @@ package jp.co.yuji.mydebugapplication.presentation.presenter.other
 import jp.co.yuji.mydebugapplication.domain.usecase.GetLogUseCase
 
 /**
- * Created by yuji on 2018/01/04.
+ * Log Detail Presenter.
  */
 class LogDetailPresenter {
 

@@ -1,63 +1,39 @@
-package jp.co.yuji.mydebugapplication.presentation.view.fragment.other
+package jp.co.yuji.mydebugapplication.presentation.view.fragment.hard
 
-import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
 import android.widget.TextView
 import jp.co.yuji.mydebugapplication.R
 import jp.co.yuji.mydebugapplication.presentation.view.fragment.BaseFragment
-import kotlinx.android.synthetic.main.fragment_adb_shell.view.*
 import java.io.BufferedReader
 import java.io.InputStreamReader
 
 /**
- * Adb Shell Fragment.
+ * Cpu Info Fragment.
  */
-class AdbShellFragment : BaseFragment() {
+class CpuInfoFragment : BaseFragment() {
 
     companion object {
+        const val command = "cat proc/cpuinfo"
         fun newInstance() : Fragment {
-            return AdbShellFragment()
+            return CpuInfoFragment()
         }
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        val view = inflater!!.inflate(R.layout.fragment_adb_shell, container, false)
-
-        val editText = view.findViewById<EditText>(R.id.adb_shell_edit_text)
-        val resultText = view.findViewById<TextView>(R.id.adb_shell_result_text)
-
-        view.adb_shell_execute_button.setOnClickListener({
-            resultText.text = getExecuteText(editText.text.toString())
-            view.hideKeyboard()
-            resultText.requestFocus()
-        })
-
+        val view = inflater!!.inflate(R.layout.fragment_cpu_info, container, false)
+        val resultText = view.findViewById<TextView>(R.id.cpu_info_text)
+        resultText.text = execute(command)
         return view
     }
 
     override fun getTitle(): Int {
-        return R.string.screen_name_adb_shell
-    }
-
-    private fun getExecuteText(command: String) : String {
-        val resultText = StringBuilder()
-        resultText.append(execute(command))
-        resultText.append("\n")
-        resultText.append("\n")
-        resultText.append("\n")
-        resultText.append("\n")
-        resultText.append("\n")
-        resultText.append("\n")
-        resultText.append("\n")
-        return resultText.toString()
+        return R.string.screen_name_cpu_info
     }
 
     private fun execute(command: String) : String {
@@ -89,11 +65,6 @@ class AdbShellFragment : BaseFragment() {
 
         }
 
-    }
-
-    private fun View.hideKeyboard() {
-        val inputMethodManager = activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        inputMethodManager.hideSoftInputFromWindow(windowToken, 0)
     }
 
 }
