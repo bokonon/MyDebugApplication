@@ -5,7 +5,7 @@ import android.net.wifi.ScanResult
 import jp.co.yuji.mydebugapplication.domain.usecase.GetWiFiInfoListUseCase
 
 /**
- * Created by yuji on 2018/02/10.
+ * WiFi Info List Presenter.
  */
 class WiFiInfoListPresenter {
 

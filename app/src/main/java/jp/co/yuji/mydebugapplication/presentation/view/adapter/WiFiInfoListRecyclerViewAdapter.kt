@@ -35,6 +35,10 @@ class WiFiInfoListRecyclerViewAdapter(private val items: ArrayList<ScanResult>) 
         this.listener = listener
     }
 
+    fun getItems():  ArrayList<ScanResult> {
+        return items
+    }
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.ssidText?.text = items[position].SSID
         holder.macAddressText?.text = items[position].BSSID
