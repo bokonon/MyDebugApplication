@@ -12,6 +12,8 @@ import jp.co.yuji.mydebugapplication.presentation.view.fragment.hard.HardwareInf
 import jp.co.yuji.mydebugapplication.presentation.view.fragment.other.OtherInfoFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
+
+
 class MainActivity : AppCompatActivity() {
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
@@ -53,4 +55,5 @@ class MainActivity : AppCompatActivity() {
 
         MobileAds.initialize(this, getString(R.string.app_id))
     }
+
 }

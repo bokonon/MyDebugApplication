@@ -11,7 +11,7 @@ import jp.co.yuji.mydebugapplication.R
 import jp.co.yuji.mydebugapplication.domain.model.CommonDto
 
 /**
- * WiFi Info Detail RecyclerViewAdapter.
+ * WiFi Info Detail Adapter.
  */
 class WiFiInfoDetailRecyclerViewAdapter(private val context: Context, private val items: List<CommonDto>) : RecyclerView.Adapter<WiFiInfoDetailRecyclerViewAdapter.ViewHolder>() {
 

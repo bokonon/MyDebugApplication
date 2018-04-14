@@ -14,6 +14,10 @@ class MyDeviceAdminReceiver : DeviceAdminReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         super.onReceive(context, intent)
         println("onReceive")
+
+        when(intent.action) {
+            // do something
+        }
     }
 
     override fun onEnabled(context: Context, intent: Intent) {

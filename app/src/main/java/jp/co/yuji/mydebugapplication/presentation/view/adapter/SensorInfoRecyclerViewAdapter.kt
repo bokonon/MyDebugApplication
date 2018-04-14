@@ -10,7 +10,7 @@ import android.widget.TextView
 import jp.co.yuji.mydebugapplication.R
 
 /**
- * Created by yuji on 2018/01/04.
+ * Sensor Info Adapter.
  */
 class SensorInfoRecyclerViewAdapter (private val context: Context, private val items: List<Sensor>) : RecyclerView.Adapter<SensorInfoRecyclerViewAdapter.ViewHolder>() {
 
