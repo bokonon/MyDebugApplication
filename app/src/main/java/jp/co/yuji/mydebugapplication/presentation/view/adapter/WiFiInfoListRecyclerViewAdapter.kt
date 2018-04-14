@@ -10,7 +10,7 @@ import android.widget.TextView
 import jp.co.yuji.mydebugapplication.R
 
 /**
- * WiFi Info List RecyclerViewAdapter.
+ * WiFi Info List Adapter.
  */
 class WiFiInfoListRecyclerViewAdapter(private val items: ArrayList<ScanResult>) : RecyclerView.Adapter<WiFiInfoListRecyclerViewAdapter.ViewHolder>() {
 

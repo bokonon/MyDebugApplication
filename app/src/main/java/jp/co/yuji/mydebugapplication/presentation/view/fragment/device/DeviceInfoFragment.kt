@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.fragment_device_info.view.*
 import java.util.*
 
 /**
- * Created by yuji on 2017/12/29.
+ * Device Info Fragment.
  */
 class DeviceInfoFragment : BaseFragment() {
 

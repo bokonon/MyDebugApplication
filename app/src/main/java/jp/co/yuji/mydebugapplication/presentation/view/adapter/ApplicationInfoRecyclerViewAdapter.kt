@@ -8,7 +8,7 @@ import android.widget.TextView
 import jp.co.yuji.mydebugapplication.R
 
 /**
- * Created by yuji on 2017/12/30.
+ * Application Info Adapter.
  */
 class ApplicationInfoRecyclerViewAdapter(private val items: List<String>) : RecyclerView.Adapter<ApplicationInfoRecyclerViewAdapter.ViewHolder>() {
 

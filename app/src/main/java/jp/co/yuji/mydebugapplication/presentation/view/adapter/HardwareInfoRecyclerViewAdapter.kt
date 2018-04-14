@@ -8,7 +8,7 @@ import android.widget.TextView
 import jp.co.yuji.mydebugapplication.R
 
 /**
- * Created by yuji on 2018/01/04.
+ * Hardware Info Adapter.
  */
 class HardwareInfoRecyclerViewAdapter(private val items: List<String>) : RecyclerView.Adapter<HardwareInfoRecyclerViewAdapter.ViewHolder>() {
 

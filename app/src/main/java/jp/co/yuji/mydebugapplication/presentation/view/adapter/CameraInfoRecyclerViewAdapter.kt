@@ -11,7 +11,7 @@ import jp.co.yuji.mydebugapplication.R
 import jp.co.yuji.mydebugapplication.domain.model.CommonDto
 
 /**
- * Created by yuji on 2018/01/04.
+ * Camera Info Adapter.
  */
 class CameraInfoRecyclerViewAdapter (private val context: Context, private val items: List<CommonDto>) : RecyclerView.Adapter<CameraInfoRecyclerViewAdapter.ViewHolder>() {
 

@@ -10,16 +10,13 @@ import android.widget.TextView
 import jp.co.yuji.mydebugapplication.R
 import jp.co.yuji.mydebugapplication.domain.model.CommonDto
 
-/**
- * Device Info Adapter.
- */
-class DeviceInfoRecyclerViewAdapter(private val context : Context, private val items: ArrayList<CommonDto>) : RecyclerView.Adapter<DeviceInfoRecyclerViewAdapter.ViewHolder>() {
+class NetworkInfoRecyclerViewAdapter(private val context : Context, private val items: ArrayList<CommonDto>) : RecyclerView.Adapter<NetworkInfoRecyclerViewAdapter.ViewHolder>() {
 
     override fun getItemCount(): Int = items.size
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
         val v: View = LayoutInflater.from(parent?.context)
-                .inflate(R.layout.adapter_device_info_item, parent, false)
+                .inflate(R.layout.adapter_network_info, parent, false)
         return ViewHolder.create(v)
     }
 
@@ -31,6 +28,10 @@ class DeviceInfoRecyclerViewAdapter(private val context : Context, private val i
         if (position%2 == 0) {
             holder?.itemView?.setBackgroundColor(ContextCompat.getColor(context, R.color.recycler_view_back))
         }
+    }
+
+    public fun getList() :  ArrayList<CommonDto> {
+        return items
     }
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {

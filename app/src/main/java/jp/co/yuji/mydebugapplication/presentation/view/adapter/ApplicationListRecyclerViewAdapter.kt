@@ -10,7 +10,7 @@ import jp.co.yuji.mydebugapplication.R
 import jp.co.yuji.mydebugapplication.domain.model.ApplicationListDto
 
 /**
- * Created by yuji on 2017/12/31.
+ * Application List Adapter.
  */
 class ApplicationListRecyclerViewAdapter(private val items: ArrayList<ApplicationListDto>) : RecyclerView.Adapter<ApplicationListRecyclerViewAdapter.ViewHolder>() {
 
