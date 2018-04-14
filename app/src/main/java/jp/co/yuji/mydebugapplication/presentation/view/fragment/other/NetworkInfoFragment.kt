@@ -37,7 +37,7 @@ class NetworkInfoFragment : BaseFragment() {
 
         activity.registerReceiver(
                 ConnectivityReceiver(object : ConnectivityReceiver.OnConnectivityListener{
-                    override fun onConnectivityReceive(networkInfo: NetworkInfo) {
+                    override fun onConnectivityReceive(networkInfo: NetworkInfo?) {
                         updateView(networkInfo)
                     }
                 }),
@@ -50,18 +50,24 @@ class NetworkInfoFragment : BaseFragment() {
         return R.string.screen_name_network_info
     }
 
-    private fun updateView(networkInfo: NetworkInfo) {
+    private fun updateView(networkInfo: NetworkInfo?) {
         val list = adapter.getList()
-        list.add(CommonDto("state", networkInfo.state.toString()))
-        list.add(CommonDto("detailedState", networkInfo.detailedState.toString()))
-        if (networkInfo.reason != null) {
-            list.add(CommonDto("reason", networkInfo.reason))
+
+        if (networkInfo != null) {
+            list.add(CommonDto("state", networkInfo.state.toString()))
+            list.add(CommonDto("detailedState", networkInfo.detailedState.toString()))
+            if (networkInfo.reason != null) {
+                list.add(CommonDto("reason", networkInfo.reason))
+            }
+            list.add(CommonDto("extraInfo", networkInfo.extraInfo))
+            list.add(CommonDto("type", networkInfo.type.toString()))
+            list.add(CommonDto("typeName", networkInfo.typeName))
+            list.add(CommonDto("subtype", networkInfo.subtype.toString()))
+            list.add(CommonDto("subtypeName", networkInfo.subtypeName))
+        } else {
+            list.add(CommonDto("networkInfo", "none"))
         }
-        list.add(CommonDto("extraInfo", networkInfo.extraInfo))
-        list.add(CommonDto("type", networkInfo.type.toString()))
-        list.add(CommonDto("typeName", networkInfo.typeName))
-        list.add(CommonDto("subtype", networkInfo.subtype.toString()))
-        list.add(CommonDto("subtypeName", networkInfo.subtypeName))
+
 
         adapter.notifyDataSetChanged()
     }

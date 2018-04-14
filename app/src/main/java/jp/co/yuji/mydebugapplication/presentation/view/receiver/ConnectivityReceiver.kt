@@ -10,7 +10,7 @@ import android.net.NetworkInfo
 class ConnectivityReceiver(val listener : OnConnectivityListener) : BroadcastReceiver() {
 
     interface OnConnectivityListener {
-        fun onConnectivityReceive(networkInfo : NetworkInfo)
+        fun onConnectivityReceive(networkInfo : NetworkInfo?)
     }
 
     override fun onReceive(context: Context, intent: Intent) {
@@ -19,7 +19,9 @@ class ConnectivityReceiver(val listener : OnConnectivityListener) : BroadcastRec
             ConnectivityManager.CONNECTIVITY_ACTION -> {
                 val manager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
                 val networkInfo = manager.activeNetworkInfo
-                println(networkInfo.toString())
+                if (networkInfo != null) {
+                    println(networkInfo.toString())
+                }
                 listener.onConnectivityReceive(networkInfo)
             }
             else -> {
