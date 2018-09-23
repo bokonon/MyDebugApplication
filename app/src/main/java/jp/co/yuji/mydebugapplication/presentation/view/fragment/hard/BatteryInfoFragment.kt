@@ -17,7 +17,7 @@ import jp.co.yuji.mydebugapplication.domain.model.MyBatteryInfo
 import jp.co.yuji.mydebugapplication.presentation.view.adapter.BatteryInfoRecyclerViewAdapter
 import jp.co.yuji.mydebugapplication.presentation.view.fragment.BaseFragment
 import jp.co.yuji.mydebugapplication.presentation.view.receiver.BatteryReceiver
-import kotlinx.android.synthetic.main.fragment_camera_info.view.*
+import kotlinx.android.synthetic.main.fragment_battery_info.view.*
 import java.util.*
 
 
