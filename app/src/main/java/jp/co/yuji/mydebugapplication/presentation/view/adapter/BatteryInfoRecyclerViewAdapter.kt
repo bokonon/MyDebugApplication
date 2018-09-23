@@ -10,19 +10,25 @@ import android.widget.TextView
 import jp.co.yuji.mydebugapplication.R
 import jp.co.yuji.mydebugapplication.domain.model.CommonDto
 
-class NetworkInfoRecyclerViewAdapter(private val context : Context, private val items: ArrayList<CommonDto>) : RecyclerView.Adapter<NetworkInfoRecyclerViewAdapter.ViewHolder>() {
+/**
+ * Battery Info Adapter.
+ */
+class BatteryInfoRecyclerViewAdapter (private val context: Context, private val items: ArrayList<CommonDto>) : RecyclerView.Adapter<BatteryInfoRecyclerViewAdapter.ViewHolder>() {
 
     override fun getItemCount(): Int = items.size
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): BatteryInfoRecyclerViewAdapter.ViewHolder {
         val v: View = LayoutInflater.from(parent?.context)
-                .inflate(R.layout.adapter_network_info, parent, false)
+                .inflate(R.layout.adapter_battery_info_item, parent, false)
         return ViewHolder.create(v)
     }
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
         holder?.titleTextView?.text = items[position].title
         holder?.valueTextView?.text = items[position].value
+
+        holder?.valueTextView?.requestFocus()
+        holder?.valueTextView?.isSelected = true
 
         holder?.itemView?.setBackgroundColor(ContextCompat.getColor(context, android.R.color.transparent))
         if (position%2 == 0) {

@@ -8,11 +8,12 @@ import android.widget.ImageView
 import android.widget.TextView
 import jp.co.yuji.mydebugapplication.R
 import jp.co.yuji.mydebugapplication.domain.model.ApplicationListDto
+import jp.co.yuji.mydebugapplication.presentation.view.adapter.common.FilterableRecyclerViewAdapter
 
 /**
  * Application List Adapter.
  */
-class ApplicationListRecyclerViewAdapter(private val items: ArrayList<ApplicationListDto>) : RecyclerView.Adapter<ApplicationListRecyclerViewAdapter.ViewHolder>() {
+class ApplicationListRecyclerViewAdapter(private val items: ArrayList<ApplicationListDto>) : FilterableRecyclerViewAdapter<ApplicationListDto>(items) {
 
     interface OnItemClickListener {
         fun onItemClick(packageName: String)
@@ -20,7 +21,13 @@ class ApplicationListRecyclerViewAdapter(private val items: ArrayList<Applicatio
 
     private var listener : OnItemClickListener? = null
 
-    override fun getItemCount(): Int = items.size
+    override fun updateList(list: List<ApplicationListDto>) {
+        items.addAll(list)
+        filteredList.addAll(list)
+        notifyDataSetChanged()
+    }
+
+    override fun getItemCount(): Int = filteredList.size
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
         val v: View = LayoutInflater.from(parent?.context)
@@ -33,10 +40,10 @@ class ApplicationListRecyclerViewAdapter(private val items: ArrayList<Applicatio
     }
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
-        holder?.icon?.setImageDrawable(items[position].icon)
-        holder?.appName?.text = items[position].appName
-        holder?.packageName?.text = items[position].packageName
-        holder?.itemView?.setOnClickListener { listener?.onItemClick(items[position].packageName) }
+        holder?.icon?.setImageDrawable(filteredList[position].icon)
+        holder?.appName?.text = filteredList[position].appName
+        holder?.packageName?.text = filteredList[position].packageName
+        holder?.itemView?.setOnClickListener { listener?.onItemClick(filteredList[position].packageName) }
     }
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {

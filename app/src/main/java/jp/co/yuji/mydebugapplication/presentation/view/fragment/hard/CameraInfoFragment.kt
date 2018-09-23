@@ -50,7 +50,7 @@ class CameraInfoFragment : BaseFragment() {
     }
 
     override fun getTitle(): Int {
-        return R.string.screen_name_camera_detail
+        return R.string.screen_name_camera_info
     }
 
     private fun addCameraInfo(list : ArrayList<CommonDto>) {

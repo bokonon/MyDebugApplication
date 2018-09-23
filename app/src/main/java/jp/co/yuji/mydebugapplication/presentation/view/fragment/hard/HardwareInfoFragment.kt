@@ -34,6 +34,8 @@ class HardwareInfoFragment : BaseFragment() {
                 Type.SENSOR -> fragment = SensorInfoFragment.newInstance()
                 Type.CAMERA -> fragment = CameraInfoFragment.newInstance()
                 Type.CPU -> fragment = CpuInfoFragment.newInstance()
+                Type.MEMORY -> fragment = MemoryInfoFragment.newInstance()
+                Type.BATTERY -> fragment = BatteryInfoFragment.newInstance()
             }
             if (fragment != null) {
                 activity.supportFragmentManager.beginTransaction()
@@ -80,7 +82,9 @@ class HardwareInfoFragment : BaseFragment() {
     enum class Type(val title: String, val position: Int)  {
         SENSOR("Sensor", 0),
         CAMERA("Camera", 1),
-        CPU("CPU", 2);
+        CPU("CPU", 2),
+        MEMORY("Memory", 3),
+        BATTERY("Battery", 4);
 
         companion object {
             @Nullable
