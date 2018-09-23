@@ -26,6 +26,12 @@ class NetworkInfoFragment : BaseFragment() {
 
     private lateinit var adapter : NetworkInfoRecyclerViewAdapter
 
+    private val receiver = ConnectivityReceiver(object : ConnectivityReceiver.OnConnectivityListener {
+        override fun onConnectivityReceive(networkInfo: NetworkInfo?) {
+            updateView(networkInfo)
+        }
+    })
+
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
@@ -35,15 +41,17 @@ class NetworkInfoFragment : BaseFragment() {
         adapter = NetworkInfoRecyclerViewAdapter(activity, ArrayList())
         view.recyclerView.adapter = adapter
 
-        activity.registerReceiver(
-                ConnectivityReceiver(object : ConnectivityReceiver.OnConnectivityListener{
-                    override fun onConnectivityReceive(networkInfo: NetworkInfo?) {
-                        updateView(networkInfo)
-                    }
-                }),
-                IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
-        )
         return view
+    }
+
+    override fun onResume() {
+        super.onResume()
+        activity.registerReceiver(receiver, IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
+    }
+
+    override fun onPause() {
+        super.onPause()
+        activity.unregisterReceiver(receiver)
     }
 
     override fun getTitle(): Int {
@@ -52,6 +60,7 @@ class NetworkInfoFragment : BaseFragment() {
 
     private fun updateView(networkInfo: NetworkInfo?) {
         val list = adapter.getList()
+        list.clear()
 
         if (networkInfo != null) {
             list.add(CommonDto("state", networkInfo.state.toString()))

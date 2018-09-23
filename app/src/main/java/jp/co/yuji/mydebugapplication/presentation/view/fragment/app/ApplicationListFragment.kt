@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.support.v7.widget.SearchView
+import android.view.*
 import android.widget.ProgressBar
+import jp.co.yuji.mydebugapplication.BuildConfig
 import jp.co.yuji.mydebugapplication.R
 import jp.co.yuji.mydebugapplication.domain.model.ApplicationListDto
 import jp.co.yuji.mydebugapplication.presentation.presenter.app.ApplicationListPresenter
@@ -16,13 +16,13 @@ import jp.co.yuji.mydebugapplication.presentation.view.fragment.BaseFragment
 import kotlinx.android.synthetic.main.fragment_app_list.view.*
 import java.util.*
 
+
 /**
  * Created by yuji on 2017/12/31.
  */
 class ApplicationListFragment : BaseFragment() {
 
     companion object {
-
         val ARG_KEY = "arg_key"
 
         fun newInstance(actionTypePosition : Int) : Fragment {
@@ -50,6 +50,11 @@ class ApplicationListFragment : BaseFragment() {
         }
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                                savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
@@ -73,6 +78,20 @@ class ApplicationListFragment : BaseFragment() {
         return view
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        // Inflate the menu to use in the action bar
+        val inflater = activity.menuInflater
+        inflater.inflate(R.menu.search, menu)
+
+
+        val menuItem = menu.findItem(R.id.menu_search_view)
+        val searchView = menuItem.actionView as SearchView
+        searchView.setOnQueryTextListener(this.onQueryTextListener)
+
+
+        return super.onCreateOptionsMenu(menu, inflater)
+    }
+
     override fun getTitle(): Int {
         return R.string.screen_name_application_list
     }
@@ -82,11 +101,27 @@ class ApplicationListFragment : BaseFragment() {
         if (actionType != null) {
             presenter.getApplicationList(activity, actionType, object: ApplicationListPresenter.OnGetApplicationListListener {
                 override fun onGetApplicationList(appList: List<ApplicationListDto>) {
-                    list.addAll(appList)
-                    adapter?.notifyDataSetChanged()
+                    adapter?.updateList(appList)
                     progressBar?.visibility = View.GONE
                 }
             })
+        }
+    }
+
+    private val onQueryTextListener = object: SearchView.OnQueryTextListener {
+        override fun onQueryTextSubmit(searchWord: String): Boolean {
+            if (BuildConfig.DEBUG) {
+                println("onQueryTextSubmit searchWord : $searchWord")
+            }
+//            adapter?.filter(searchWord)
+            return false
+        }
+        override fun onQueryTextChange(searchWord: String): Boolean {
+            if (BuildConfig.DEBUG) {
+                println("onQueryTextChange searchWord : $searchWord")
+            }
+            adapter?.filter(searchWord)
+            return false
         }
     }
 

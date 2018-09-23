@@ -32,22 +32,22 @@
         <activity
             android:name=".presentation.view.activity.PinningActivity"
             android:label="@string/app_name"/>
-        <receiver android:name=".presentation.view.receiver.MyDeviceAdminReceiver"
-            android:label="@string/my_device_admin"
-            android:description="@string/my_device_admin_description"
-            android:permission="android.permission.BIND_DEVICE_ADMIN">
-            <meta-data android:name="android.app.device_admin"
-                android:resource="@xml/device_admin" />
-            <intent-filter>
-                <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
-                <action android:name="android.app.action.DEVICE_ADMIN_DISABLE_REQUESTED" />
-                <action android:name="android.app.action.DEVICE_ADMIN_DISABLED" />
-                <action android:name="android.app.action.ACTION_PASSWORD_CHANGED" />
-                <action android:name="android.app.action.ACTION_PASSWORD_EXPIRING" />
-                <action android:name="android.app.action.ACTION_PASSWORD_FAILED" />
-                <action android:name="android.app.action.ACTION_PASSWORD_SUCCEEDED" />
-            </intent-filter>
-        </receiver>
+        <!--<receiver android:name=".presentation.view.receiver.MyDeviceAdminReceiver"-->
+            <!--android:label="@string/my_device_admin"-->
+            <!--android:description="@string/my_device_admin_description"-->
+            <!--android:permission="android.permission.BIND_DEVICE_ADMIN">-->
+            <!--<meta-data android:name="android.app.device_admin"-->
+                <!--android:resource="@xml/device_admin" />-->
+            <!--<intent-filter>-->
+                <!--<action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />-->
+                <!--<action android:name="android.app.action.DEVICE_ADMIN_DISABLE_REQUESTED" />-->
+                <!--<action android:name="android.app.action.DEVICE_ADMIN_DISABLED" />-->
+                <!--<action android:name="android.app.action.ACTION_PASSWORD_CHANGED" />-->
+                <!--<action android:name="android.app.action.ACTION_PASSWORD_EXPIRING" />-->
+                <!--<action android:name="android.app.action.ACTION_PASSWORD_FAILED" />-->
+                <!--<action android:name="android.app.action.ACTION_PASSWORD_SUCCEEDED" />-->
+            <!--</intent-filter>-->
+        <!--</receiver>-->
     </application>
 
 </manifest>
