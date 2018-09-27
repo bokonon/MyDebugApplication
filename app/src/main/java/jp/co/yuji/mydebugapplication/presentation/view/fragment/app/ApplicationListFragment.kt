@@ -85,8 +85,8 @@ class ApplicationListFragment : BaseFragment() {
 
 
         val menuItem = menu.findItem(R.id.menu_search_view)
-        val searchView = menuItem.actionView as SearchView
-        searchView.setOnQueryTextListener(this.onQueryTextListener)
+        val searchView = menuItem.actionView as? SearchView
+        searchView?.setOnQueryTextListener(this.onQueryTextListener)
 
 
         return super.onCreateOptionsMenu(menu, inflater)
