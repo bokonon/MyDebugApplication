@@ -18,13 +18,13 @@ import kotlinx.android.synthetic.main.fragment_sensor_detail.view.*
 
 
 /**
- * Created by yuji on 2018/01/04.
+ * Sensor Detail Fragment.
  */
 class SensorDetailFragment : BaseFragment() {
 
     companion object {
 
-        val ARG_KEY = "arg_key"
+        const val ARG_KEY = "arg_key"
 
         val SENSOR_TYPE_DEFAULT = -1
 

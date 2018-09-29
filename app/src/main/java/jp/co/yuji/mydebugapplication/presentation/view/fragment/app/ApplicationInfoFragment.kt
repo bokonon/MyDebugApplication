@@ -10,13 +10,13 @@ import android.view.View
 import android.view.ViewGroup
 import com.google.android.gms.ads.AdRequest
 import jp.co.yuji.mydebugapplication.R
-import jp.co.yuji.mydebugapplication.presentation.view.adapter.ApplicationInfoRecyclerViewAdapter
+import jp.co.yuji.mydebugapplication.presentation.view.adapter.common.CommonInfoRecyclerViewAdapter
 import jp.co.yuji.mydebugapplication.presentation.view.fragment.BaseFragment
 import kotlinx.android.synthetic.main.fragment_app_info.view.*
 import java.util.*
 
 /**
- * Created by yuji on 2017/12/29.
+ * Application Info Fragment.
  */
 class ApplicationInfoFragment : BaseFragment() {
 
@@ -26,7 +26,7 @@ class ApplicationInfoFragment : BaseFragment() {
         }
     }
 
-    private val listener = object:ApplicationInfoRecyclerViewAdapter.OnItemClickListener {
+    private val listener = object:CommonInfoRecyclerViewAdapter.OnItemClickListener {
         override fun onItemClick(position: Int) {
             val fragment = ApplicationListFragment.newInstance(position)
             activity.supportFragmentManager.beginTransaction()
@@ -42,7 +42,7 @@ class ApplicationInfoFragment : BaseFragment() {
         val view = inflater!!.inflate(R.layout.fragment_app_info, container, false)
 
         view.recyclerView.layoutManager = LinearLayoutManager(activity)
-        val adapter = ApplicationInfoRecyclerViewAdapter(getApplicationInfo())
+        val adapter = CommonInfoRecyclerViewAdapter(getApplicationInfo())
         view.recyclerView.adapter = adapter
         adapter.setOnItemClickListener(listener)
 

@@ -16,7 +16,7 @@ import jp.co.yuji.mydebugapplication.R
 import jp.co.yuji.mydebugapplication.presentation.presenter.other.WiFiInfoListPresenter
 import jp.co.yuji.mydebugapplication.presentation.view.adapter.WiFiInfoListRecyclerViewAdapter
 import jp.co.yuji.mydebugapplication.presentation.view.fragment.BaseFragment
-import kotlinx.android.synthetic.main.fragment_app_list.view.*
+import kotlinx.android.synthetic.main.fragment_common_progress.view.*
 import java.util.*
 
 /**
@@ -50,7 +50,7 @@ class WiFiInfoListFragment : BaseFragment() {
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        val view = inflater!!.inflate(R.layout.fragment_wifi_info_list, container, false)
+        val view = inflater!!.inflate(R.layout.fragment_common_progress, container, false)
 
         progressBar = view.progressBar
         progressBar?.visibility = View.VISIBLE

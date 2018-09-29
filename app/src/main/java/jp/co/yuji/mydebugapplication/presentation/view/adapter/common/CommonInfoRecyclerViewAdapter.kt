@@ -1,4 +1,4 @@
-package jp.co.yuji.mydebugapplication.presentation.view.adapter
+package jp.co.yuji.mydebugapplication.presentation.view.adapter.common
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -8,9 +8,9 @@ import android.widget.TextView
 import jp.co.yuji.mydebugapplication.R
 
 /**
- * Application Info Adapter.
+ * Common Info Adapter.
  */
-class ApplicationInfoRecyclerViewAdapter(private val items: List<String>) : RecyclerView.Adapter<ApplicationInfoRecyclerViewAdapter.ViewHolder>() {
+class CommonInfoRecyclerViewAdapter(private val items: List<String>) : RecyclerView.Adapter<CommonInfoRecyclerViewAdapter.ViewHolder>() {
 
     interface OnItemClickListener {
         fun onItemClick(position: Int)
@@ -22,17 +22,17 @@ class ApplicationInfoRecyclerViewAdapter(private val items: List<String>) : Recy
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
         val v: View = LayoutInflater.from(parent?.context)
-                .inflate(R.layout.adapter_application_info_item, parent, false)
+                .inflate(R.layout.adapter_common_info_item, parent, false)
         return ViewHolder.create(v)
-    }
-
-    fun setOnItemClickListener(listener: OnItemClickListener) {
-        this.listener = listener
     }
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
         holder?.titleTextView?.text = items[position]
         holder?.itemView?.setOnClickListener { listener?.onItemClick(position) }
+    }
+
+    fun setOnItemClickListener(listener: OnItemClickListener) {
+        this.listener = listener
     }
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {

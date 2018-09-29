@@ -81,7 +81,7 @@ class PinningActivityFragment : BaseFragment() {
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private fun startPinning() {
-        executeForApiLevel21orHigher({
+        executeForApiLevel21orHigher {
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
                 if (activityManager != null && !activityManager!!.isInLockTaskMode) {
                     activity?.startLockTask()
@@ -92,7 +92,7 @@ class PinningActivityFragment : BaseFragment() {
                     activity?.startLockTask()
                 }
             }
-        })
+        }
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
@@ -105,7 +105,7 @@ class PinningActivityFragment : BaseFragment() {
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private fun stopPinning() {
-        executeForApiLevel21orHigher({
+        executeForApiLevel21orHigher {
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
                 if (activityManager != null && activityManager!!.isInLockTaskMode) {
                     activity?.stopLockTask()
@@ -115,7 +115,7 @@ class PinningActivityFragment : BaseFragment() {
                     activity?.stopLockTask()
                 }
             }
-        })
+        }
         activity?.finish()
     }
 

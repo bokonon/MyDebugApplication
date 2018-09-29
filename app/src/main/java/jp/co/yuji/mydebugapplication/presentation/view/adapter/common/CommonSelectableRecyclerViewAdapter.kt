@@ -1,4 +1,4 @@
-package jp.co.yuji.mydebugapplication.presentation.view.adapter
+package jp.co.yuji.mydebugapplication.presentation.view.adapter.common
 
 import android.content.Context
 import android.support.v4.content.ContextCompat
@@ -11,15 +11,15 @@ import jp.co.yuji.mydebugapplication.R
 import jp.co.yuji.mydebugapplication.domain.model.CommonDto
 
 /**
- * Battery Info Adapter.
+ * Common Selectable Adapter.
  */
-class BatteryInfoRecyclerViewAdapter (private val context: Context, private val items: ArrayList<CommonDto>) : RecyclerView.Adapter<BatteryInfoRecyclerViewAdapter.ViewHolder>() {
+class CommonSelectableRecyclerViewAdapter (private val context: Context, private val items: List<CommonDto>) : RecyclerView.Adapter<CommonSelectableRecyclerViewAdapter.ViewHolder>() {
 
     override fun getItemCount(): Int = items.size
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): BatteryInfoRecyclerViewAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): CommonSelectableRecyclerViewAdapter.ViewHolder {
         val v: View = LayoutInflater.from(parent?.context)
-                .inflate(R.layout.adapter_battery_info_item, parent, false)
+                .inflate(R.layout.adapter_common_item, parent, false)
         return ViewHolder.create(v)
     }
 
@@ -36,10 +36,6 @@ class BatteryInfoRecyclerViewAdapter (private val context: Context, private val 
         }
     }
 
-    fun getList() :  ArrayList<CommonDto> {
-        return items
-    }
-
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
 
         var titleTextView: TextView? = itemView.findViewById(R.id.title_text) as? TextView
@@ -49,5 +45,4 @@ class BatteryInfoRecyclerViewAdapter (private val context: Context, private val 
             fun create(v: View): ViewHolder = ViewHolder(v)
         }
     }
-
 }

@@ -19,7 +19,6 @@ import jp.co.yuji.mydebugapplication.presentation.view.fragment.BaseFragment
 import jp.co.yuji.mydebugapplication.presentation.view.receiver.MyDeviceAdminReceiver
 import kotlinx.android.synthetic.main.fragment_pinning.view.*
 
-
 /**
  * Pinning Fragment.
  */
@@ -78,7 +77,7 @@ class PinningFragment : BaseFragment() {
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private fun startPinning() {
-        executeForApiLevel21orHigher({
+        executeForApiLevel21orHigher {
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
                 if (activityManager != null && !activityManager!!.isInLockTaskMode) {
                     activity?.startLockTask()
@@ -89,12 +88,12 @@ class PinningFragment : BaseFragment() {
                     activity?.startLockTask()
                 }
             }
-        })
+        }
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private fun stopPinning() {
-        executeForApiLevel21orHigher({
+        executeForApiLevel21orHigher {
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
                 if (activityManager != null && activityManager!!.isInLockTaskMode) {
                     activity?.stopLockTask()
@@ -104,7 +103,7 @@ class PinningFragment : BaseFragment() {
                     activity?.stopLockTask()
                 }
             }
-        })
+        }
     }
 
     private fun startPinningActivity() {

@@ -10,7 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.google.android.gms.ads.AdRequest
 import jp.co.yuji.mydebugapplication.R
-import jp.co.yuji.mydebugapplication.presentation.view.adapter.HardwareInfoRecyclerViewAdapter
+import jp.co.yuji.mydebugapplication.presentation.view.adapter.common.CommonInfoRecyclerViewAdapter
 import jp.co.yuji.mydebugapplication.presentation.view.fragment.BaseFragment
 import kotlinx.android.synthetic.main.fragment_hard_info.view.*
 import java.util.*
@@ -26,7 +26,7 @@ class HardwareInfoFragment : BaseFragment() {
         }
     }
 
-    private val listener = object: HardwareInfoRecyclerViewAdapter.OnItemClickListener {
+    private val listener = object: CommonInfoRecyclerViewAdapter.OnItemClickListener {
         override fun onItemClick(position: Int) {
             var fragment: Fragment? = null
             val type = Type.find(position)
@@ -51,7 +51,7 @@ class HardwareInfoFragment : BaseFragment() {
         super.onCreateView(inflater, container, savedInstanceState)
         val view = inflater!!.inflate(R.layout.fragment_hard_info, container, false)
         view.recyclerView.layoutManager = LinearLayoutManager(activity)
-        val adapter = HardwareInfoRecyclerViewAdapter(getHardwareInfo())
+        val adapter = CommonInfoRecyclerViewAdapter(getHardwareInfo())
         view.recyclerView.adapter = adapter
         adapter.setOnItemClickListener(listener)
 

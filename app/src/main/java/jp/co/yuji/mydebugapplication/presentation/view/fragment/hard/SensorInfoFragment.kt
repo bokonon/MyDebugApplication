@@ -13,11 +13,11 @@ import android.view.ViewGroup
 import jp.co.yuji.mydebugapplication.R
 import jp.co.yuji.mydebugapplication.presentation.view.adapter.SensorInfoRecyclerViewAdapter
 import jp.co.yuji.mydebugapplication.presentation.view.fragment.BaseFragment
-import kotlinx.android.synthetic.main.fragment_sensor_info.view.*
+import kotlinx.android.synthetic.main.fragment_common.view.*
 import java.util.*
 
 /**
- * Created by yuji on 2018/01/04.
+ * Sensor Info Fragment.
  */
 class SensorInfoFragment : BaseFragment() {
 
@@ -42,7 +42,7 @@ class SensorInfoFragment : BaseFragment() {
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        val view = inflater!!.inflate(R.layout.fragment_sensor_info, container, false)
+        val view = inflater!!.inflate(R.layout.fragment_common, container, false)
         sensorManager = activity.getSystemService(Context.SENSOR_SERVICE) as SensorManager
 
         view.recyclerView.layoutManager = LinearLayoutManager(activity)

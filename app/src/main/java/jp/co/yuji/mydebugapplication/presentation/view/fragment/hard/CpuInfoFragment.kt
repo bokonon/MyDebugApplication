@@ -5,9 +5,9 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import jp.co.yuji.mydebugapplication.R
 import jp.co.yuji.mydebugapplication.presentation.view.fragment.BaseFragment
+import kotlinx.android.synthetic.main.fragment_common_log.view.*
 import java.io.BufferedReader
 import java.io.InputStreamReader
 
@@ -26,9 +26,8 @@ class CpuInfoFragment : BaseFragment() {
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        val view = inflater!!.inflate(R.layout.fragment_cpu_info, container, false)
-        val resultText = view.findViewById<TextView>(R.id.cpu_info_text)
-        resultText.text = execute(command)
+        val view = inflater!!.inflate(R.layout.fragment_common_log, container, false)
+        view.logText.text = execute(command)
         return view
     }
 

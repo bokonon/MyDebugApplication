@@ -10,9 +10,9 @@ import android.widget.ProgressBar
 import jp.co.yuji.mydebugapplication.R
 import jp.co.yuji.mydebugapplication.domain.model.CommonDto
 import jp.co.yuji.mydebugapplication.presentation.presenter.hard.CameraInfoPresenter
-import jp.co.yuji.mydebugapplication.presentation.view.adapter.CameraInfoRecyclerViewAdapter
+import jp.co.yuji.mydebugapplication.presentation.view.adapter.common.CommonSelectableRecyclerViewAdapter
 import jp.co.yuji.mydebugapplication.presentation.view.fragment.BaseFragment
-import kotlinx.android.synthetic.main.fragment_camera_info.view.*
+import kotlinx.android.synthetic.main.fragment_common_progress.view.*
 import java.util.*
 
 /**
@@ -28,17 +28,17 @@ class CameraInfoFragment : BaseFragment() {
 
     private val presenter = CameraInfoPresenter()
 
-    private var adapter: CameraInfoRecyclerViewAdapter? = null
+    private var adapter: CommonSelectableRecyclerViewAdapter? = null
 
     private var progressBar: ProgressBar? = null
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        val view = inflater!!.inflate(R.layout.fragment_camera_info, container, false)
+        val view = inflater!!.inflate(R.layout.fragment_common_progress, container, false)
         view.recyclerView.layoutManager = LinearLayoutManager(activity)
         val list = ArrayList<CommonDto>()
-        adapter = CameraInfoRecyclerViewAdapter(activity, list)
+        adapter = CommonSelectableRecyclerViewAdapter(activity, list)
         view.recyclerView.adapter = adapter
 
         progressBar = view.progressBar

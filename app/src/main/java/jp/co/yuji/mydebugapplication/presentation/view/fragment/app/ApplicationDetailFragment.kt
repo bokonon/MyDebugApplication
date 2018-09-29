@@ -12,7 +12,7 @@ import jp.co.yuji.mydebugapplication.R
 import jp.co.yuji.mydebugapplication.domain.model.CommonDto
 import jp.co.yuji.mydebugapplication.presentation.view.adapter.ApplicationDetailRecyclerViewAdapter
 import jp.co.yuji.mydebugapplication.presentation.view.fragment.BaseFragment
-import kotlinx.android.synthetic.main.fragment_app_detail.view.*
+import kotlinx.android.synthetic.main.fragment_common.view.*
 import java.util.*
 
 /**
@@ -36,7 +36,7 @@ class ApplicationDetailFragment : BaseFragment() {
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        val view = inflater!!.inflate(R.layout.fragment_app_detail, container, false)
+        val view = inflater!!.inflate(R.layout.fragment_common, container, false)
 
         view.recyclerView.layoutManager = LinearLayoutManager(activity)
         val packageName = arguments.getString(ARG_KEY)

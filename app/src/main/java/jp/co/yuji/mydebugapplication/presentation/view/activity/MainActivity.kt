@@ -12,8 +12,9 @@ import jp.co.yuji.mydebugapplication.presentation.view.fragment.hard.HardwareInf
 import jp.co.yuji.mydebugapplication.presentation.view.fragment.other.OtherInfoFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
-
-
+/**
+ * Main Activity.
+ */
 class MainActivity : AppCompatActivity() {
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->

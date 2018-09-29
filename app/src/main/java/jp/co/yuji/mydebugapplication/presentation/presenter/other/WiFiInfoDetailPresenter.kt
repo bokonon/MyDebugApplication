@@ -7,7 +7,7 @@ import jp.co.yuji.mydebugapplication.R
 import jp.co.yuji.mydebugapplication.domain.model.CommonDto
 
 /**
- * WiFi Info Detail Presenter.
+ * Wi-Fi Info Detail Presenter.
  */
 class WiFiInfoDetailPresenter {
 

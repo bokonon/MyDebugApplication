@@ -6,7 +6,7 @@ import jp.co.yuji.mydebugapplication.domain.usecase.GetAppListUseCase
 import jp.co.yuji.mydebugapplication.presentation.view.fragment.app.ApplicationInfoFragment
 
 /**
- * Created by yuji on 2018/01/04.
+ * Application List Presenter.
  */
 class ApplicationListPresenter {
 

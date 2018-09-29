@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 
 /**
- * Created by yuji on 2018/01/04.
+ * Fragment Base Class.
  */
 abstract class BaseFragment : Fragment() {
 
