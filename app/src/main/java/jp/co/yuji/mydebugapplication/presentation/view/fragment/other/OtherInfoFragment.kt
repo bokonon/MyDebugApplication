@@ -36,6 +36,7 @@ class OtherInfoFragment : BaseFragment() {
                 Type.ADB_SHELL -> fragment = AdbShellFragment.newInstance()
                 Type.PINNING -> fragment = PinningFragment.newInstance()
                 Type.NETWORK_INFO -> fragment = NetworkInfoFragment.newInstance()
+                Type.ACTIVITY_MANAGER -> fragment = ActivityManagerFragment.newInstance()
             }
             if (fragment != null) {
                 activity.supportFragmentManager.beginTransaction()
@@ -84,7 +85,8 @@ class OtherInfoFragment : BaseFragment() {
         WI_FI("Wi-Fi", 1),
         ADB_SHELL("Adb Shell", 2),
         PINNING("Pinning", 3),
-        NETWORK_INFO("Network Info", 4);
+        NETWORK_INFO("Network Info", 4),
+        ACTIVITY_MANAGER("Activity Manager", 5);
 
         companion object {
             @Nullable

@@ -109,7 +109,7 @@ class SensorDetailFragment : BaseFragment() {
 
     private fun getSensorBaseText(s: Sensor): String {
         val stringBuilder = StringBuilder()
-        stringBuilder.append("name : " + s.name + "\n")
+        stringBuilder.append("name : " + s.name?.toString().orEmpty() + "\n")
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             stringBuilder.append("fifoMaxEventCount : " + s.fifoMaxEventCount.toString() + "\n")
             stringBuilder.append("fifoReservedEventCount : " + s.fifoReservedEventCount.toString() + "\n")
@@ -138,9 +138,9 @@ class SensorDetailFragment : BaseFragment() {
         stringBuilder.append("resolution : " + s.resolution.toString() + "\n")
         stringBuilder.append("minDelay : " + s.minDelay.toString() + "\n")
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH) {
-            stringBuilder.append("stringType : " + s.stringType + "\n")
+            stringBuilder.append("stringType : " + s.stringType?.toString().orEmpty() + "\n")
         }
-        stringBuilder.append("vendor : " + s.vendor + "\n")
+        stringBuilder.append("vendor : " + s.vendor?.toString().orEmpty() + "\n")
         stringBuilder.append("version : " + s.version + "\n")
         return stringBuilder.toString()
     }

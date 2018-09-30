@@ -64,6 +64,6 @@ class SensorInfoFragment : BaseFragment() {
         if (list != null) {
             return list
         }
-        return ArrayList<Sensor>()
+        return ArrayList()
     }
 }

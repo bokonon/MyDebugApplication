@@ -66,16 +66,14 @@ class NetworkInfoFragment : BaseFragment() {
         list.clear()
 
         if (networkInfo != null) {
-            list.add(CommonDto("state", networkInfo.state.toString()))
-            list.add(CommonDto("detailedState", networkInfo.detailedState.toString()))
-            if (networkInfo.reason != null) {
-                list.add(CommonDto("reason", networkInfo.reason))
-            }
-            list.add(CommonDto("extraInfo", networkInfo.extraInfo))
+            list.add(CommonDto("state", networkInfo.state?.toString().orEmpty()))
+            list.add(CommonDto("detailedState", networkInfo.detailedState?.toString().orEmpty()))
+            list.add(CommonDto("reason", networkInfo.reason?.toString().orEmpty()))
+            list.add(CommonDto("extraInfo", networkInfo.extraInfo?.toString().orEmpty()))
             list.add(CommonDto("type", networkInfo.type.toString()))
-            list.add(CommonDto("typeName", networkInfo.typeName))
+            list.add(CommonDto("typeName", networkInfo.typeName?.toString().orEmpty()))
             list.add(CommonDto("subtype", networkInfo.subtype.toString()))
-            list.add(CommonDto("subtypeName", networkInfo.subtypeName))
+            list.add(CommonDto("subtypeName", networkInfo.subtypeName?.toString().orEmpty()))
         } else {
             list.add(CommonDto("networkInfo", "none"))
         }

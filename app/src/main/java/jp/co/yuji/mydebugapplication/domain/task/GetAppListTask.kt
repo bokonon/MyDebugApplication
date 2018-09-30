@@ -14,7 +14,7 @@ import java.util.*
 class GetAppListTask(private val packageManager: PackageManager, private val actionType: ApplicationInfoFragment.ActionType, private val listener: OnGetApplicationListListener) : AsyncTask<Void, Void, List<ApplicationListDto>>() {
 
     interface OnGetApplicationListListener {
-        fun onGetApplicationList(cameraList : List<ApplicationListDto>)
+        fun onGetApplicationList(appList : List<ApplicationListDto>)
     }
 
     override fun doInBackground(vararg params: Void?): List<ApplicationListDto> {

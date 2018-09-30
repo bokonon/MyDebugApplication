@@ -22,7 +22,7 @@ class WiFiInfoDetailFragment : BaseFragment() {
 
     companion object {
 
-        val ARG_KEY = "arg_key"
+        const val ARG_KEY = "arg_key"
 
         fun newInstance(scanResult : ScanResult) : Fragment {
             val fragment = WiFiInfoDetailFragment()

@@ -1,4 +1,4 @@
-package jp.co.yuji.mydebugapplication.presentation.view.adapter
+package jp.co.yuji.mydebugapplication.presentation.view.adapter.common
 
 import android.content.Context
 import android.support.v4.content.ContextCompat
@@ -11,15 +11,15 @@ import jp.co.yuji.mydebugapplication.R
 import jp.co.yuji.mydebugapplication.domain.model.CommonDto
 
 /**
- * Application Detail Adapter.
+ * Common Detail RecyclerView Adapter.
  */
-class ApplicationDetailRecyclerViewAdapter(private val context: Context, private val items: List<CommonDto>) : RecyclerView.Adapter<ApplicationDetailRecyclerViewAdapter.ViewHolder>() {
+class CommonDetailRecyclerViewAdapter (private val context: Context, private val items: List<CommonDto>) : RecyclerView.Adapter<CommonDetailRecyclerViewAdapter.ViewHolder>() {
 
     override fun getItemCount(): Int = items.size
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
         val v: View = LayoutInflater.from(parent?.context)
-                .inflate(R.layout.adapter_application_detail_item, parent, false)
+                .inflate(R.layout.adapter_common_detail_item, parent, false)
         return ViewHolder.create(v)
     }
 
