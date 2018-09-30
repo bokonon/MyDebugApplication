@@ -10,11 +10,10 @@ import android.view.View
 import android.view.ViewGroup
 import com.google.android.gms.ads.AdRequest
 import jp.co.yuji.mydebugapplication.R
-import jp.co.yuji.mydebugapplication.presentation.view.adapter.OtherInfoRecyclerViewAdapter
+import jp.co.yuji.mydebugapplication.presentation.view.adapter.common.CommonInfoRecyclerViewAdapter
 import jp.co.yuji.mydebugapplication.presentation.view.fragment.BaseFragment
 import kotlinx.android.synthetic.main.fragment_other_info.view.*
 import java.util.*
-
 
 /**
  * Other Info Fragment.
@@ -27,7 +26,7 @@ class OtherInfoFragment : BaseFragment() {
         }
     }
 
-    private val listener = object: OtherInfoRecyclerViewAdapter.OnItemClickListener {
+    private val listener = object: CommonInfoRecyclerViewAdapter.OnItemClickListener {
         override fun onItemClick(position: Int) {
             var fragment: Fragment? = null
             val type = Type.find(position)
@@ -37,6 +36,7 @@ class OtherInfoFragment : BaseFragment() {
                 Type.ADB_SHELL -> fragment = AdbShellFragment.newInstance()
                 Type.PINNING -> fragment = PinningFragment.newInstance()
                 Type.NETWORK_INFO -> fragment = NetworkInfoFragment.newInstance()
+                Type.ACTIVITY_MANAGER -> fragment = ActivityManagerFragment.newInstance()
             }
             if (fragment != null) {
                 activity.supportFragmentManager.beginTransaction()
@@ -52,7 +52,7 @@ class OtherInfoFragment : BaseFragment() {
         super.onCreateView(inflater, container, savedInstanceState)
         val view = inflater!!.inflate(R.layout.fragment_other_info, container, false)
         view.recyclerView.layoutManager = LinearLayoutManager(activity)
-        val adapter = OtherInfoRecyclerViewAdapter(getOtherInfo())
+        val adapter = CommonInfoRecyclerViewAdapter(getOtherInfo())
         view.recyclerView.adapter = adapter
         adapter.setOnItemClickListener(listener)
 
@@ -82,10 +82,11 @@ class OtherInfoFragment : BaseFragment() {
 
     enum class Type(val title: String, val position: Int)  {
         LOG("Log", 0),
-        WI_FI("WiFi", 1),
+        WI_FI("Wi-Fi", 1),
         ADB_SHELL("Adb Shell", 2),
         PINNING("Pinning", 3),
-        NETWORK_INFO("Network Info", 4);
+        NETWORK_INFO("Network Info", 4),
+        ACTIVITY_MANAGER("Activity Manager", 5);
 
         companion object {
             @Nullable

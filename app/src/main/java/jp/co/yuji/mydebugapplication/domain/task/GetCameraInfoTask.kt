@@ -52,7 +52,7 @@ class GetCameraInfoTask(private val context: Context, private val listener: OnGe
                 return
             }
             for (cameraId in cameraIdList) {
-                list.add(CommonDto("camera id", cameraId))
+                list.add(CommonDto("camera id", cameraId?.toString().orEmpty()))
                 val characteristics = manager.getCameraCharacteristics(cameraId)
                 val facing = characteristics.get(CameraCharacteristics.LENS_FACING)
                 if (facing != null) {
@@ -87,7 +87,9 @@ class GetCameraInfoTask(private val context: Context, private val listener: OnGe
             val cameraInfo = Camera.CameraInfo()
             Camera.getCameraInfo(i, cameraInfo)
             list.add(CommonDto("orientation", cameraInfo.orientation.toString()))
-            list.add(CommonDto("can disable shutter sound", cameraInfo.canDisableShutterSound.toString()))
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                list.add(CommonDto("can disable shutter sound", cameraInfo.canDisableShutterSound.toString()))
+            }
             when (cameraInfo.facing) {
                 Camera.CameraInfo.CAMERA_FACING_BACK -> list.add(CommonDto("camera facing", "BACK"))
                 Camera.CameraInfo.CAMERA_FACING_FRONT -> list.add(CommonDto("camera facing", "FRONT"))

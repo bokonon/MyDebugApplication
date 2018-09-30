@@ -13,7 +13,7 @@ import jp.co.yuji.mydebugapplication.domain.model.CommonDto
 import jp.co.yuji.mydebugapplication.presentation.presenter.other.WiFiInfoDetailPresenter
 import jp.co.yuji.mydebugapplication.presentation.view.adapter.WiFiInfoDetailRecyclerViewAdapter
 import jp.co.yuji.mydebugapplication.presentation.view.fragment.BaseFragment
-import kotlinx.android.synthetic.main.fragment_app_detail.view.*
+import kotlinx.android.synthetic.main.fragment_common.view.*
 
 /**
  * WiFi Info Detail Fragment.
@@ -22,7 +22,7 @@ class WiFiInfoDetailFragment : BaseFragment() {
 
     companion object {
 
-        val ARG_KEY = "arg_key"
+        const val ARG_KEY = "arg_key"
 
         fun newInstance(scanResult : ScanResult) : Fragment {
             val fragment = WiFiInfoDetailFragment()
@@ -38,7 +38,7 @@ class WiFiInfoDetailFragment : BaseFragment() {
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        val view = inflater!!.inflate(R.layout.fragment_wifi_info_detail, container, false)
+        val view = inflater!!.inflate(R.layout.fragment_common, container, false)
 
         view.recyclerView.layoutManager = LinearLayoutManager(activity)
         val scanResult = arguments.getParcelable<ScanResult>(ARG_KEY)

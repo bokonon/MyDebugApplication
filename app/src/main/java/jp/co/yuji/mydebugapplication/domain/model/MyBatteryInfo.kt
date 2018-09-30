@@ -1,5 +1,8 @@
 package jp.co.yuji.mydebugapplication.domain.model
 
+/**
+ * MyBatteryInfo.
+ */
 class MyBatteryInfo(val health: Int,
                     val icon_small: Int,
                     val level: Int,

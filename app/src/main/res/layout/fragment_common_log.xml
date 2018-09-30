@@ -14,7 +14,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/cpu_info_text"
+            android:id="@+id/logText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/default_log_text"

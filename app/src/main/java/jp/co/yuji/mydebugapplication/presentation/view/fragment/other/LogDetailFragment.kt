@@ -9,7 +9,7 @@ import android.widget.ProgressBar
 import jp.co.yuji.mydebugapplication.R
 import jp.co.yuji.mydebugapplication.presentation.presenter.other.LogDetailPresenter
 import jp.co.yuji.mydebugapplication.presentation.view.fragment.BaseFragment
-import kotlinx.android.synthetic.main.fragment_log_detail.view.*
+import kotlinx.android.synthetic.main.fragment_common_log_progress.view.*
 
 /**
  * Log Detail Fragment.
@@ -29,14 +29,14 @@ class LogDetailFragment : BaseFragment() {
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        val view = inflater!!.inflate(R.layout.fragment_log_detail, container, false)
+        val view = inflater!!.inflate(R.layout.fragment_common_log_progress, container, false)
 
         progressBar = view.progressBar
         progressBar?.visibility = View.VISIBLE
 
         presenter.getLog(object : LogDetailPresenter.OnGetLogListener {
             override fun onGetLog(log: String) {
-                view.log_text.text = log
+                view.logText.text = log
                 progressBar?.visibility = View.GONE
             }
         })

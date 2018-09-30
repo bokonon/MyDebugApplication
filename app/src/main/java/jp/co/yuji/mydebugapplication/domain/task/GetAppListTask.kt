@@ -9,12 +9,12 @@ import jp.co.yuji.mydebugapplication.presentation.view.fragment.app.ApplicationI
 import java.util.*
 
 /**
- * Created by yuji on 2018/01/04.
+ * Get AppList Task.
  */
 class GetAppListTask(private val packageManager: PackageManager, private val actionType: ApplicationInfoFragment.ActionType, private val listener: OnGetApplicationListListener) : AsyncTask<Void, Void, List<ApplicationListDto>>() {
 
     interface OnGetApplicationListListener {
-        fun onGetApplicationList(cameraList : List<ApplicationListDto>)
+        fun onGetApplicationList(appList : List<ApplicationListDto>)
     }
 
     override fun doInBackground(vararg params: Void?): List<ApplicationListDto> {

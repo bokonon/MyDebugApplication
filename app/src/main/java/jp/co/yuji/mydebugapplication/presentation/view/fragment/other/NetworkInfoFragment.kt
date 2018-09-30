@@ -11,11 +11,14 @@ import android.view.View
 import android.view.ViewGroup
 import jp.co.yuji.mydebugapplication.R
 import jp.co.yuji.mydebugapplication.domain.model.CommonDto
-import jp.co.yuji.mydebugapplication.presentation.view.adapter.NetworkInfoRecyclerViewAdapter
+import jp.co.yuji.mydebugapplication.presentation.view.adapter.common.CommonRecyclerViewAdapter
 import jp.co.yuji.mydebugapplication.presentation.view.fragment.BaseFragment
 import jp.co.yuji.mydebugapplication.presentation.view.receiver.ConnectivityReceiver
-import kotlinx.android.synthetic.main.fragment_device_info.view.*
+import kotlinx.android.synthetic.main.fragment_common.view.*
 
+/**
+ * Network Info Fragment
+ */
 class NetworkInfoFragment : BaseFragment() {
 
     companion object {
@@ -24,7 +27,7 @@ class NetworkInfoFragment : BaseFragment() {
         }
     }
 
-    private lateinit var adapter : NetworkInfoRecyclerViewAdapter
+    private lateinit var adapter : CommonRecyclerViewAdapter
 
     private val receiver = ConnectivityReceiver(object : ConnectivityReceiver.OnConnectivityListener {
         override fun onConnectivityReceive(networkInfo: NetworkInfo?) {
@@ -35,10 +38,10 @@ class NetworkInfoFragment : BaseFragment() {
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        val view = inflater!!.inflate(R.layout.fragment_network_info, container, false)
+        val view = inflater!!.inflate(R.layout.fragment_common, container, false)
 
         view.recyclerView.layoutManager = LinearLayoutManager(activity)
-        adapter = NetworkInfoRecyclerViewAdapter(activity, ArrayList())
+        adapter = CommonRecyclerViewAdapter(activity, ArrayList())
         view.recyclerView.adapter = adapter
 
         return view
@@ -63,16 +66,14 @@ class NetworkInfoFragment : BaseFragment() {
         list.clear()
 
         if (networkInfo != null) {
-            list.add(CommonDto("state", networkInfo.state.toString()))
-            list.add(CommonDto("detailedState", networkInfo.detailedState.toString()))
-            if (networkInfo.reason != null) {
-                list.add(CommonDto("reason", networkInfo.reason))
-            }
-            list.add(CommonDto("extraInfo", networkInfo.extraInfo))
+            list.add(CommonDto("state", networkInfo.state?.toString().orEmpty()))
+            list.add(CommonDto("detailedState", networkInfo.detailedState?.toString().orEmpty()))
+            list.add(CommonDto("reason", networkInfo.reason?.toString().orEmpty()))
+            list.add(CommonDto("extraInfo", networkInfo.extraInfo?.toString().orEmpty()))
             list.add(CommonDto("type", networkInfo.type.toString()))
-            list.add(CommonDto("typeName", networkInfo.typeName))
+            list.add(CommonDto("typeName", networkInfo.typeName?.toString().orEmpty()))
             list.add(CommonDto("subtype", networkInfo.subtype.toString()))
-            list.add(CommonDto("subtypeName", networkInfo.subtypeName))
+            list.add(CommonDto("subtypeName", networkInfo.subtypeName?.toString().orEmpty()))
         } else {
             list.add(CommonDto("networkInfo", "none"))
         }

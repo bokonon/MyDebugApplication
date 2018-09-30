@@ -23,12 +23,13 @@
     <string name="screen_name_battery_info">Battery Info</string>
     <string name="screen_name_other_info">Other Info</string>
     <string name="screen_name_log_detail">Log Detail</string>
-    <string name="screen_name_wifi_info_list">WiFi Info List</string>
-    <string name="screen_name_wifi_info_detail">WiFi Info Detail</string>
+    <string name="screen_name_wifi_info_list">Wi-Fi Info List</string>
+    <string name="screen_name_wifi_info_detail">Wi-Fi Info Detail</string>
     <string name="screen_name_adb_shell">Adb Shell</string>
     <string name="screen_name_pinning">Pinning</string>
     <string name="screen_name_lock_task">LockTask</string>
     <string name="screen_name_network_info">Network Info</string>
+    <string name="screen_name_activity_manager">Activity Manager</string>
 
     <!-- WiFi info -->
     <string name="wifi_info_level_unit_text">%1$d dBm</string>

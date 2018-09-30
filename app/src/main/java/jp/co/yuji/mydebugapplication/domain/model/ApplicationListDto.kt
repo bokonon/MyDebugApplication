@@ -4,7 +4,7 @@ import android.graphics.drawable.Drawable
 import jp.co.yuji.mydebugapplication.presentation.view.adapter.common.MyFilterable
 
 /**
- * Created by yuji on 2017/12/31.
+ * ApplicationListDto.
  */
 class ApplicationListDto(appName: String, packageName: String, icon: Drawable): MyFilterable() {
     val appName: String = appName

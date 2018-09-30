@@ -14,8 +14,8 @@ android {
         applicationId "jp.co.yuji.mydebugapplication"
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 13
-        versionName "1.7.1"
+        versionCode 14
+        versionName "1.7.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
 
@@ -42,5 +42,5 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-    compile 'com.google.android.gms:play-services-ads:15.0.0'
+    implementation 'com.google.android.gms:play-services-ads:15.0.0'
 }

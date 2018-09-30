@@ -7,8 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
-import android.widget.TextView
 import jp.co.yuji.mydebugapplication.R
 import jp.co.yuji.mydebugapplication.presentation.view.fragment.BaseFragment
 import kotlinx.android.synthetic.main.fragment_adb_shell.view.*
@@ -31,14 +29,16 @@ class AdbShellFragment : BaseFragment() {
         super.onCreateView(inflater, container, savedInstanceState)
         val view = inflater!!.inflate(R.layout.fragment_adb_shell, container, false)
 
-        val editText = view.findViewById<EditText>(R.id.adb_shell_edit_text)
-        val resultText = view.findViewById<TextView>(R.id.adb_shell_result_text)
+        view.adbShellResultText.text = "pm list features\n" +
+                "pm list libraries\n" +
+                "ls /system/bin\n" +
+                "etc"
 
-        view.adb_shell_execute_button.setOnClickListener({
-            resultText.text = getExecuteText(editText.text.toString())
+        view.adbShellExecuteButton.setOnClickListener {
+            view.adbShellResultText.text = getExecuteText(view.adbShellEditText.text.toString())
             view.hideKeyboard()
-            resultText.requestFocus()
-        })
+            view.adbShellResultText.requestFocus()
+        }
 
         return view
     }

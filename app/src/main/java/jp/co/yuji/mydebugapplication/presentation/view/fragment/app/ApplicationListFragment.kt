@@ -13,17 +13,17 @@ import jp.co.yuji.mydebugapplication.domain.model.ApplicationListDto
 import jp.co.yuji.mydebugapplication.presentation.presenter.app.ApplicationListPresenter
 import jp.co.yuji.mydebugapplication.presentation.view.adapter.ApplicationListRecyclerViewAdapter
 import jp.co.yuji.mydebugapplication.presentation.view.fragment.BaseFragment
-import kotlinx.android.synthetic.main.fragment_app_list.view.*
+import kotlinx.android.synthetic.main.fragment_common_progress.view.*
 import java.util.*
 
 
 /**
- * Created by yuji on 2017/12/31.
+ * Application List Fragment.
  */
 class ApplicationListFragment : BaseFragment() {
 
     companion object {
-        val ARG_KEY = "arg_key"
+        const val ARG_KEY = "arg_key"
 
         fun newInstance(actionTypePosition : Int) : Fragment {
             val fragment = ApplicationListFragment()
@@ -58,7 +58,7 @@ class ApplicationListFragment : BaseFragment() {
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                                savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        val view = inflater!!.inflate(R.layout.fragment_app_list, container, false)
+        val view = inflater!!.inflate(R.layout.fragment_common_progress, container, false)
 
         progressBar = view.progressBar
         progressBar?.visibility = View.VISIBLE
