@@ -36,6 +36,7 @@ class HardwareInfoFragment : BaseFragment() {
                 Type.CPU -> fragment = CpuInfoFragment.newInstance()
                 Type.MEMORY -> fragment = MemoryInfoFragment.newInstance()
                 Type.BATTERY -> fragment = BatteryInfoFragment.newInstance()
+                Type.STORAGE -> fragment = StorageInfoFragment.newInstance()
             }
             if (fragment != null) {
                 activity.supportFragmentManager.beginTransaction()
@@ -84,7 +85,8 @@ class HardwareInfoFragment : BaseFragment() {
         CAMERA("Camera", 1),
         CPU("CPU", 2),
         MEMORY("Memory", 3),
-        BATTERY("Battery", 4);
+        BATTERY("Battery", 4),
+        STORAGE("Storage", 5);
 
         companion object {
             @Nullable
