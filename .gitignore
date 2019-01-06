@@ -57,3 +57,6 @@ captures/
 google-services.json
 
 output.json
+
+# Android App Bundle
+app/release/release/app.aab
