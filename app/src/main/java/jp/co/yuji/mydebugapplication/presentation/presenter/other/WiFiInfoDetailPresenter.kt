@@ -37,7 +37,7 @@ class WiFiInfoDetailPresenter {
             list.add(CommonDto("timestamp", scanResult.timestamp.toString()))
         }
 
-        list.add(CommonDto("=== ScanResult toString ===", ""))
+        list.add(CommonDto("=== ScanResult ===", ""))
         val items = scanResult.toString().split(",")
         items
                 .map { it.split(":") }

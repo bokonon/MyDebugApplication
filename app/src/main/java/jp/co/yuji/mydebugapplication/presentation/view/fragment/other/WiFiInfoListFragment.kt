@@ -64,9 +64,9 @@ class WiFiInfoListFragment : BaseFragment() {
         val itemDecoration = DividerItemDecoration(activity, DividerItemDecoration.VERTICAL)
         view.recyclerView.addItemDecoration(itemDecoration)
 
-        if (ContextCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION)
+        if (ContextCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_COARSE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
-            val permissions: Array<String> = arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION)
+            val permissions: Array<String> = arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION)
             requestPermissions(
                     permissions,
                     PERMISSIONS_REQUEST_CODE_ACCESS_COARSE_LOCATION)

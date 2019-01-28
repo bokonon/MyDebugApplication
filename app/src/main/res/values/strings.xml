@@ -16,6 +16,7 @@
     <string name="screen_name_application_detail">Application Detail</string>
     <string name="screen_name_hardware_info">Hardware Info</string>
     <string name="screen_name_sensor_info">Sensor Info</string>
+    <string name="screen_name_sound_info">Sound Info</string>
     <string name="screen_name_sensor_detail">Sensor Detail</string>
     <string name="screen_name_camera_info">Camera Info</string>
     <string name="screen_name_cpu_info">Cpu Info</string>
@@ -59,4 +60,6 @@
 
     <!-- error -->
     <string name="error_support_api_level_21">This function is valid at Api level 21 or higher.</string>
+
+    <string name="content_description">Icon Image</string>
 </resources>
