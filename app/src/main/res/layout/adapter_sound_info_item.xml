@@ -10,27 +10,29 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:id="@+id/title_text"
-        android:textIsSelectable="true"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintWidth_percent="0.5"/>
+        app:layout_constraintWidth_percent="0.8"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"/>
 
     <android.support.constraint.Guideline
         android:layout_width="1dp"
         android:layout_height="1dp"
         android:id="@+id/guideline"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.5"/>
+        app:layout_constraintGuide_percent="0.8"/>
 
     <TextView
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:id="@+id/value_text"
-        android:textIsSelectable="true"
+        android:gravity="center"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="@id/guideline"
-        app:layout_constraintWidth_percent="0.5"/>
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintWidth_percent="0.2"/>
 
 </android.support.constraint.ConstraintLayout>

@@ -179,7 +179,7 @@ class BatteryInfoFragment : BaseFragment() {
 
     private fun appendExtraInfo(list: ArrayList<CommonDto>) {
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            list.add(CommonDto("=== for LOLLIPOP or more ===", ""))
+            list.add(CommonDto("=== over LOLLIPOP ===", ""))
 
             val batteryManager = activity.getSystemService(Context.BATTERY_SERVICE) as BatteryManager
 
