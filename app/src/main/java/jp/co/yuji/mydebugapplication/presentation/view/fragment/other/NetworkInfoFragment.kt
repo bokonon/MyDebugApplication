@@ -62,7 +62,7 @@ class NetworkInfoFragment : BaseFragment() {
     }
 
     private fun updateView(networkInfo: NetworkInfo?) {
-        val list = adapter.getList()
+        val list = adapter.items
         list.clear()
 
         if (networkInfo != null) {

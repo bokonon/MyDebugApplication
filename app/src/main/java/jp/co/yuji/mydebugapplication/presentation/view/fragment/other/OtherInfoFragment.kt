@@ -37,6 +37,7 @@ class OtherInfoFragment : BaseFragment() {
                 Type.PINNING -> fragment = PinningFragment.newInstance()
                 Type.NETWORK_INFO -> fragment = NetworkInfoFragment.newInstance()
                 Type.ACTIVITY_MANAGER -> fragment = ActivityManagerFragment.newInstance()
+                Type.ALARM_MANAGER -> fragment = AlarmManagerFragment.newInstance()
             }
             if (fragment != null) {
                 activity.supportFragmentManager.beginTransaction()
@@ -86,7 +87,8 @@ class OtherInfoFragment : BaseFragment() {
         ADB_SHELL("Adb Shell", 2),
         PINNING("Pinning", 3),
         NETWORK_INFO("Network Info", 4),
-        ACTIVITY_MANAGER("Activity Manager", 5);
+        ACTIVITY_MANAGER("Activity Manager", 5),
+        ALARM_MANAGER("Alarm Manager", 6);
 
         companion object {
             @Nullable

@@ -13,7 +13,9 @@ import jp.co.yuji.mydebugapplication.domain.model.CommonDto
 /**
  * Common Adapter.
  */
-class CommonRecyclerViewAdapter(private val context : Context, private val items: ArrayList<CommonDto>) : RecyclerView.Adapter<CommonRecyclerViewAdapter.ViewHolder>() {
+class CommonRecyclerViewAdapter(private val context : Context, items: ArrayList<CommonDto>) : RecyclerView.Adapter<CommonRecyclerViewAdapter.ViewHolder>() {
+
+    val items = items
 
     override fun getItemCount(): Int = items.size
 
@@ -31,10 +33,6 @@ class CommonRecyclerViewAdapter(private val context : Context, private val items
         if (position%2 == 0) {
             holder?.itemView?.setBackgroundColor(ContextCompat.getColor(context, R.color.recycler_view_back))
         }
-    }
-
-    fun getList() :  ArrayList<CommonDto> {
-        return items
     }
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {

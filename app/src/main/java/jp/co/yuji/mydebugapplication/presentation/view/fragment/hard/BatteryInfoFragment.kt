@@ -65,7 +65,7 @@ class BatteryInfoFragment : BaseFragment() {
     }
 
     private fun updateView(myBatteryInfo : MyBatteryInfo) {
-        val list = adapter.getList()
+        val list = adapter.items
         list.clear()
 
         try {
