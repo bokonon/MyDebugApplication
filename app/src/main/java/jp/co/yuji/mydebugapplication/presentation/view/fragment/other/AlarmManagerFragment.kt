@@ -57,7 +57,7 @@ class AlarmManagerFragment : BaseFragment() {
         val list = ArrayList<CommonDto>()
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+            val alarmManager = activity.getSystemService(Context.ALARM_SERVICE) as AlarmManager
             val alarmClockInfo = alarmManager.nextAlarmClock
             if (alarmClockInfo != null) {
                 list.add(CommonDto("=== Next Alarm Clock ===", ""))
