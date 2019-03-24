@@ -59,4 +59,4 @@ google-services.json
 output.json
 
 # Android App Bundle
-app/release/release/app.aab
+app/release/app.aab
