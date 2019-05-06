@@ -53,8 +53,13 @@ class TelephoneInfoFragment : BaseFragment() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
         if (requestCode == PERMISSIONS_REQUEST_CODE_READ_PHONE_STATE
-                && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                && grantResults.isNotEmpty()
+                && grantResults[0] == PackageManager.PERMISSION_GRANTED
+                && grantResults.size > 1
+                && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
             addRequiredPermissionTelephoneInfo(adapter.getItems())
+
+            adapter.notifyDataSetChanged()
         }
 
     }
@@ -171,30 +176,14 @@ class TelephoneInfoFragment : BaseFragment() {
             list.add(CommonDto("isDataEnabled", isDataEnabledString))
         }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            val canChangeDtmfToneLength = telephonyManager.canChangeDtmfToneLength()
-            val canChangeDtmfToneLengthString = if (canChangeDtmfToneLength) "true" else "false"
-            list.add(CommonDto("canChangeDtmfToneLength", canChangeDtmfToneLengthString))
-
-            val isWorldPhone = telephonyManager.isWorldPhone
-            val isWorldPhoneString = if (isWorldPhone) "true" else "false"
-            list.add(CommonDto("isWorldPhone", isWorldPhoneString))
-
-            val isTtyModeSupported = telephonyManager.isTtyModeSupported
-            val isTtyModeSupportedString = if (isTtyModeSupported) "true" else "false"
-            list.add(CommonDto("isTtyModeSupported", isTtyModeSupportedString))
-
-            val isHearingAidCompatibilitySupported = telephonyManager.isHearingAidCompatibilitySupported
-            val isHearingAidCompatibilitySupportedString = if (isHearingAidCompatibilitySupported) "true" else "false"
-            list.add(CommonDto("isHearingAidCompatibilitySupported", isHearingAidCompatibilitySupportedString))
-        }
-
     }
 
     private fun addRequiredPermissionTelephoneInfo(list: ArrayList<CommonDto>) {
         if (ContextCompat.checkSelfPermission(activity, Manifest.permission.READ_PHONE_STATE)
+                != PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_COARSE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
-            val permissions: Array<String> = arrayOf(Manifest.permission.READ_PHONE_STATE)
+            val permissions: Array<String> = arrayOf(Manifest.permission.READ_PHONE_STATE, Manifest.permission.ACCESS_COARSE_LOCATION)
             requestPermissions(
                     permissions,
                     PERMISSIONS_REQUEST_CODE_READ_PHONE_STATE)
@@ -278,6 +267,24 @@ class TelephoneInfoFragment : BaseFragment() {
                     list.add(CommonDto("timeStamp", timeStamp.toString()))
                 }
             }
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            val canChangeDtmfToneLength = telephonyManager.canChangeDtmfToneLength()
+            val canChangeDtmfToneLengthString = if (canChangeDtmfToneLength) "true" else "false"
+            list.add(CommonDto("canChangeDtmfToneLength", canChangeDtmfToneLengthString))
+
+            val isWorldPhone = telephonyManager.isWorldPhone
+            val isWorldPhoneString = if (isWorldPhone) "true" else "false"
+            list.add(CommonDto("isWorldPhone", isWorldPhoneString))
+
+            val isTtyModeSupported = telephonyManager.isTtyModeSupported
+            val isTtyModeSupportedString = if (isTtyModeSupported) "true" else "false"
+            list.add(CommonDto("isTtyModeSupported", isTtyModeSupportedString))
+
+            val isHearingAidCompatibilitySupported = telephonyManager.isHearingAidCompatibilitySupported
+            val isHearingAidCompatibilitySupportedString = if (isHearingAidCompatibilitySupported) "true" else "false"
+            list.add(CommonDto("isHearingAidCompatibilitySupported", isHearingAidCompatibilitySupportedString))
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
