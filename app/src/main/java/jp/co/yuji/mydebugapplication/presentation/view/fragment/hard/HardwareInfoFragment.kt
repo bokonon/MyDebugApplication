@@ -45,6 +45,7 @@ class HardwareInfoFragment : BaseFragment() {
                         .addToBackStack(null)
                         .commit()
             }
+            postLogEvent("hardware type: ${type?.title}")
         }
     }
 

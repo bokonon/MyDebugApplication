@@ -47,6 +47,7 @@ class ApplicationListFragment : BaseFragment() {
                     .replace(R.id.container, fragment)
                     .addToBackStack(null)
                     .commit()
+            postLogEvent("package name: $packageName")
         }
     }
 
@@ -73,16 +74,14 @@ class ApplicationListFragment : BaseFragment() {
         val itemDecoration = DividerItemDecoration(activity, DividerItemDecoration.VERTICAL)
         view.recyclerView.addItemDecoration(itemDecoration)
 
-        addApplicationList(actionTypePosition, list)
+        addApplicationList(actionTypePosition)
 
         return view
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         // Inflate the menu to use in the action bar
-        val inflater = activity.menuInflater
         inflater.inflate(R.menu.search, menu)
-
 
         val menuItem = menu.findItem(R.id.menu_search_view)
         val searchView = menuItem.actionView as? SearchView
@@ -96,7 +95,7 @@ class ApplicationListFragment : BaseFragment() {
         return R.string.screen_name_application_list
     }
 
-    private fun addApplicationList(actionTypePosition: Int, list : ArrayList<ApplicationListDto>) {
+    private fun addApplicationList(actionTypePosition: Int) {
         val actionType: ApplicationInfoFragment.ActionType? = ApplicationInfoFragment.ActionType.find(actionTypePosition)
         if (actionType != null) {
             presenter.getApplicationList(activity, actionType, object: ApplicationListPresenter.OnGetApplicationListListener {
