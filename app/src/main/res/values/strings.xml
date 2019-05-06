@@ -23,6 +23,7 @@
     <string name="screen_name_memory_info">Memory Info</string>
     <string name="screen_name_battery_info">Battery Info</string>
     <string name="screen_name_storage_info">Storage Info</string>
+    <string name="screen_name_telephone_info">Telephone Info</string>
     <string name="screen_name_other_info">Other Info</string>
     <string name="screen_name_log_detail">Log Detail</string>
     <string name="screen_name_wifi_info_list">Wi-Fi Info List</string>

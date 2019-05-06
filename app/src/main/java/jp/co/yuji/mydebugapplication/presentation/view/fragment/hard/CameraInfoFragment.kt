@@ -54,7 +54,7 @@ class CameraInfoFragment : BaseFragment() {
     }
 
     private fun addCameraInfo(list : ArrayList<CommonDto>) {
-        presenter.getCameraInfo(activity, object: CameraInfoPresenter.OnGetCameraInfoListener{
+        presenter.getCameraInfo(activity, object: CameraInfoPresenter.OnGetCameraInfoListener {
             override fun onGetCameraInfo(cameraList: List<CommonDto>) {
                 list.addAll(cameraList)
                 if (adapter != null) {
