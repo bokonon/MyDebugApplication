@@ -5,15 +5,16 @@ import android.support.annotation.Nullable
 import android.support.v4.app.Fragment
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import com.google.android.gms.ads.AdRequest
 import jp.co.yuji.mydebugapplication.R
+import jp.co.yuji.mydebugapplication.presentation.view.activity.AboutActivity
 import jp.co.yuji.mydebugapplication.presentation.view.adapter.common.CommonInfoRecyclerViewAdapter
 import jp.co.yuji.mydebugapplication.presentation.view.fragment.BaseFragment
 import kotlinx.android.synthetic.main.fragment_other_info.view.*
 import java.util.*
+
+
 
 /**
  * Other Info Fragment.
@@ -45,7 +46,13 @@ class OtherInfoFragment : BaseFragment() {
                         .addToBackStack(null)
                         .commit()
             }
+            postLogEvent("other type: ${type?.title}")
         }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
@@ -67,6 +74,31 @@ class OtherInfoFragment : BaseFragment() {
         return view
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        // Inflate the menu to use in the action bar
+        inflater.inflate(R.menu.menu, menu)
+        return super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Handle presses on the action bar menu items
+        when (item.itemId) {
+            R.id.menu_privacy_policy -> {
+                startActivity("http://bokonon.html.xdomain.jp/privacy_policy.html", "privacy policy")
+                return true
+            }
+            R.id.menu_license -> {
+                startActivity("file:///android_asset/license.html", "license")
+                return true
+            }
+            R.id.menu_version -> {
+                startActivity("file:///android_asset/version.html", "version")
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     override fun getTitle(): Int {
         return R.string.screen_name_other_info
     }
@@ -79,6 +111,11 @@ class OtherInfoFragment : BaseFragment() {
         }
 
         return list
+    }
+
+    private fun startActivity(url: String, contentType: String) {
+        postLogEvent(contentType)
+        AboutActivity.startActivity(activity, url)
     }
 
     enum class Type(val title: String, val position: Int)  {

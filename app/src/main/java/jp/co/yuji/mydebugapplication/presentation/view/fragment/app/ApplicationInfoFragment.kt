@@ -33,6 +33,7 @@ class ApplicationInfoFragment : BaseFragment() {
                     .replace(R.id.container, fragment)
                     .addToBackStack(null)
                     .commit()
+            postLogEvent("action type: $position")
         }
     }
 

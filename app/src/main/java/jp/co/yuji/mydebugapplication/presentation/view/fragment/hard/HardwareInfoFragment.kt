@@ -38,6 +38,7 @@ class HardwareInfoFragment : BaseFragment() {
                 Type.BATTERY -> fragment = BatteryInfoFragment.newInstance()
                 Type.STORAGE -> fragment = StorageInfoFragment.newInstance()
                 Type.SOUND -> fragment = SoundInfoFragment.newInstance()
+                Type.TELEPHONE -> fragment = TelephoneInfoFragment.newInstance()
             }
             if (fragment != null) {
                 activity.supportFragmentManager.beginTransaction()
@@ -45,6 +46,7 @@ class HardwareInfoFragment : BaseFragment() {
                         .addToBackStack(null)
                         .commit()
             }
+            postLogEvent("hardware type: ${type?.title}")
         }
     }
 
@@ -88,7 +90,8 @@ class HardwareInfoFragment : BaseFragment() {
         MEMORY("Memory", 3),
         BATTERY("Battery", 4),
         STORAGE("Storage", 5),
-        SOUND("Sound", 6);
+        SOUND("Sound", 6),
+        TELEPHONE("Telephone", 7);
 
         companion object {
             @Nullable

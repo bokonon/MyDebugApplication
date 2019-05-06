@@ -3,14 +3,13 @@ package jp.co.yuji.mydebugapplication.presentation.view.activity
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import jp.co.yuji.mydebugapplication.R
 import jp.co.yuji.mydebugapplication.presentation.view.fragment.other.PinningActivityFragment
 
 /**
  * Pinning Activity.
  */
-class PinningActivity : AppCompatActivity() {
+class PinningActivity : BaseActivity() {
 
     companion object {
 
