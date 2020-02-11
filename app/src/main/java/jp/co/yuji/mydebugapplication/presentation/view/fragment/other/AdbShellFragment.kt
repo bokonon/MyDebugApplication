@@ -24,10 +24,10 @@ class AdbShellFragment : BaseFragment() {
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        val view = inflater!!.inflate(R.layout.fragment_adb_shell, container, false)
+        val view = inflater.inflate(R.layout.fragment_adb_shell, container, false)
 
         view.adbShellResultText.text = "pm list features\n" +
                 "pm list libraries\n" +
@@ -92,7 +92,7 @@ class AdbShellFragment : BaseFragment() {
     }
 
     private fun View.hideKeyboard() {
-        val inputMethodManager = activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        val inputMethodManager = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(windowToken, 0)
     }
 

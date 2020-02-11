@@ -13,7 +13,6 @@ import kotlinx.android.synthetic.main.fragment_common.view.*
 import java.util.ArrayList
 import android.media.AudioManager
 import android.content.Context
-import android.media.AudioManager.*
 import android.os.Build
 import jp.co.yuji.mydebugapplication.presentation.view.adapter.SoundInfoRecyclerViewAdapter
 
@@ -31,13 +30,17 @@ class SoundInfoFragment : BaseFragment() {
 
     private lateinit var adapter: SoundInfoRecyclerViewAdapter
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        val view = inflater!!.inflate(jp.co.yuji.mydebugapplication.R.layout.fragment_common, container, false)
+        val view = inflater.inflate(jp.co.yuji.mydebugapplication.R.layout.fragment_common, container, false)
         view.recyclerView.layoutManager = LinearLayoutManager(activity)
-        adapter = SoundInfoRecyclerViewAdapter(activity, getSoundInfo())
-        view.recyclerView.adapter = adapter
+
+        if (activity != null) {
+            adapter = SoundInfoRecyclerViewAdapter(activity!!, getSoundInfo())
+            view.recyclerView.adapter = adapter
+        }
+
         return view
     }
 
@@ -47,7 +50,7 @@ class SoundInfoFragment : BaseFragment() {
 
     private fun getSoundInfo(): ArrayList<CommonDto> {
         val list = ArrayList<CommonDto>()
-        val audioManager = activity.getSystemService(Context.AUDIO_SERVICE) as AudioManager
+        val audioManager = activity?.getSystemService(Context.AUDIO_SERVICE) as AudioManager
 
         val common = CommonDto("=== common ===", "")
         list.add(common)

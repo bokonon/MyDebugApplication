@@ -39,25 +39,29 @@ class BatteryInfoFragment : BaseFragment() {
         }
     })
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         val view = inflater!!.inflate(R.layout.fragment_common, container, false)
         view.recyclerView.layoutManager = LinearLayoutManager(activity)
-        val list = ArrayList<CommonDto>()
-        adapter = CommonRecyclerViewAdapter(activity, list)
-        view.recyclerView.adapter = adapter
+
+        if (activity != null) {
+            val list = ArrayList<CommonDto>()
+            adapter = CommonRecyclerViewAdapter(activity!!, list)
+            view.recyclerView.adapter = adapter
+        }
+
         return view
     }
 
     override fun onResume() {
         super.onResume()
-        activity.registerReceiver(receiver, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
+        activity?.registerReceiver(receiver, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
     }
 
     override fun onPause() {
         super.onPause()
-        activity.unregisterReceiver(receiver)
+        activity?.unregisterReceiver(receiver)
     }
 
     override fun getTitle(): Int {
@@ -181,7 +185,7 @@ class BatteryInfoFragment : BaseFragment() {
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             list.add(CommonDto("=== over LOLLIPOP ===", ""))
 
-            val batteryManager = activity.getSystemService(Context.BATTERY_SERVICE) as BatteryManager
+            val batteryManager = activity?.getSystemService(Context.BATTERY_SERVICE) as BatteryManager
 
             val propertyCapacity = batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY)
             val propertyChargeCounter = batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CHARGE_COUNTER)

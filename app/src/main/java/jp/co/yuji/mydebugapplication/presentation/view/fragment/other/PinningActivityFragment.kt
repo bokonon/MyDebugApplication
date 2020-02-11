@@ -46,18 +46,18 @@ class PinningActivityFragment : BaseFragment() {
 
     private var activityManager : ActivityManager? = null
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        val view = inflater!!.inflate(R.layout.fragment_activity_pinning, container, false)
-        val type = arguments.getInt(PinningActivityFragment.ARG_KEY)
+        val view = inflater.inflate(R.layout.fragment_activity_pinning, container, false)
+        val type = arguments?.getInt(PinningActivityFragment.ARG_KEY)
         val pinningType = PinningType.values().first { type == it.type }
         setTitleLazy(pinningType.strResId)
 
         devicePolicyManager = activity?.getSystemService(Context.DEVICE_POLICY_SERVICE) as DevicePolicyManager?
         deviceAdmin = ComponentName(activity, MyDeviceAdminReceiver::class.java)
 
-        activityManager = activity.getSystemService(
+        activityManager = activity?.getSystemService(
                 Context.ACTIVITY_SERVICE) as ActivityManager
 
         when (pinningType) {
@@ -97,8 +97,8 @@ class PinningActivityFragment : BaseFragment() {
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private fun startLockTask() {
-        if (devicePolicyManager != null && devicePolicyManager!!.isDeviceOwnerApp(activity.packageName)) {
-            devicePolicyManager?.setLockTaskPackages(deviceAdmin, arrayOf(activity.packageName))
+        if (devicePolicyManager != null && devicePolicyManager!!.isDeviceOwnerApp(activity?.packageName)) {
+            devicePolicyManager?.setLockTaskPackages(deviceAdmin, arrayOf(activity?.packageName))
             startPinning()
         }
     }

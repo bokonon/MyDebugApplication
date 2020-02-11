@@ -25,25 +25,28 @@ class AlarmManagerFragment : BaseFragment() {
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        val view = inflater!!.inflate(R.layout.fragment_common, container, false)
+        val view = inflater.inflate(R.layout.fragment_common, container, false)
 
         view.recyclerView.layoutManager = LinearLayoutManager(activity)
-        val adapter = CommonRecyclerViewAdapter(activity, getAlarmManagerInfo())
-        view.recyclerView.adapter = adapter
 
-        if (adapter.items.isEmpty()) {
-            view.recyclerView.visibility = View.GONE
-            view.emptyView.text = getString(R.string.alarm_manager_no_data_text)
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-                view.emptyView.text = getString(R.string.alarm_manager_under_lollipop_no_data_text)
+        if (activity != null) {
+            val adapter = CommonRecyclerViewAdapter(activity!!, getAlarmManagerInfo())
+            view.recyclerView.adapter = adapter
+
+            if (adapter.items.isEmpty()) {
+                view.recyclerView.visibility = View.GONE
+                view.emptyView.text = getString(R.string.alarm_manager_no_data_text)
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                    view.emptyView.text = getString(R.string.alarm_manager_under_lollipop_no_data_text)
+                }
+                view.emptyView.visibility = View.VISIBLE
+            } else {
+                view.recyclerView.visibility = View.VISIBLE
+                view.emptyView.visibility = View.GONE
             }
-            view.emptyView.visibility = View.VISIBLE
-        } else {
-            view.recyclerView.visibility = View.VISIBLE
-            view.emptyView.visibility = View.GONE
         }
 
         return view
@@ -57,7 +60,7 @@ class AlarmManagerFragment : BaseFragment() {
         val list = ArrayList<CommonDto>()
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            val alarmManager = activity.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+            val alarmManager = activity?.getSystemService(Context.ALARM_SERVICE) as AlarmManager
             val alarmClockInfo = alarmManager.nextAlarmClock
             if (alarmClockInfo != null) {
                 list.add(CommonDto("=== Next Alarm Clock ===", ""))

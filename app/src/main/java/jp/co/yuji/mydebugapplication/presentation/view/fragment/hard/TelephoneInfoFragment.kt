@@ -31,14 +31,17 @@ class TelephoneInfoFragment : BaseFragment() {
 
     private lateinit var adapter: CommonSelectableRecyclerViewAdapter
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        val view = inflater!!.inflate(R.layout.fragment_common, container, false)
+        val view = inflater.inflate(R.layout.fragment_common, container, false)
         view.recyclerView.layoutManager = LinearLayoutManager(activity)
         val list = ArrayList<CommonDto>()
-        adapter = CommonSelectableRecyclerViewAdapter(activity, list)
-        view.recyclerView.adapter = adapter
+
+        if (activity != null) {
+            adapter = CommonSelectableRecyclerViewAdapter(activity!!, list)
+            view.recyclerView.adapter = adapter
+        }
 
         addTelephoneInfo(list)
         addRequiredPermissionTelephoneInfo(list)
@@ -66,15 +69,15 @@ class TelephoneInfoFragment : BaseFragment() {
 
     private fun addTelephoneInfo(list: ArrayList<CommonDto>) {
 
-        val telephonyManager = activity.getSystemService(TELEPHONY_SERVICE) as TelephonyManager
+        val telephonyManager = activity?.getSystemService(TELEPHONY_SERVICE) as TelephonyManager
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             val phoneCount = telephonyManager.phoneCount
-            list.add(CommonDto("phoneCount", Integer.toString(phoneCount)))
+            list.add(CommonDto("phoneCount", phoneCount.toString()))
         }
 
         val phoneType = telephonyManager.phoneType
-        list.add(CommonDto("phoneType", Integer.toString(phoneType)))
+        list.add(CommonDto("phoneType", phoneType.toString()))
 
         val networkOperatorName = telephonyManager.networkOperatorName
         if (networkOperatorName != null) {
@@ -103,14 +106,14 @@ class TelephoneInfoFragment : BaseFragment() {
         }
 
         val networkType = telephonyManager.networkType
-        list.add(CommonDto("networkType", Integer.toString(networkType)))
+        list.add(CommonDto("networkType", networkType.toString()))
 
         val hasIccCard = telephonyManager.hasIccCard()
         val hasIccCardString = if (hasIccCard) "true" else "false"
         list.add(CommonDto("hasIccCard", hasIccCardString))
 
         val simState = telephonyManager.simState
-        list.add(CommonDto("simState", Integer.toString(simState)))
+        list.add(CommonDto("simState", simState.toString()))
 
         val simOperator = telephonyManager.simOperator
         if (simOperator != null) {
@@ -128,13 +131,13 @@ class TelephoneInfoFragment : BaseFragment() {
         }
 
         val callState = telephonyManager.callState
-        list.add(CommonDto("callState", Integer.toString(callState)))
+        list.add(CommonDto("callState", callState.toString()))
 
         val dataActivity = telephonyManager.dataActivity
-        list.add(CommonDto("dataActivity", Integer.toString(dataActivity)))
+        list.add(CommonDto("dataActivity", dataActivity.toString()))
 
         val dataState = telephonyManager.dataState
-        list.add(CommonDto("dataState", Integer.toString(dataState)))
+        list.add(CommonDto("dataState", dataState.toString()))
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
             val isVoiceCapable = telephonyManager.isVoiceCapable
@@ -179,9 +182,12 @@ class TelephoneInfoFragment : BaseFragment() {
     }
 
     private fun addRequiredPermissionTelephoneInfo(list: ArrayList<CommonDto>) {
-        if (ContextCompat.checkSelfPermission(activity, Manifest.permission.READ_PHONE_STATE)
+        if (activity == null) {
+            return
+        }
+        if (ContextCompat.checkSelfPermission(activity!!, Manifest.permission.READ_PHONE_STATE)
                 != PackageManager.PERMISSION_GRANTED
-                || ContextCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_COARSE_LOCATION)
+                || ContextCompat.checkSelfPermission(activity!!, Manifest.permission.ACCESS_COARSE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
             val permissions: Array<String> = arrayOf(Manifest.permission.READ_PHONE_STATE, Manifest.permission.ACCESS_COARSE_LOCATION)
             requestPermissions(
@@ -189,7 +195,7 @@ class TelephoneInfoFragment : BaseFragment() {
                     PERMISSIONS_REQUEST_CODE_READ_PHONE_STATE)
             return
         }
-        val telephonyManager = activity.getSystemService(TELEPHONY_SERVICE) as TelephonyManager
+        val telephonyManager = activity?.getSystemService(TELEPHONY_SERVICE) as TelephonyManager
 
         val deviceSoftwareVersion = telephonyManager.deviceSoftwareVersion
         if (deviceSoftwareVersion != null) {
@@ -215,10 +221,10 @@ class TelephoneInfoFragment : BaseFragment() {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             val dataNetworkType = telephonyManager.dataNetworkType
-            list.add(CommonDto("dataNetworkType", Integer.toString(dataNetworkType)))
+            list.add(CommonDto("dataNetworkType", dataNetworkType.toString()))
 
             val voiceNetworkType = telephonyManager.voiceNetworkType
-            list.add(CommonDto("voiceNetworkType", Integer.toString(voiceNetworkType)))
+            list.add(CommonDto("voiceNetworkType", voiceNetworkType.toString()))
         }
 
         val simSerialNumber = telephonyManager.simSerialNumber
@@ -258,7 +264,7 @@ class TelephoneInfoFragment : BaseFragment() {
             if (allCellInfo != null && allCellInfo.size > 0) {
                 list.add(CommonDto("=== CellInfo ===", ""))
                 for ((num, cellInfo) in allCellInfo.withIndex()) {
-                    list.add(CommonDto(Integer.toString(num), ""))
+                    list.add(CommonDto(num.toString(), ""))
                     val isRegistered = cellInfo.isRegistered
                     val isRegisteredString = if (isRegistered) "true" else "false"
                     list.add(CommonDto("isRegistered", isRegisteredString))

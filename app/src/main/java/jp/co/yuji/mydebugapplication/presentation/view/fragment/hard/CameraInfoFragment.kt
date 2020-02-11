@@ -32,14 +32,17 @@ class CameraInfoFragment : BaseFragment() {
 
     private var progressBar: ProgressBar? = null
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        val view = inflater!!.inflate(R.layout.fragment_common_progress, container, false)
+        val view = inflater.inflate(R.layout.fragment_common_progress, container, false)
         view.recyclerView.layoutManager = LinearLayoutManager(activity)
+
         val list = ArrayList<CommonDto>()
-        adapter = CommonSelectableRecyclerViewAdapter(activity, list)
-        view.recyclerView.adapter = adapter
+        if (activity != null) {
+            adapter = CommonSelectableRecyclerViewAdapter(activity!!, list)
+            view.recyclerView.adapter = adapter
+        }
 
         progressBar = view.progressBar
         progressBar?.visibility = View.VISIBLE
@@ -54,15 +57,17 @@ class CameraInfoFragment : BaseFragment() {
     }
 
     private fun addCameraInfo(list : ArrayList<CommonDto>) {
-        presenter.getCameraInfo(activity, object: CameraInfoPresenter.OnGetCameraInfoListener {
-            override fun onGetCameraInfo(cameraList: List<CommonDto>) {
-                list.addAll(cameraList)
-                if (adapter != null) {
-                    adapter?.notifyDataSetChanged()
-                    progressBar?.visibility = View.GONE
+        if (activity != null) {
+            presenter.getCameraInfo(activity!!, object: CameraInfoPresenter.OnGetCameraInfoListener {
+                override fun onGetCameraInfo(cameraList: List<CommonDto>) {
+                    list.addAll(cameraList)
+                    if (adapter != null) {
+                        adapter?.notifyDataSetChanged()
+                        progressBar?.visibility = View.GONE
+                    }
                 }
-            }
-        })
+            })
+        }
     }
 
 }

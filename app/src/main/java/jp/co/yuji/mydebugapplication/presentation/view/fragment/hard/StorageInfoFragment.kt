@@ -29,13 +29,17 @@ class StorageInfoFragment : BaseFragment() {
 
     private lateinit var adapter: CommonDetailRecyclerViewAdapter
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        val view = inflater!!.inflate(R.layout.fragment_common, container, false)
+        val view = inflater.inflate(R.layout.fragment_common, container, false)
         view.recyclerView.layoutManager = LinearLayoutManager(activity)
-        adapter = CommonDetailRecyclerViewAdapter(activity, getStorageInfo())
-        view.recyclerView.adapter = adapter
+
+        if (activity != null) {
+            adapter = CommonDetailRecyclerViewAdapter(activity!!, getStorageInfo())
+            view.recyclerView.adapter = adapter
+        }
+
         return view
     }
 
@@ -58,8 +62,10 @@ class StorageInfoFragment : BaseFragment() {
 
         addExternalFilesDir(context, list)
 
-        val externalCacheDir = context.externalCacheDir.absolutePath
-        list.add(CommonDto("Context.getExternalCacheDir()", externalCacheDir))
+        val externalCacheDir = context.externalCacheDir?.absolutePath
+        if (externalCacheDir != null) {
+            list.add(CommonDto("Context.getExternalCacheDir()", externalCacheDir))
+        }
 
         return list
     }

@@ -25,14 +25,17 @@ class ActivityManagerFragment : BaseFragment() {
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        val view = inflater!!.inflate(R.layout.fragment_common, container, false)
+        val view = inflater.inflate(R.layout.fragment_common, container, false)
 
         view.recyclerView.layoutManager = LinearLayoutManager(activity)
-        val adapter = CommonDetailRecyclerViewAdapter(activity, getActivityManagerInfo())
-        view.recyclerView.adapter = adapter
+
+        if (activity != null) {
+            val adapter = CommonDetailRecyclerViewAdapter(activity!!, getActivityManagerInfo())
+            view.recyclerView.adapter = adapter
+        }
 
         return view
     }
@@ -44,7 +47,7 @@ class ActivityManagerFragment : BaseFragment() {
     private fun getActivityManagerInfo() : ArrayList<CommonDto> {
         val list = ArrayList<CommonDto>()
 
-        val activityManager = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+        val activityManager = context?.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             val appTasks = activityManager.appTasks
             for (appTask in appTasks) {
@@ -88,6 +91,14 @@ class ActivityManagerFragment : BaseFragment() {
                 list.add(CommonDto("uid", info.uid.toString()))
             }
         }
+        val memoryInfo: ActivityManager.MemoryInfo = ActivityManager.MemoryInfo()
+        activityManager.getMemoryInfo(memoryInfo)
+        list.add(CommonDto(" === MemoryInfo ===", ""))
+        list.add(CommonDto("availMem", memoryInfo.availMem.toString()))
+        list.add(CommonDto("lowMemory", memoryInfo.lowMemory.toString()))
+        list.add(CommonDto("threshold", memoryInfo.threshold.toString()))
+        list.add(CommonDto("totalMem", memoryInfo.totalMem.toString()))
+
         val runningAppProcessInfo = activityManager.runningAppProcesses
         if (runningAppProcessInfo != null) {
             for (info in runningAppProcessInfo) {

@@ -1,5 +1,6 @@
 package jp.co.yuji.mydebugapplication.presentation.view.fragment.other
 
+import android.content.Context
 import android.net.wifi.ScanResult
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -35,15 +36,18 @@ class WiFiInfoDetailFragment : BaseFragment() {
 
     private val presenter = WiFiInfoDetailPresenter()
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        val view = inflater!!.inflate(R.layout.fragment_common, container, false)
+        val view = inflater.inflate(R.layout.fragment_common, container, false)
 
         view.recyclerView.layoutManager = LinearLayoutManager(activity)
-        val scanResult = arguments.getParcelable<ScanResult>(ARG_KEY)
-        val adapter = WiFiInfoDetailRecyclerViewAdapter(activity, getWiFiInfoDetail(scanResult))
-        view.recyclerView.adapter = adapter
+        val scanResult = arguments?.getParcelable<ScanResult>(ARG_KEY)
+
+        if (activity != null && scanResult != null) {
+            val adapter = WiFiInfoDetailRecyclerViewAdapter(activity!!, getWiFiInfoDetail(activity!!, scanResult))
+            view.recyclerView.adapter = adapter
+        }
 
         val itemDecoration = DividerItemDecoration(activity, DividerItemDecoration.VERTICAL)
         view.recyclerView.addItemDecoration(itemDecoration)
@@ -55,8 +59,8 @@ class WiFiInfoDetailFragment : BaseFragment() {
         return R.string.screen_name_wifi_info_detail
     }
 
-    private fun getWiFiInfoDetail(scanResult: ScanResult): List<CommonDto> {
-        return presenter.getWiFiInfoDetail(activity, scanResult)
+    private fun getWiFiInfoDetail(context: Context, scanResult: ScanResult): List<CommonDto> {
+        return presenter.getWiFiInfoDetail(context, scanResult)
     }
 
 }

@@ -17,22 +17,22 @@ class CommonSelectableRecyclerViewAdapter (private val context: Context, private
 
     override fun getItemCount(): Int = items.size
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): CommonSelectableRecyclerViewAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommonSelectableRecyclerViewAdapter.ViewHolder {
         val v: View = LayoutInflater.from(parent?.context)
                 .inflate(R.layout.adapter_common_item, parent, false)
         return ViewHolder.create(v)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
-        holder?.titleTextView?.text = items[position].title
-        holder?.valueTextView?.text = items[position].value
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.titleTextView?.text = items[position].title
+        holder.valueTextView?.text = items[position].value
 
-        holder?.valueTextView?.requestFocus()
-        holder?.valueTextView?.isSelected = true
+        holder.valueTextView?.requestFocus()
+        holder.valueTextView?.isSelected = true
 
-        holder?.itemView?.setBackgroundColor(ContextCompat.getColor(context, android.R.color.transparent))
+        holder.itemView.setBackgroundColor(ContextCompat.getColor(context, android.R.color.transparent))
         if (position%2 == 0) {
-            holder?.itemView?.setBackgroundColor(ContextCompat.getColor(context, R.color.recycler_view_back))
+            holder.itemView.setBackgroundColor(ContextCompat.getColor(context, R.color.recycler_view_back))
         }
     }
 

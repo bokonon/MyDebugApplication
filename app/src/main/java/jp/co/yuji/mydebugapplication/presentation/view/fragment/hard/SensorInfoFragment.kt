@@ -30,25 +30,28 @@ class SensorInfoFragment : BaseFragment() {
     private val listener = object: SensorInfoRecyclerViewAdapter.OnItemClickListener {
         override fun onItemClick(sensor: Sensor) {
             val fragment = SensorDetailFragment.newInstance(sensor.type)
-            activity.supportFragmentManager.beginTransaction()
-                    .replace(R.id.container, fragment)
-                    .addToBackStack(null)
-                    .commit()
+            activity?.supportFragmentManager?.beginTransaction()
+                    ?.replace(R.id.container, fragment)
+                    ?.addToBackStack(null)
+                    ?.commit()
         }
     }
 
     private var sensorManager: SensorManager? = null
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        val view = inflater!!.inflate(R.layout.fragment_common, container, false)
-        sensorManager = activity.getSystemService(Context.SENSOR_SERVICE) as SensorManager
+        val view = inflater.inflate(R.layout.fragment_common, container, false)
+        sensorManager = activity?.getSystemService(Context.SENSOR_SERVICE) as SensorManager
 
         view.recyclerView.layoutManager = LinearLayoutManager(activity)
-        val adapter = SensorInfoRecyclerViewAdapter(activity, getSensorInfo())
-        view.recyclerView.adapter = adapter
-        adapter.setOnItemClickListener(listener)
+
+        if (activity != null) {
+            val adapter = SensorInfoRecyclerViewAdapter(activity!!, getSensorInfo())
+            view.recyclerView.adapter = adapter
+            adapter.setOnItemClickListener(listener)
+        }
 
         val itemDecoration = DividerItemDecoration(activity, DividerItemDecoration.VERTICAL)
         view.recyclerView.addItemDecoration(itemDecoration)

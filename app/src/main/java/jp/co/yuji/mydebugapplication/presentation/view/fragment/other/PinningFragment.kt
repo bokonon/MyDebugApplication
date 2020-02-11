@@ -41,15 +41,15 @@ class PinningFragment : BaseFragment() {
     private var stopLockTaskButton : Button? = null
     private var startLockTaskActivityButton : Button? = null
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        val view = inflater!!.inflate(R.layout.fragment_pinning, container, false)
+        val view = inflater.inflate(R.layout.fragment_pinning, container, false)
 
         devicePolicyManager = activity?.getSystemService(Context.DEVICE_POLICY_SERVICE) as DevicePolicyManager?
         deviceAdmin = ComponentName(activity, MyDeviceAdminReceiver::class.java)
 
-        activityManager = activity.getSystemService(
+        activityManager = activity?.getSystemService(
                 Context.ACTIVITY_SERVICE) as ActivityManager
 
         view.startPinningButton?.setOnClickListener { startPinning() }
@@ -107,14 +107,16 @@ class PinningFragment : BaseFragment() {
     }
 
     private fun startPinningActivity() {
-        PinningActivity.startActivity(activity, PinningActivityFragment.PinningType.PINNING)
+        if (activity != null) {
+            PinningActivity.startActivity(activity!!, PinningActivityFragment.PinningType.PINNING)
+        }
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private fun clearDeviceOwner() {
         executeForApiLevel21orHigher {
             if (isDeviceOwner()) {
-                devicePolicyManager?.clearDeviceOwnerApp(activity.packageName)
+                devicePolicyManager?.clearDeviceOwnerApp(activity?.packageName)
                 disableButton()
             }
         }
@@ -122,8 +124,8 @@ class PinningFragment : BaseFragment() {
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private fun startLockTask() {
-        if (devicePolicyManager != null && devicePolicyManager!!.isDeviceOwnerApp(activity.packageName)) {
-            devicePolicyManager?.setLockTaskPackages(deviceAdmin, arrayOf(activity.packageName))
+        if (devicePolicyManager != null && devicePolicyManager!!.isDeviceOwnerApp(activity?.packageName)) {
+            devicePolicyManager?.setLockTaskPackages(deviceAdmin, arrayOf(activity?.packageName))
             startPinning()
         }
     }
@@ -134,7 +136,9 @@ class PinningFragment : BaseFragment() {
     }
 
     private fun startLockTaskActivity() {
-        PinningActivity.startActivity(activity, PinningActivityFragment.PinningType.LOCK_TASK)
+        if (activity != null) {
+            PinningActivity.startActivity(activity!!, PinningActivityFragment.PinningType.LOCK_TASK)
+        }
     }
 
     private fun executeForApiLevel21orHigher(execute: () -> Unit) {
@@ -153,7 +157,7 @@ class PinningFragment : BaseFragment() {
     private fun isDeviceOwner() : Boolean {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2
                 && devicePolicyManager != null
-                && devicePolicyManager!!.isDeviceOwnerApp(activity.packageName)
+                && devicePolicyManager!!.isDeviceOwnerApp(activity?.packageName)
     }
 
 //    private fun setDeviceOwnerView(@NonNull view: View) {

@@ -40,17 +40,17 @@ class WiFiInfoListFragment : BaseFragment() {
     private val listener = object: WiFiInfoListRecyclerViewAdapter.OnItemClickListener {
         override fun onItemClick(scanResult: ScanResult) {
             val fragment = WiFiInfoDetailFragment.newInstance(scanResult)
-            activity.supportFragmentManager.beginTransaction()
-                    .replace(R.id.container, fragment)
-                    .addToBackStack(null)
-                    .commit()
+            activity?.supportFragmentManager?.beginTransaction()
+                    ?.replace(R.id.container, fragment)
+                    ?.addToBackStack(null)
+                    ?.commit()
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        val view = inflater!!.inflate(R.layout.fragment_common_progress, container, false)
+        val view = inflater.inflate(R.layout.fragment_common_progress, container, false)
 
         progressBar = view.progressBar
         progressBar?.visibility = View.VISIBLE
@@ -64,7 +64,7 @@ class WiFiInfoListFragment : BaseFragment() {
         val itemDecoration = DividerItemDecoration(activity, DividerItemDecoration.VERTICAL)
         view.recyclerView.addItemDecoration(itemDecoration)
 
-        if (ContextCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_COARSE_LOCATION)
+        if (activity != null && ContextCompat.checkSelfPermission(activity!!, Manifest.permission.ACCESS_COARSE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
             val permissions: Array<String> = arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION)
             requestPermissions(
@@ -94,7 +94,10 @@ class WiFiInfoListFragment : BaseFragment() {
     }
 
     private fun addWiFiList(list : ArrayList<ScanResult>?) {
-        presenter.getWiFiInfoList(activity, object: WiFiInfoListPresenter.OnGetWiFiInfoListListener {
+        if (activity == null) {
+            return
+        }
+        presenter.getWiFiInfoList(activity!!, object: WiFiInfoListPresenter.OnGetWiFiInfoListListener {
             override fun onGetWiFiInfoList(wifiInfoList: List<ScanResult>) {
                 list?.addAll(wifiInfoList)
                 adapter?.notifyDataSetChanged()
