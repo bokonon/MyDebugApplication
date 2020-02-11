@@ -44,10 +44,10 @@ class ApplicationListFragment : BaseFragment() {
     private val listener = object: ApplicationListRecyclerViewAdapter.OnItemClickListener {
         override fun onItemClick(packageName: String) {
             val fragment = ApplicationDetailFragment.newInstance(packageName)
-            activity.supportFragmentManager.beginTransaction()
-                    .replace(R.id.container, fragment)
-                    .addToBackStack(null)
-                    .commit()
+            activity?.supportFragmentManager?.beginTransaction()
+                    ?.replace(R.id.container, fragment)
+                    ?.addToBackStack(null)
+                    ?.commit()
             postLogEvent("package name: $packageName")
         }
     }
@@ -57,16 +57,16 @@ class ApplicationListFragment : BaseFragment() {
         setHasOptionsMenu(true)
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                                savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        val view = inflater!!.inflate(R.layout.fragment_common_progress, container, false)
+        val view = inflater.inflate(R.layout.fragment_common_progress, container, false)
 
         progressBar = view.progressBar
         progressBar?.visibility = View.VISIBLE
 
         view.recyclerView.layoutManager = LinearLayoutManager(activity)
-        val actionTypePosition = arguments.getInt(ARG_KEY)
+        val actionTypePosition = arguments?.getInt(ARG_KEY)
         val list = ArrayList<ApplicationListDto>()
         adapter = ApplicationListRecyclerViewAdapter(list)
         view.recyclerView.adapter = adapter
@@ -75,7 +75,9 @@ class ApplicationListFragment : BaseFragment() {
         val itemDecoration = DividerItemDecoration(activity, DividerItemDecoration.VERTICAL)
         view.recyclerView.addItemDecoration(itemDecoration)
 
-        addApplicationList(actionTypePosition)
+        if (actionTypePosition != null) {
+            addApplicationList(actionTypePosition)
+        }
 
         return view
     }
@@ -98,8 +100,8 @@ class ApplicationListFragment : BaseFragment() {
 
     private fun addApplicationList(actionTypePosition: Int) {
         val actionType: ApplicationInfoFragment.ActionType? = ApplicationInfoFragment.ActionType.find(actionTypePosition)
-        if (actionType != null) {
-            presenter.getApplicationList(activity, actionType, object: ApplicationListPresenter.OnGetApplicationListListener {
+        if (activity != null && actionType != null) {
+            presenter.getApplicationList(activity!!, actionType, object: ApplicationListPresenter.OnGetApplicationListListener {
                 override fun onGetApplicationList(appList: List<ApplicationListDto>) {
                     adapter?.updateList(appList)
                     progressBar?.visibility = View.GONE

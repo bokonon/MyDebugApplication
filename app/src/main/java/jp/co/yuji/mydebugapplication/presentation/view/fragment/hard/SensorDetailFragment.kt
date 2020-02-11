@@ -68,12 +68,15 @@ class SensorDetailFragment : BaseFragment() {
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        val view = inflater!!.inflate(R.layout.fragment_sensor_detail, container, false)
-        sensorManager = activity.getSystemService(Context.SENSOR_SERVICE) as SensorManager
-        sensorType = arguments.getInt(ARG_KEY)
+        val view = inflater.inflate(R.layout.fragment_sensor_detail, container, false)
+        sensorManager = activity?.getSystemService(Context.SENSOR_SERVICE) as SensorManager
+        val type = arguments?.getInt(ARG_KEY)
+        if (type != null) {
+            sensorType = type
+        }
         sensorList = sensorManager?.getSensorList(sensorType)
         sensor = sensorList?.get(0)
 

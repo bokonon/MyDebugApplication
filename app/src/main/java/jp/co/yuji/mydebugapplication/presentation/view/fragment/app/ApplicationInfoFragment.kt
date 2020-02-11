@@ -29,18 +29,18 @@ class ApplicationInfoFragment : BaseFragment() {
     private val listener = object:CommonInfoRecyclerViewAdapter.OnItemClickListener {
         override fun onItemClick(position: Int) {
             val fragment = ApplicationListFragment.newInstance(position)
-            activity.supportFragmentManager.beginTransaction()
-                    .replace(R.id.container, fragment)
-                    .addToBackStack(null)
-                    .commit()
+            activity?.supportFragmentManager?.beginTransaction()
+                    ?.replace(R.id.container, fragment)
+                    ?.addToBackStack(null)
+                    ?.commit()
             postLogEvent("action type: $position")
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        val view = inflater!!.inflate(R.layout.fragment_app_info, container, false)
+        val view = inflater.inflate(R.layout.fragment_app_info, container, false)
 
         view.recyclerView.layoutManager = LinearLayoutManager(activity)
         val adapter = CommonInfoRecyclerViewAdapter(getApplicationInfo())

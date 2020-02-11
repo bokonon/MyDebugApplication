@@ -41,10 +41,10 @@ class OtherInfoFragment : BaseFragment() {
                 Type.ALARM_MANAGER -> fragment = AlarmManagerFragment.newInstance()
             }
             if (fragment != null) {
-                activity.supportFragmentManager.beginTransaction()
-                        .replace(R.id.container, fragment)
-                        .addToBackStack(null)
-                        .commit()
+                activity?.supportFragmentManager?.beginTransaction()
+                        ?.replace(R.id.container, fragment)
+                        ?.addToBackStack(null)
+                        ?.commit()
             }
             postLogEvent("other type: ${type?.title}")
         }
@@ -55,10 +55,10 @@ class OtherInfoFragment : BaseFragment() {
         setHasOptionsMenu(true)
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        val view = inflater!!.inflate(R.layout.fragment_other_info, container, false)
+        val view = inflater.inflate(R.layout.fragment_other_info, container, false)
         view.recyclerView.layoutManager = LinearLayoutManager(activity)
         val adapter = CommonInfoRecyclerViewAdapter(getOtherInfo())
         view.recyclerView.adapter = adapter
@@ -115,7 +115,9 @@ class OtherInfoFragment : BaseFragment() {
 
     private fun startActivity(url: String, contentType: String) {
         postLogEvent(contentType)
-        AboutActivity.startActivity(activity, url)
+        if (activity != null) {
+            AboutActivity.startActivity(activity!!, url)
+        }
     }
 
     enum class Type(val title: String, val position: Int)  {

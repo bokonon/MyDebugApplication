@@ -20,15 +20,15 @@ class CommonInfoRecyclerViewAdapter(private val items: List<String>) : RecyclerV
 
     override fun getItemCount(): Int = items.size
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
-        val v: View = LayoutInflater.from(parent?.context)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val v: View = LayoutInflater.from(parent.context)
                 .inflate(R.layout.adapter_common_info_item, parent, false)
         return ViewHolder.create(v)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
-        holder?.titleTextView?.text = items[position]
-        holder?.itemView?.setOnClickListener { listener?.onItemClick(position) }
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.titleTextView?.text = items[position]
+        holder.itemView.setOnClickListener { listener?.onItemClick(position) }
     }
 
     fun setOnItemClickListener(listener: OnItemClickListener) {

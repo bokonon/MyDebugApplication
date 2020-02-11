@@ -45,7 +45,7 @@ class WiFiInfoListRecyclerViewAdapter(private val items: ArrayList<ScanResult>) 
         holder.capabilitiesText?.text = items[position].capabilities
         holder.frequencyText?.text = context?.getString(R.string.wifi_info_frequency_unit_text, items[position].frequency)
         holder.levelText?.text = context?.getString(R.string.wifi_info_level_unit_text, items[position].level)
-        holder.itemView?.setOnClickListener { listener?.onItemClick(items[position]) }
+        holder.itemView.setOnClickListener { listener?.onItemClick(items[position]) }
     }
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {

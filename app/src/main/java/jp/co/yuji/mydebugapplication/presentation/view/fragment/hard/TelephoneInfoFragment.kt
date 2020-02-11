@@ -31,14 +31,17 @@ class TelephoneInfoFragment : BaseFragment() {
 
     private lateinit var adapter: CommonSelectableRecyclerViewAdapter
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        val view = inflater!!.inflate(R.layout.fragment_common, container, false)
+        val view = inflater.inflate(R.layout.fragment_common, container, false)
         view.recyclerView.layoutManager = LinearLayoutManager(activity)
         val list = ArrayList<CommonDto>()
-        adapter = CommonSelectableRecyclerViewAdapter(activity, list)
-        view.recyclerView.adapter = adapter
+
+        if (activity != null) {
+            adapter = CommonSelectableRecyclerViewAdapter(activity!!, list)
+            view.recyclerView.adapter = adapter
+        }
 
         addTelephoneInfo(list)
         addRequiredPermissionTelephoneInfo(list)
@@ -66,7 +69,7 @@ class TelephoneInfoFragment : BaseFragment() {
 
     private fun addTelephoneInfo(list: ArrayList<CommonDto>) {
 
-        val telephonyManager = activity.getSystemService(TELEPHONY_SERVICE) as TelephonyManager
+        val telephonyManager = activity?.getSystemService(TELEPHONY_SERVICE) as TelephonyManager
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             val phoneCount = telephonyManager.phoneCount
@@ -179,9 +182,12 @@ class TelephoneInfoFragment : BaseFragment() {
     }
 
     private fun addRequiredPermissionTelephoneInfo(list: ArrayList<CommonDto>) {
-        if (ContextCompat.checkSelfPermission(activity, Manifest.permission.READ_PHONE_STATE)
+        if (activity == null) {
+            return
+        }
+        if (ContextCompat.checkSelfPermission(activity!!, Manifest.permission.READ_PHONE_STATE)
                 != PackageManager.PERMISSION_GRANTED
-                || ContextCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_COARSE_LOCATION)
+                || ContextCompat.checkSelfPermission(activity!!, Manifest.permission.ACCESS_COARSE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
             val permissions: Array<String> = arrayOf(Manifest.permission.READ_PHONE_STATE, Manifest.permission.ACCESS_COARSE_LOCATION)
             requestPermissions(
@@ -189,7 +195,7 @@ class TelephoneInfoFragment : BaseFragment() {
                     PERMISSIONS_REQUEST_CODE_READ_PHONE_STATE)
             return
         }
-        val telephonyManager = activity.getSystemService(TELEPHONY_SERVICE) as TelephonyManager
+        val telephonyManager = activity?.getSystemService(TELEPHONY_SERVICE) as TelephonyManager
 
         val deviceSoftwareVersion = telephonyManager.deviceSoftwareVersion
         if (deviceSoftwareVersion != null) {

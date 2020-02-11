@@ -2,6 +2,8 @@ package jp.co.yuji.mydebugapplication.presentation.view.adapter.common
 
 import android.support.v7.widget.RecyclerView
 import jp.co.yuji.mydebugapplication.presentation.view.adapter.ApplicationListRecyclerViewAdapter
+import java.util.*
+import kotlin.collections.ArrayList
 
 abstract class FilterableRecyclerViewAdapter<T: MyFilterable>(private val items: ArrayList<T>) : RecyclerView.Adapter<ApplicationListRecyclerViewAdapter.ViewHolder>() {
 
@@ -11,11 +13,11 @@ abstract class FilterableRecyclerViewAdapter<T: MyFilterable>(private val items:
 
     fun filter(char: CharSequence?) {
         if (char != null && char.isNotEmpty()) {
-            val lowerConstraint = char.toString().toLowerCase()
+            val lowerConstraint = char.toString().toLowerCase(Locale.ROOT)
             filteredList.clear()
             for (filterable in items) {
-                if (filterable.getFirstFilterName().toLowerCase().contains(lowerConstraint)
-                        || filterable.getSecondFilterName().toLowerCase().contains(lowerConstraint)) {
+                if (filterable.getFirstFilterName().toLowerCase(Locale.ROOT).contains(lowerConstraint)
+                        || filterable.getSecondFilterName().toLowerCase(Locale.ROOT).contains(lowerConstraint)) {
                     filteredList.add(filterable)
                 }
             }

@@ -23,10 +23,10 @@ class MemoryInfoFragment : BaseFragment() {
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        val view = inflater!!.inflate(R.layout.fragment_common_log, container, false)
+        val view = inflater.inflate(R.layout.fragment_common_log, container, false)
         view.logText.text = execute(MemoryInfoFragment.command)
         return view
     }

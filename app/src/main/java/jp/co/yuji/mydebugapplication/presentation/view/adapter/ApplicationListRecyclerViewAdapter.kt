@@ -29,8 +29,8 @@ class ApplicationListRecyclerViewAdapter(private val items: ArrayList<Applicatio
 
     override fun getItemCount(): Int = filteredList.size
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
-        val v: View = LayoutInflater.from(parent?.context)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val v: View = LayoutInflater.from(parent.context)
                 .inflate(R.layout.adapter_application_list_item, parent, false)
         return ViewHolder.create(v)
     }
@@ -39,11 +39,11 @@ class ApplicationListRecyclerViewAdapter(private val items: ArrayList<Applicatio
         this.listener = listener
     }
 
-    override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
-        holder?.icon?.setImageDrawable(filteredList[position].icon)
-        holder?.appName?.text = filteredList[position].appName
-        holder?.packageName?.text = filteredList[position].packageName
-        holder?.itemView?.setOnClickListener { listener?.onItemClick(filteredList[position].packageName) }
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.icon?.setImageDrawable(filteredList[position].icon)
+        holder.appName?.text = filteredList[position].appName
+        holder.packageName?.text = filteredList[position].packageName
+        holder.itemView.setOnClickListener { listener?.onItemClick(filteredList[position].packageName) }
     }
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {

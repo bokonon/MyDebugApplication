@@ -25,15 +25,17 @@ class DisplayInfoFragment  : BaseFragment() {
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        val view = inflater!!.inflate(R.layout.fragment_common, container, false)
+        val view = inflater.inflate(R.layout.fragment_common, container, false)
 
 
         view.recyclerView.layoutManager = LinearLayoutManager(activity)
-        val adapter = CommonDetailRecyclerViewAdapter(activity, getDisplayInfo())
-        view.recyclerView.adapter = adapter
+        if (activity != null) {
+            val adapter = CommonDetailRecyclerViewAdapter(activity!!, getDisplayInfo())
+            view.recyclerView.adapter = adapter
+        }
 
         val itemDecoration = DividerItemDecoration(activity, DividerItemDecoration.VERTICAL)
         view.recyclerView.addItemDecoration(itemDecoration)
@@ -45,7 +47,7 @@ class DisplayInfoFragment  : BaseFragment() {
     }
 
     private fun getDisplayInfo() : ArrayList<CommonDto> {
-        val windowManager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+        val windowManager = context?.getSystemService(Context.WINDOW_SERVICE) as WindowManager
         val display: Display = windowManager.defaultDisplay
         val list = ArrayList<CommonDto>()
         list.add(CommonDto("DisplayId", display.displayId.toString()))

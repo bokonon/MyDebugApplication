@@ -42,19 +42,19 @@ class HardwareInfoFragment : BaseFragment() {
                 Type.TELEPHONE -> fragment = TelephoneInfoFragment.newInstance()
             }
             if (fragment != null) {
-                activity.supportFragmentManager.beginTransaction()
-                        .replace(R.id.container, fragment)
-                        .addToBackStack(null)
-                        .commit()
+                activity?.supportFragmentManager?.beginTransaction()
+                        ?.replace(R.id.container, fragment)
+                        ?.addToBackStack(null)
+                        ?.commit()
             }
             postLogEvent("hardware type: ${type?.title}")
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        val view = inflater!!.inflate(R.layout.fragment_hard_info, container, false)
+        val view = inflater.inflate(R.layout.fragment_hard_info, container, false)
         view.recyclerView.layoutManager = LinearLayoutManager(activity)
         val adapter = CommonInfoRecyclerViewAdapter(getHardwareInfo())
         view.recyclerView.adapter = adapter

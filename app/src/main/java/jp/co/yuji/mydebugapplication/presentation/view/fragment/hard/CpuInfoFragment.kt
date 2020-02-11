@@ -23,10 +23,10 @@ class CpuInfoFragment : BaseFragment() {
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        val view = inflater!!.inflate(R.layout.fragment_common_log, container, false)
+        val view = inflater.inflate(R.layout.fragment_common_log, container, false)
         view.logText.text = execute(command)
         return view
     }
@@ -35,12 +35,12 @@ class CpuInfoFragment : BaseFragment() {
         return R.string.screen_name_cpu_info
     }
 
-    private fun execute(command: String) : String {
+    private fun execute(c: String) : String {
 
         var inputStreamReader : InputStreamReader? = null
         var bufferReader : BufferedReader? = null
         try {
-            val process = Runtime.getRuntime().exec(command)
+            val process = Runtime.getRuntime().exec(c)
             inputStreamReader = InputStreamReader(process.inputStream)
             bufferReader = BufferedReader(inputStreamReader, 1024)
 
@@ -51,12 +51,8 @@ class CpuInfoFragment : BaseFragment() {
         }
         finally {
             try {
-                if (inputStreamReader != null) {
-                    inputStreamReader.close()
-                }
-                if (bufferReader != null) {
-                    bufferReader.close()
-                }
+                inputStreamReader?.close()
+                bufferReader?.close()
             }
             catch (e: Exception) {
                 return e.message.toString()

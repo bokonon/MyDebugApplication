@@ -33,15 +33,18 @@ class ApplicationDetailFragment : BaseFragment() {
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        val view = inflater!!.inflate(R.layout.fragment_common, container, false)
+        val view = inflater.inflate(R.layout.fragment_common, container, false)
 
         view.recyclerView.layoutManager = LinearLayoutManager(activity)
-        val packageName = arguments.getString(ARG_KEY)
-        val adapter = CommonDetailRecyclerViewAdapter(activity, getApplicationDetail(packageName))
-        view.recyclerView.adapter = adapter
+        val packageName = arguments?.getString(ARG_KEY)
+
+        if (activity != null && packageName != null) {
+            val adapter = CommonDetailRecyclerViewAdapter(activity!!, getApplicationDetail(packageName))
+            view.recyclerView.adapter = adapter
+        }
 
         val itemDecoration = DividerItemDecoration(activity, DividerItemDecoration.VERTICAL)
         view.recyclerView.addItemDecoration(itemDecoration)
@@ -57,52 +60,53 @@ class ApplicationDetailFragment : BaseFragment() {
         val list = ArrayList<CommonDto>()
 
         try {
-            val applicationInfo = activity.packageManager.getApplicationInfo(packageName, 0)
-
-            // field
-            list.add(CommonDto("taskAffinity", applicationInfo.taskAffinity?.toString().orEmpty()))
-            list.add(CommonDto("permission", applicationInfo.permission?.toString().orEmpty()))
-            list.add(CommonDto("processName", applicationInfo.processName?.toString().orEmpty()))
-            list.add(CommonDto("className", applicationInfo.className?.toString().orEmpty()))
-            if (applicationInfo.descriptionRes > 0) {
-                list.add(CommonDto("descriptionRes", activity.getString(applicationInfo.descriptionRes)))
-            } else {
-                list.add(CommonDto("descriptionRes", "no resource"))
-            }
-            list.add(CommonDto("theme", applicationInfo.theme.toString()))
-            list.add(CommonDto("manageSpaceActivityName", applicationInfo.manageSpaceActivityName?.toString().orEmpty()))
-            list.add(CommonDto("backupAgentName", applicationInfo.backupAgentName?.toString().orEmpty()))
-            list.add(CommonDto("uiOptions", applicationInfo.uiOptions.toString()))
-            list.add(CommonDto("flags", applicationInfo.flags.toString()))
-            list.add(CommonDto("requiresSmallestWidthDp", applicationInfo.requiresSmallestWidthDp.toString()))
-            list.add(CommonDto("compatibleWidthLimitDp", applicationInfo.compatibleWidthLimitDp.toString()))
-            list.add(CommonDto("largestWidthLimitDp", applicationInfo.largestWidthLimitDp.toString()))
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                list.add(CommonDto("storageUuid", applicationInfo.storageUuid?.toString().orEmpty()))
-            }
-            list.add(CommonDto("sourceDir", applicationInfo.sourceDir?.toString().orEmpty()))
-            list.add(CommonDto("publicSourceDir", applicationInfo.publicSourceDir?.toString().orEmpty()))
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                list.add(CommonDto("splitNames", applicationInfo.splitNames?.toString().orEmpty()))
-            }
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                list.add(CommonDto("splitSourceDirs", applicationInfo.splitSourceDirs?.toString().orEmpty()))
-                list.add(CommonDto("splitPublicSourceDirs", applicationInfo.splitPublicSourceDirs?.toString().orEmpty()))
-            }
-            list.add(CommonDto("sharedLibraryFiles", applicationInfo.sharedLibraryFiles?.toString().orEmpty()))
-            list.add(CommonDto("dataDir", applicationInfo.dataDir?.toString().orEmpty()))
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                list.add(CommonDto("deviceProtectedDataDir", applicationInfo.deviceProtectedDataDir?.toString().orEmpty()))
-            }
-            list.add(CommonDto("nativeLibraryDir", applicationInfo.nativeLibraryDir?.toString().orEmpty()))
-            list.add(CommonDto("uid", applicationInfo.uid.toString()))
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                list.add(CommonDto("minSdkVersion", applicationInfo.minSdkVersion.toString()))
-            }
-            list.add(CommonDto("targetSdkVersion", applicationInfo.targetSdkVersion.toString()))
-            list.add(CommonDto("enabled", applicationInfo.enabled.toString()))
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                list.add(CommonDto("category", applicationInfo.category.toString()))
+            val applicationInfo = activity?.packageManager?.getApplicationInfo(packageName, 0)
+            if (applicationInfo != null) {
+                // field
+                list.add(CommonDto("taskAffinity", applicationInfo.taskAffinity?.toString().orEmpty()))
+                list.add(CommonDto("permission", applicationInfo.permission?.toString().orEmpty()))
+                list.add(CommonDto("processName", applicationInfo.processName?.toString().orEmpty()))
+                list.add(CommonDto("className", applicationInfo.className?.toString().orEmpty()))
+                if (applicationInfo.descriptionRes > 0) {
+                    list.add(CommonDto("descriptionRes", activity!!.getString(applicationInfo.descriptionRes)))
+                } else {
+                    list.add(CommonDto("descriptionRes", "no resource"))
+                }
+                list.add(CommonDto("theme", applicationInfo.theme.toString()))
+                list.add(CommonDto("manageSpaceActivityName", applicationInfo.manageSpaceActivityName?.toString().orEmpty()))
+                list.add(CommonDto("backupAgentName", applicationInfo.backupAgentName?.toString().orEmpty()))
+                list.add(CommonDto("uiOptions", applicationInfo.uiOptions.toString()))
+                list.add(CommonDto("flags", applicationInfo.flags.toString()))
+                list.add(CommonDto("requiresSmallestWidthDp", applicationInfo.requiresSmallestWidthDp.toString()))
+                list.add(CommonDto("compatibleWidthLimitDp", applicationInfo.compatibleWidthLimitDp.toString()))
+                list.add(CommonDto("largestWidthLimitDp", applicationInfo.largestWidthLimitDp.toString()))
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    list.add(CommonDto("storageUuid", applicationInfo.storageUuid?.toString().orEmpty()))
+                }
+                list.add(CommonDto("sourceDir", applicationInfo.sourceDir?.toString().orEmpty()))
+                list.add(CommonDto("publicSourceDir", applicationInfo.publicSourceDir?.toString().orEmpty()))
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    list.add(CommonDto("splitNames", applicationInfo.splitNames?.toString().orEmpty()))
+                }
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    list.add(CommonDto("splitSourceDirs", applicationInfo.splitSourceDirs?.toString().orEmpty()))
+                    list.add(CommonDto("splitPublicSourceDirs", applicationInfo.splitPublicSourceDirs?.toString().orEmpty()))
+                }
+                list.add(CommonDto("sharedLibraryFiles", applicationInfo.sharedLibraryFiles?.toString().orEmpty()))
+                list.add(CommonDto("dataDir", applicationInfo.dataDir?.toString().orEmpty()))
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    list.add(CommonDto("deviceProtectedDataDir", applicationInfo.deviceProtectedDataDir?.toString().orEmpty()))
+                }
+                list.add(CommonDto("nativeLibraryDir", applicationInfo.nativeLibraryDir?.toString().orEmpty()))
+                list.add(CommonDto("uid", applicationInfo.uid.toString()))
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    list.add(CommonDto("minSdkVersion", applicationInfo.minSdkVersion.toString()))
+                }
+                list.add(CommonDto("targetSdkVersion", applicationInfo.targetSdkVersion.toString()))
+                list.add(CommonDto("enabled", applicationInfo.enabled.toString()))
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    list.add(CommonDto("category", applicationInfo.category.toString()))
+                }
             }
         } catch (e: Exception) {
             println(e.message)

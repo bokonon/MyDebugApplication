@@ -35,26 +35,29 @@ class NetworkInfoFragment : BaseFragment() {
         }
     })
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        val view = inflater!!.inflate(R.layout.fragment_common, container, false)
+        val view = inflater.inflate(R.layout.fragment_common, container, false)
 
         view.recyclerView.layoutManager = LinearLayoutManager(activity)
-        adapter = CommonRecyclerViewAdapter(activity, ArrayList())
-        view.recyclerView.adapter = adapter
+
+        if (activity != null) {
+            adapter = CommonRecyclerViewAdapter(activity!!, ArrayList())
+            view.recyclerView.adapter = adapter
+        }
 
         return view
     }
 
     override fun onResume() {
         super.onResume()
-        activity.registerReceiver(receiver, IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
+        activity?.registerReceiver(receiver, IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
     }
 
     override fun onPause() {
         super.onPause()
-        activity.unregisterReceiver(receiver)
+        activity?.unregisterReceiver(receiver)
     }
 
     override fun getTitle(): Int {
