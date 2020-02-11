@@ -6,6 +6,7 @@ import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.SearchView
 import android.view.*
+import android.view.inputmethod.EditorInfo
 import android.widget.ProgressBar
 import jp.co.yuji.mydebugapplication.BuildConfig
 import jp.co.yuji.mydebugapplication.R
@@ -86,7 +87,7 @@ class ApplicationListFragment : BaseFragment() {
         val menuItem = menu.findItem(R.id.menu_search_view)
         val searchView = menuItem.actionView as? SearchView
         searchView?.setOnQueryTextListener(this.onQueryTextListener)
-
+        searchView?.imeOptions = EditorInfo.IME_ACTION_DONE
 
         return super.onCreateOptionsMenu(menu, inflater)
     }

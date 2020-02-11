@@ -1,10 +1,16 @@
 package jp.co.yuji.mydebugapplication.presentation.view.fragment.device
 
+import android.annotation.SuppressLint
 import android.app.ActivityManager
 import android.content.Context
 import android.content.Context.ACTIVITY_SERVICE
+import android.content.Context.WIFI_SERVICE
+import android.net.wifi.WifiInfo
+import android.net.wifi.WifiManager
+import android.os.Build
 import android.os.Bundle
 import android.os.SystemClock
+import android.provider.Settings
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.util.DisplayMetrics
@@ -16,8 +22,11 @@ import jp.co.yuji.mydebugapplication.R
 import jp.co.yuji.mydebugapplication.domain.model.CommonDto
 import jp.co.yuji.mydebugapplication.presentation.view.adapter.common.CommonRecyclerViewAdapter
 import jp.co.yuji.mydebugapplication.presentation.view.fragment.BaseFragment
-import kotlinx.android.synthetic.main.fragment_common.view.*
+import java.math.BigInteger
+import java.net.InetAddress
 import java.util.*
+import kotlinx.android.synthetic.main.fragment_common.view.*
+
 
 /**
  * Device Info Fragment.
@@ -52,6 +61,7 @@ class DeviceInfoFragment : BaseFragment() {
         addScreenInfo(list)
         addMemoryInfo(list)
         addTimeInfo(list)
+        addOtherInfo(list)
         return list
     }
 
@@ -69,7 +79,7 @@ class DeviceInfoFragment : BaseFragment() {
         windowManager.defaultDisplay.getMetrics(displayMetrics)
         val screenWidth = displayMetrics.widthPixels
         val screenHeight = displayMetrics.heightPixels
-        list.add(CommonDto("Resolution", screenWidth.toString() + " X " + screenHeight.toString()))
+        list.add(CommonDto("Resolution", "$screenWidth X $screenHeight"))
 
         val metrics = resources.displayMetrics
         list.add(CommonDto("Xdpi", metrics.xdpi.toString() + " dpi"))
@@ -101,6 +111,52 @@ class DeviceInfoFragment : BaseFragment() {
         list.add(CommonDto("Uptime", day.toString() + " days "
                 + hour.toString() + " h "
                 + minutes.toString() + " m"))
+    }
+
+    @SuppressLint("HardwareIds")
+    private fun addOtherInfo(list : ArrayList<CommonDto>) {
+        list.add(CommonDto("Language", Locale.getDefault().language))
+        list.add(CommonDto("Display Language", Locale.getDefault().displayLanguage))
+        list.add(CommonDto("Display Name", Locale.getDefault().displayName))
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//            list.add(CommonDto("Display Script", Locale.getDefault().displayScript))
+//        }
+//        list.add(CommonDto("Display Variant", Locale.getDefault().displayVariant))
+        list.add(CommonDto("IP Address", getIpAddress()))
+        list.add(CommonDto("Mac Address", getMacAddress()))
+
+        var androidId = Settings.Secure.getString(context.contentResolver, Settings.Secure.ANDROID_ID)
+        if (androidId == null) {
+            androidId = "none"
+        }
+        list.add(CommonDto("Android ID", androidId))
+    }
+
+    private fun getIpAddress() : String {
+        try {
+            val wifiManager = context.getSystemService(WIFI_SERVICE) as WifiManager
+            val wifiInfo: WifiInfo = wifiManager.connectionInfo
+            val myIPAddress: ByteArray = BigInteger.valueOf(wifiInfo.ipAddress.toLong()).toByteArray()
+            // you must reverse the byte array before conversion. Use Apache's commons library
+            myIPAddress.reverse()
+            val myInetIP: InetAddress = InetAddress.getByAddress(myIPAddress)
+            return myInetIP.hostAddress
+        } catch(e: Exception) {
+            postLogEvent("exception in get ip address: ${e.message}")
+        }
+        return "none"
+    }
+
+    @SuppressLint("HardwareIds")
+    private fun getMacAddress() : String {
+        try {
+            val wifiManager = context.getSystemService(WIFI_SERVICE) as WifiManager
+            val info = wifiManager.connectionInfo
+            return info.macAddress
+        } catch(e: Exception) {
+            postLogEvent("exception in get mac address: ${e.message}")
+        }
+        return "none"
     }
 
 }

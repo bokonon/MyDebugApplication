@@ -7,9 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import jp.co.yuji.mydebugapplication.R
 import jp.co.yuji.mydebugapplication.presentation.view.fragment.BaseFragment
-import kotlinx.android.synthetic.main.fragment_common_log.view.*
 import java.io.BufferedReader
 import java.io.InputStreamReader
+import kotlinx.android.synthetic.main.fragment_common_log.view.*
 
 /**
  * Memory Info Fragment
@@ -51,12 +51,8 @@ class MemoryInfoFragment : BaseFragment() {
         }
         finally {
             try {
-                if (inputStreamReader != null) {
-                    inputStreamReader.close()
-                }
-                if (bufferReader != null) {
-                    bufferReader.close()
-                }
+                inputStreamReader?.close()
+                bufferReader?.close()
             }
             catch (e: Exception) {
                 return e.message.toString()

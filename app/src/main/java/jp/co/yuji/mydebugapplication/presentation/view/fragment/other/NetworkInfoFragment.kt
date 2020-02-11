@@ -78,7 +78,6 @@ class NetworkInfoFragment : BaseFragment() {
             list.add(CommonDto("networkInfo", "none"))
         }
 
-
         adapter.notifyDataSetChanged()
     }
 }

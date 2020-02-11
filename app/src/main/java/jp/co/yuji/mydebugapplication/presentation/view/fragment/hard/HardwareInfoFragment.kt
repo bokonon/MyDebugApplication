@@ -32,6 +32,7 @@ class HardwareInfoFragment : BaseFragment() {
             val type = Type.find(position)
             when (type) {
                 Type.SENSOR -> fragment = SensorInfoFragment.newInstance()
+                Type.DISPLAY -> fragment = DisplayInfoFragment.newInstance()
                 Type.CAMERA -> fragment = CameraInfoFragment.newInstance()
                 Type.CPU -> fragment = CpuInfoFragment.newInstance()
                 Type.MEMORY -> fragment = MemoryInfoFragment.newInstance()
@@ -85,13 +86,14 @@ class HardwareInfoFragment : BaseFragment() {
 
     enum class Type(val title: String, val position: Int)  {
         SENSOR("Sensor", 0),
-        CAMERA("Camera", 1),
-        CPU("CPU", 2),
-        MEMORY("Memory", 3),
-        BATTERY("Battery", 4),
-        STORAGE("Storage", 5),
-        SOUND("Sound", 6),
-        TELEPHONE("Telephone", 7);
+        DISPLAY("Display", 1),
+        CAMERA("Camera", 2),
+        CPU("CPU", 3),
+        MEMORY("Memory", 4),
+        BATTERY("Battery", 5),
+        STORAGE("Storage", 6),
+        SOUND("Sound", 7),
+        TELEPHONE("Telephone", 8);
 
         companion object {
             @Nullable

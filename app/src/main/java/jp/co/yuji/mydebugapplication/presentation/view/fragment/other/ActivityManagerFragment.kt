@@ -88,6 +88,14 @@ class ActivityManagerFragment : BaseFragment() {
                 list.add(CommonDto("uid", info.uid.toString()))
             }
         }
+        val memoryInfo: ActivityManager.MemoryInfo = ActivityManager.MemoryInfo()
+        activityManager.getMemoryInfo(memoryInfo)
+        list.add(CommonDto(" === MemoryInfo ===", ""))
+        list.add(CommonDto("availMem", memoryInfo.availMem.toString()))
+        list.add(CommonDto("lowMemory", memoryInfo.lowMemory.toString()))
+        list.add(CommonDto("threshold", memoryInfo.threshold.toString()))
+        list.add(CommonDto("totalMem", memoryInfo.totalMem.toString()))
+
         val runningAppProcessInfo = activityManager.runningAppProcesses
         if (runningAppProcessInfo != null) {
             for (info in runningAppProcessInfo) {
