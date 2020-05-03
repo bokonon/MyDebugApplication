@@ -75,12 +75,26 @@ class ApplicationInfoFragment : BaseFragment() {
         INSTALLED("Installed App", 0),
         LAUNCHER("Launcher App", 1),
         HOME("Home App", 2),
-        SETTING("Setting App", 3);
+        SETTING("Setting App", 3),
+        ALARM("Alarm App", 4),
+        TIMER("Timer App", 5),
+        CALENDAR("Calendar App", 6),
+        CAMERA("Camera App", 7),
+        CONTACT("Contact App", 8),
+        MAIL("Mail App", 9),
+        FILE("File App", 10),
+        TAXI("Taxi app", 11),
+        MAP("Map App", 12),
+        MEDIA_SEARCH("Media Search App", 13),
+        NOTE("Note App", 14),
+        DIAL("Dial App", 15),
+        MESSAGE("Message App", 16),
+        BROWSER("Browser App", 17);
 
         companion object {
             @Nullable
             fun find(position: Int): ActionType? {
-                return ActionType.values().firstOrNull { it.position == position }
+                return values().firstOrNull { it.position == position }
             }
         }
     }
