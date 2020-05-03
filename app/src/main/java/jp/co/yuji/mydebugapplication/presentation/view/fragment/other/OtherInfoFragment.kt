@@ -84,7 +84,7 @@ class OtherInfoFragment : BaseFragment() {
         // Handle presses on the action bar menu items
         when (item.itemId) {
             R.id.menu_privacy_policy -> {
-                startActivity("http://bokonon.html.xdomain.jp/privacy_policy.html", "privacy policy")
+                startActivity("https://bokonon.github.io/privacy/", "privacy policy")
                 return true
             }
             R.id.menu_license -> {

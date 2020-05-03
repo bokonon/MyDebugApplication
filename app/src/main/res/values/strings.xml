@@ -63,6 +63,8 @@
     <string name="is_device_owner_status_false">This app is not a DeviceOwner.</string>
 
     <!-- No data -->
+    <!-- Application Info -->
+    <string name="application_info_no_data_text">No application.</string>
     <!-- Alarm Manager -->
     <string name="alarm_manager_no_data_text">No next alarm.</string>
     <string name="alarm_manager_under_lollipop_no_data_text">Data can not be acquired under lollipop.</string>

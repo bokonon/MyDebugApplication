@@ -13,9 +13,7 @@ import jp.co.yuji.mydebugapplication.domain.model.CommonDto
 /**
  * Common Adapter.
  */
-class CommonRecyclerViewAdapter(private val context : Context, items: ArrayList<CommonDto>) : RecyclerView.Adapter<CommonRecyclerViewAdapter.ViewHolder>() {
-
-    val items = items
+class CommonRecyclerViewAdapter(private val context : Context, val items: ArrayList<CommonDto>) : RecyclerView.Adapter<CommonRecyclerViewAdapter.ViewHolder>() {
 
     override fun getItemCount(): Int = items.size
 

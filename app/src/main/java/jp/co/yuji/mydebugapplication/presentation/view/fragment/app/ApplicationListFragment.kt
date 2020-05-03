@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.SearchView
 import android.view.*
 import android.view.inputmethod.EditorInfo
 import android.widget.ProgressBar
+import android.widget.TextView
 import jp.co.yuji.mydebugapplication.BuildConfig
 import jp.co.yuji.mydebugapplication.R
 import jp.co.yuji.mydebugapplication.domain.model.ApplicationListDto
@@ -76,7 +78,7 @@ class ApplicationListFragment : BaseFragment() {
         view.recyclerView.addItemDecoration(itemDecoration)
 
         if (actionTypePosition != null) {
-            addApplicationList(actionTypePosition)
+            addApplicationList(actionTypePosition, view.recyclerView, view.emptyView)
         }
 
         return view
@@ -98,13 +100,21 @@ class ApplicationListFragment : BaseFragment() {
         return R.string.screen_name_application_list
     }
 
-    private fun addApplicationList(actionTypePosition: Int) {
+    private fun addApplicationList(actionTypePosition: Int, recyclerView: RecyclerView, emptyView: TextView) {
         val actionType: ApplicationInfoFragment.ActionType? = ApplicationInfoFragment.ActionType.find(actionTypePosition)
         if (activity != null && actionType != null) {
             presenter.getApplicationList(activity!!, actionType, object: ApplicationListPresenter.OnGetApplicationListListener {
                 override fun onGetApplicationList(appList: List<ApplicationListDto>) {
                     adapter?.updateList(appList)
                     progressBar?.visibility = View.GONE
+                    if (appList.isNotEmpty()) {
+                        recyclerView.visibility = View.VISIBLE
+                        emptyView.visibility = View.GONE
+                    } else {
+                        recyclerView.visibility = View.GONE
+                        emptyView.visibility = View.VISIBLE
+                        emptyView.text = getString(R.string.application_info_no_data_text)
+                    }
                 }
             })
         }
