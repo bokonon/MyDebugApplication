@@ -39,6 +39,7 @@ class OtherInfoFragment : BaseFragment() {
                 Type.NETWORK_INFO -> fragment = NetworkInfoFragment.newInstance()
                 Type.ACTIVITY_MANAGER -> fragment = ActivityManagerFragment.newInstance()
                 Type.ALARM_MANAGER -> fragment = AlarmManagerFragment.newInstance()
+                Type.PORT -> fragment = PortListFragment.newInstance()
             }
             if (fragment != null) {
                 activity?.supportFragmentManager?.beginTransaction()
@@ -127,7 +128,8 @@ class OtherInfoFragment : BaseFragment() {
         PINNING("Pinning", 3),
         NETWORK_INFO("Network Info", 4),
         ACTIVITY_MANAGER("Activity Manager", 5),
-        ALARM_MANAGER("Alarm Manager", 6);
+        ALARM_MANAGER("Alarm Manager", 6),
+        PORT("Port", 7);
 
         companion object {
             @Nullable
