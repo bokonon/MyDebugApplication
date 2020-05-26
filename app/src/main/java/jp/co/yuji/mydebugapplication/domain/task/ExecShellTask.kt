@@ -5,41 +5,27 @@ import java.io.BufferedReader
 import java.io.InputStreamReader
 
 /**
- * Get Log Task.
+ * Exec Shell Task.
  */
-class GetLogTask(private val listener: OnGetLogListener) : AsyncTask<Void, Void, String>() {
+class ExecShellTask(private val listener: OnExecShellListener) : AsyncTask<String, Void, String>() {
 
-    interface OnGetLogListener {
-        fun onGetLog(log: String)
+    interface OnExecShellListener {
+        fun onExecShell(result: String)
     }
 
-    override fun doInBackground(vararg params: Void?): String {
-        val logText = StringBuilder()
-        logText.append(getLog())
-        logText.append("\n")
-        logText.append("\n")
-        logText.append("\n")
-        logText.append("\n")
-        logText.append("\n")
-        logText.append("\n")
-        logText.append("\n")
-        return logText.toString()
+    override fun doInBackground(vararg params: String?): String {
+        val command: String = params[0] ?: return ""
+        return getPort(command)
     }
 
     override fun onPostExecute(result: String?) {
         super.onPostExecute(result)
         if (result != null) {
-            listener.onGetLog(result)
+            listener.onExecShell(result)
         }
     }
 
-    private fun getLog() : String {
-
-//        val command = arrayOf("logcat", "-v", "time", "*:V")
-//        val command = "logcat"
-//        val command = arrayOf("logcat")
-
-        val command = "logcat -d"
+    private fun getPort(command: String) : String {
 
         var inputStreamReader : InputStreamReader? = null
         var bufferReader : BufferedReader? = null
@@ -63,6 +49,6 @@ class GetLogTask(private val listener: OnGetLogListener) : AsyncTask<Void, Void,
             }
 
         }
-    }
 
+    }
 }

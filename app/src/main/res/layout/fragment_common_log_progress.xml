@@ -17,7 +17,6 @@
             android:id="@+id/logText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/default_log_text"
             android:textIsSelectable="true"/>
 
     </ScrollView>
