@@ -5,6 +5,7 @@ import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
@@ -33,7 +34,7 @@ class AlarmManagerFragment : BaseFragment() {
         view.recyclerView.layoutManager = LinearLayoutManager(activity)
 
         if (activity != null) {
-            val adapter = CommonRecyclerViewAdapter(activity!!, getAlarmManagerInfo())
+            val adapter = CommonRecyclerViewAdapter(activity!!, getAlarmManagerInfo(activity!!))
             view.recyclerView.adapter = adapter
 
             if (adapter.items.isEmpty()) {
@@ -56,17 +57,22 @@ class AlarmManagerFragment : BaseFragment() {
         return R.string.screen_name_alarm_manager
     }
 
-    private fun getAlarmManagerInfo() : ArrayList<CommonDto> {
+    private fun getAlarmManagerInfo(activity: FragmentActivity): ArrayList<CommonDto> {
         val list = ArrayList<CommonDto>()
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            val alarmManager = activity?.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-            val alarmClockInfo = alarmManager.nextAlarmClock
-            if (alarmClockInfo != null) {
-                list.add(CommonDto("=== Next Alarm Clock ===", ""))
-                list.add(CommonDto("TriggerTime", convertTimeToString(alarmClockInfo.triggerTime)))
-                list.add(CommonDto("PendingIntent", alarmClockInfo.showIntent.toString()))
-                list.add(CommonDto("describeContents", alarmClockInfo.describeContents().toString()))
+
+            val alarmManager = activity.getSystemService(Context.ALARM_SERVICE)
+            if (alarmManager is AlarmManager) {
+                val alarmClockInfo = alarmManager.nextAlarmClock
+                if (alarmClockInfo != null) {
+                    list.add(CommonDto("=== Next Alarm Clock ===", ""))
+                    list.add(CommonDto("TriggerTime", convertTimeToString(alarmClockInfo.triggerTime)))
+                    if (alarmClockInfo.showIntent != null) {
+                        list.add(CommonDto("PendingIntent", alarmClockInfo.showIntent.toString()))
+                    }
+                    list.add(CommonDto("describeContents", alarmClockInfo.describeContents().toString()))
+                }
             }
         }
 
