@@ -4,10 +4,10 @@ import android.content.IntentFilter
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import jp.co.yuji.mydebugapplication.R
 import jp.co.yuji.mydebugapplication.domain.model.CommonDto
@@ -42,10 +42,8 @@ class NetworkInfoFragment : BaseFragment() {
 
         view.recyclerView.layoutManager = LinearLayoutManager(activity)
 
-        if (activity != null) {
-            adapter = CommonRecyclerViewAdapter(requireActivity(), ArrayList())
-            view.recyclerView.adapter = adapter
-        }
+        adapter = CommonRecyclerViewAdapter(requireActivity(), ArrayList())
+        view.recyclerView.adapter = adapter
 
         return view
     }
@@ -70,7 +68,7 @@ class NetworkInfoFragment : BaseFragment() {
 
         if (networkInfo != null) {
             list.add(CommonDto("state", networkInfo.state?.toString().orEmpty()))
-            list.add(CommonDto("detailedState", networkInfo.detailedState?.toString().orEmpty()))
+            list.add(CommonDto("detailedState", networkInfo.detailedState.toString().orEmpty()))
             list.add(CommonDto("reason", networkInfo.reason?.toString().orEmpty()))
             list.add(CommonDto("extraInfo", networkInfo.extraInfo?.toString().orEmpty()))
             list.add(CommonDto("type", networkInfo.type.toString()))
