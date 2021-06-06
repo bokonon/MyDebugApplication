@@ -13,7 +13,7 @@ class AdbShellPresenter {
 
     fun execShell(command: String, listener: OnExecShellListener) {
         val useCase = ExecShellUseCase()
-        useCase.execShell(command, object : ExecShellUseCase.OnExecShellListener {
+        useCase.exec(command, object : ExecShellUseCase.OnExecShellListener {
             override fun onExecShell(result: String) {
                 listener.onExecShell(result)
             }

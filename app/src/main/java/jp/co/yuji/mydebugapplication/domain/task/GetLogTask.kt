@@ -1,19 +1,14 @@
 package jp.co.yuji.mydebugapplication.domain.task
 
-import android.os.AsyncTask
 import java.io.BufferedReader
 import java.io.InputStreamReader
 
 /**
  * Get Log Task.
  */
-class GetLogTask(private val listener: OnGetLogListener) : AsyncTask<Void, Void, String>() {
+class GetLogTask {
 
-    interface OnGetLogListener {
-        fun onGetLog(log: String)
-    }
-
-    override fun doInBackground(vararg params: Void?): String {
+    suspend fun exec(): String {
         val logText = StringBuilder()
         logText.append(getLog())
         logText.append("\n")
@@ -24,13 +19,6 @@ class GetLogTask(private val listener: OnGetLogListener) : AsyncTask<Void, Void,
         logText.append("\n")
         logText.append("\n")
         return logText.toString()
-    }
-
-    override fun onPostExecute(result: String?) {
-        super.onPostExecute(result)
-        if (result != null) {
-            listener.onGetLog(result)
-        }
     }
 
     private fun getLog() : String {

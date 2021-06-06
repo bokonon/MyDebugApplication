@@ -13,7 +13,7 @@ class PortDetailPresenter {
 
     fun getPort(command: String, listener: OnGetPortListener) {
         val useCase = ExecShellUseCase()
-        useCase.execShell(command, object : ExecShellUseCase.OnExecShellListener {
+        useCase.exec(command, object : ExecShellUseCase.OnExecShellListener {
             override fun onExecShell(result: String) {
                 listener.onGetPort(result)
             }

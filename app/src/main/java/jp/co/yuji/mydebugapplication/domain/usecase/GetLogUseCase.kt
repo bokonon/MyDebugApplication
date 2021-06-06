@@ -1,23 +1,31 @@
 package jp.co.yuji.mydebugapplication.domain.usecase
 
-import android.os.AsyncTask
+import android.util.Log
 import jp.co.yuji.mydebugapplication.domain.task.GetLogTask
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * Get Log UseCase.
  */
-class GetLogUseCase {
+class GetLogUseCase: BaseUseCase() {
 
     interface OnGetLogListener {
         fun onGetLog(log: String)
     }
 
-    fun getLog(listener: OnGetLogListener) {
-        val task = GetLogTask (object : GetLogTask.OnGetLogListener {
-            override fun onGetLog(log: String) {
-                listener.onGetLog(log)
+    fun exec(listener: OnGetLogListener) {
+        scope.launch {
+            try {
+                val result = GetLogTask().exec()
+                withContext(Dispatchers.Main) {
+                    listener.onGetLog(result)
+                }
+            } catch(e: Exception) {
+                Log.e(this::class.java.simpleName, "on catch", e)
             }
-        })
-        task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR)
+
+        }
     }
 }

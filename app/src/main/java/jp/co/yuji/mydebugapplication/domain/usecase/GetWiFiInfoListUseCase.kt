@@ -3,25 +3,33 @@ package jp.co.yuji.mydebugapplication.domain.usecase
 import android.content.Context
 import android.net.wifi.ScanResult
 import android.net.wifi.WifiManager
-import android.os.AsyncTask
+import android.util.Log
 import jp.co.yuji.mydebugapplication.domain.task.GetWiFiInfoListTask
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * Get WiFi ScanResult List UseCase.
  */
-class GetWiFiInfoListUseCase {
+class GetWiFiInfoListUseCase: BaseUseCase() {
 
     interface OnGetWiFiInfoListListener {
         fun onGetWiFiInfoList(wifiInfoList : List<ScanResult>)
     }
 
-    fun getWiFiInfoList(context: Context, listener: GetWiFiInfoListUseCase.OnGetWiFiInfoListListener) {
-        val wifiManager = context.applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
-        val task = GetWiFiInfoListTask (wifiManager, object : GetWiFiInfoListTask.OnGetWiFiInfoListListener {
-            override fun onGetWiFiInfoList(wifiInfoList: List<ScanResult>) {
-                listener.onGetWiFiInfoList(wifiInfoList)
+    fun exec(context: Context, listener: GetWiFiInfoListUseCase.OnGetWiFiInfoListListener) {
+        scope.launch {
+            try {
+                val wifiManager = context.applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
+                val result = GetWiFiInfoListTask().exec(wifiManager)
+                withContext(Dispatchers.Main) {
+                    listener.onGetWiFiInfoList(result)
+                }
+            } catch(e: Exception) {
+                Log.e(this::class.java.simpleName, "on catch", e)
             }
-        })
-        task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR)
+
+        }
     }
 }

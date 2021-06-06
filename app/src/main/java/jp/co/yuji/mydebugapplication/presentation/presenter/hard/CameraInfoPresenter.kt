@@ -15,7 +15,7 @@ class CameraInfoPresenter {
 
     fun getCameraInfo(context: Context, listener: OnGetCameraInfoListener) {
         val useCase = GetCameraInfoUseCase()
-        useCase.getCameraInfo(context, object : GetCameraInfoUseCase.OnGetCameraInfoListener {
+        useCase.exec(context, object : GetCameraInfoUseCase.OnGetCameraInfoListener {
             override fun onGetCameraInfo(cameraList: List<CommonDto>) {
                 listener.onGetCameraInfo(cameraList)
             }

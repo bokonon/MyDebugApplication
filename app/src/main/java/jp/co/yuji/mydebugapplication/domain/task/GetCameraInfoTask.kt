@@ -7,32 +7,17 @@ import android.hardware.Camera
 import android.hardware.camera2.CameraAccessException
 import android.hardware.camera2.CameraCharacteristics
 import android.hardware.camera2.CameraManager
-import android.os.AsyncTask
 import android.os.Build
+import androidx.annotation.RequiresApi
 import jp.co.yuji.mydebugapplication.domain.model.CommonDto
 import java.util.*
 
 /**
  * Get Camera Info Task.
  */
-class GetCameraInfoTask(private val context: Context, private val listener: OnGetCameraInfoListener) : AsyncTask<Void, Void, List<CommonDto>>() {
+class GetCameraInfoTask(private val context: Context) {
 
-    interface OnGetCameraInfoListener {
-        fun onGetCameraInfo(cameraList : List<CommonDto>)
-    }
-
-    override fun doInBackground(vararg params: Void?): List<CommonDto> {
-        return getCameraInfo()
-    }
-
-    override fun onPostExecute(cameraList: List<CommonDto>?) {
-        super.onPostExecute(cameraList)
-        if (cameraList != null) {
-            listener.onGetCameraInfo(cameraList)
-        }
-    }
-
-    private fun getCameraInfo(): List<CommonDto> {
+    suspend fun exec(): List<CommonDto> {
         val list = ArrayList<CommonDto>()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             addCamera2Info(list)
@@ -42,15 +27,12 @@ class GetCameraInfoTask(private val context: Context, private val listener: OnGe
         return list
     }
 
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private fun addCamera2Info(list : ArrayList<CommonDto>) {
         val manager = context.getSystemService(Context.CAMERA_SERVICE) as CameraManager
         try {
             val cameraIdList = manager.cameraIdList
-            if (cameraIdList == null) {
-                list.add(CommonDto("camera id", "not available"))
-                return
-            }
             for (cameraId in cameraIdList) {
                 list.add(CommonDto("camera id", cameraId?.toString().orEmpty()))
                 val characteristics = manager.getCameraCharacteristics(cameraId)
@@ -65,7 +47,7 @@ class GetCameraInfoTask(private val context: Context, private val listener: OnGe
                 val map = characteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP)
                 if (map != null) {
                     val previewSizes = map.getOutputSizes(SurfaceTexture::class.java)
-                    (0 until previewSizes.size).mapTo(list) {
+                    (previewSizes.indices).mapTo(list) {
                         var title = ""
                         if (it == 0) {
                             title = "preview size"
@@ -117,9 +99,7 @@ class GetCameraInfoTask(private val context: Context, private val listener: OnGe
             } catch (e: Exception) {
                 println(e.message)
             } finally {
-                if (camera != null) {
-                    camera.release()
-                }
+                camera?.release()
             }
         }
 

@@ -13,7 +13,7 @@ class LogDetailPresenter {
 
     fun getLog(listener: OnGetLogListener) {
         val useCase = GetLogUseCase()
-        useCase.getLog(object : GetLogUseCase.OnGetLogListener {
+        useCase.exec(object : GetLogUseCase.OnGetLogListener {
             override fun onGetLog(log: String) {
                 listener.onGetLog(log)
             }

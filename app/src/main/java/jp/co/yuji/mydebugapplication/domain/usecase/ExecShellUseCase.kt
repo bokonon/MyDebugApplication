@@ -1,23 +1,32 @@
 package jp.co.yuji.mydebugapplication.domain.usecase
 
-import android.os.AsyncTask
+import android.util.Log
 import jp.co.yuji.mydebugapplication.domain.task.ExecShellTask
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * Exec Shell UseCase.
  */
-class ExecShellUseCase {
+class ExecShellUseCase :BaseUseCase() {
 
     interface OnExecShellListener {
         fun onExecShell(result: String)
     }
 
-    fun execShell(command: String, listener: OnExecShellListener) {
-        val task = ExecShellTask (object : ExecShellTask.OnExecShellListener {
-            override fun onExecShell(result: String) {
-                listener.onExecShell(result)
+    fun exec(command: String, listener: OnExecShellListener) {
+
+        scope.launch {
+            try {
+                val result = ExecShellTask().exec(command)
+                withContext(Dispatchers.Main) {
+                    listener.onExecShell(result)
+                }
+            } catch(e: Exception) {
+                Log.e(this::class.java.simpleName, "on catch", e)
             }
-        })
-        task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, command)
+
+        }
     }
 }
