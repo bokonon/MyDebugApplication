@@ -4,11 +4,11 @@ import android.content.IntentFilter
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import jp.co.yuji.mydebugapplication.R
 import jp.co.yuji.mydebugapplication.domain.model.CommonDto
 import jp.co.yuji.mydebugapplication.presentation.view.adapter.common.CommonRecyclerViewAdapter
@@ -43,7 +43,7 @@ class NetworkInfoFragment : BaseFragment() {
         view.recyclerView.layoutManager = LinearLayoutManager(activity)
 
         if (activity != null) {
-            adapter = CommonRecyclerViewAdapter(activity!!, ArrayList())
+            adapter = CommonRecyclerViewAdapter(requireActivity(), ArrayList())
             view.recyclerView.adapter = adapter
         }
 

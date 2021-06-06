@@ -7,7 +7,7 @@ import android.content.ComponentName
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -55,7 +55,7 @@ class PinningActivityFragment : BaseFragment() {
         setTitleLazy(pinningType.strResId)
 
         devicePolicyManager = activity?.getSystemService(Context.DEVICE_POLICY_SERVICE) as DevicePolicyManager?
-        deviceAdmin = ComponentName(activity, MyDeviceAdminReceiver::class.java)
+        deviceAdmin = ComponentName(requireActivity(), MyDeviceAdminReceiver::class.java)
 
         activityManager = activity?.getSystemService(
                 Context.ACTIVITY_SERVICE) as ActivityManager
@@ -97,8 +97,8 @@ class PinningActivityFragment : BaseFragment() {
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private fun startLockTask() {
-        if (devicePolicyManager != null && devicePolicyManager!!.isDeviceOwnerApp(activity?.packageName)) {
-            devicePolicyManager?.setLockTaskPackages(deviceAdmin, arrayOf(activity?.packageName))
+        if (devicePolicyManager != null && devicePolicyManager!!.isDeviceOwnerApp(activity?.packageName) && deviceAdmin != null) {
+            devicePolicyManager?.setLockTaskPackages(deviceAdmin!!, arrayOf(activity?.packageName))
             startPinning()
         }
     }

@@ -6,11 +6,11 @@ import android.content.IntentFilter
 import android.os.BatteryManager
 import android.os.Build
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import jp.co.yuji.mydebugapplication.R
 import jp.co.yuji.mydebugapplication.domain.model.CommonDto
 import jp.co.yuji.mydebugapplication.domain.model.MyBatteryInfo
@@ -47,7 +47,7 @@ class BatteryInfoFragment : BaseFragment() {
 
         if (activity != null) {
             val list = ArrayList<CommonDto>()
-            adapter = CommonRecyclerViewAdapter(activity!!, list)
+            adapter = CommonRecyclerViewAdapter(requireActivity(), list)
             view.recyclerView.adapter = adapter
         }
 

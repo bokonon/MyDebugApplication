@@ -1,7 +1,7 @@
 package jp.co.yuji.mydebugapplication.presentation.view.activity
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.ads.MobileAds
 import com.google.firebase.analytics.FirebaseAnalytics
 import jp.co.yuji.mydebugapplication.R
@@ -24,7 +24,7 @@ abstract class BaseActivity : AppCompatActivity() {
         firebaseAnalytics = FirebaseAnalytics.getInstance(this)
         if (this is AdvertisableActivity) {
             println("this is AdvertisableActivity")
-            MobileAds.initialize(this, getString(R.string.app_id))
+            MobileAds.initialize(this)
         }
     }
 

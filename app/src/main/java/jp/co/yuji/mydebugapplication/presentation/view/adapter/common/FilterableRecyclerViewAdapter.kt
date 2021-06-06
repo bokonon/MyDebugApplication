@@ -1,6 +1,6 @@
 package jp.co.yuji.mydebugapplication.presentation.view.adapter.common
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import jp.co.yuji.mydebugapplication.presentation.view.adapter.ApplicationListRecyclerViewAdapter
 import java.util.*
 import kotlin.collections.ArrayList

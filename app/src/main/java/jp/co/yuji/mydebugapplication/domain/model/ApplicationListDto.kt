@@ -6,10 +6,7 @@ import jp.co.yuji.mydebugapplication.presentation.view.adapter.common.MyFilterab
 /**
  * ApplicationListDto.
  */
-class ApplicationListDto(appName: String, packageName: String, icon: Drawable): MyFilterable() {
-    val appName: String = appName
-    val packageName: String = packageName
-    val icon: Drawable = icon
+class ApplicationListDto(val appName: String, val packageName: String, val icon: Drawable): MyFilterable() {
 
     override fun getFirstFilterName(): String {
         return appName

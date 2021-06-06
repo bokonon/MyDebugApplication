@@ -1,7 +1,7 @@
 package jp.co.yuji.mydebugapplication.presentation.view.fragment
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,15 +20,11 @@ abstract class BaseFragment : Fragment() {
     abstract fun getTitle(): Int
 
     private fun setTitle(stringRes: Int) {
-        if (activity != null) {
-            activity!!.title = activity!!.getString(stringRes)
-        }
+        requireActivity().title = requireActivity().getString(stringRes)
     }
 
     fun setTitleLazy(stringRes: Int) {
-        if (activity != null) {
-            activity!!.title = activity!!.getString(stringRes)
-        }
+        requireActivity().title = requireActivity().getString(stringRes)
     }
 
     fun postLogEvent(contentType: String) {

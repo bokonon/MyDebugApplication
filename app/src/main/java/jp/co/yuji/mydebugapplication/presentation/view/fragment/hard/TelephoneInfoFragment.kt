@@ -1,9 +1,9 @@
 package jp.co.yuji.mydebugapplication.presentation.view.fragment.hard
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,8 +16,9 @@ import java.util.ArrayList
 import android.content.Context.TELEPHONY_SERVICE
 import android.content.pm.PackageManager
 import android.os.Build
-import android.support.v4.content.ContextCompat
+import androidx.core.content.ContextCompat
 import android.telephony.TelephonyManager
+import androidx.recyclerview.widget.LinearLayoutManager
 
 
 class TelephoneInfoFragment : BaseFragment() {
@@ -39,7 +40,7 @@ class TelephoneInfoFragment : BaseFragment() {
         val list = ArrayList<CommonDto>()
 
         if (activity != null) {
-            adapter = CommonSelectableRecyclerViewAdapter(activity!!, list)
+            adapter = CommonSelectableRecyclerViewAdapter(requireActivity(), list)
             view.recyclerView.adapter = adapter
         }
 
@@ -104,9 +105,6 @@ class TelephoneInfoFragment : BaseFragment() {
         if (networkCountryIso != null) {
             list.add(CommonDto("networkCountryIso", networkCountryIso))
         }
-
-        val networkType = telephonyManager.networkType
-        list.add(CommonDto("networkType", networkType.toString()))
 
         val hasIccCard = telephonyManager.hasIccCard()
         val hasIccCardString = if (hasIccCard) "true" else "false"
@@ -182,12 +180,9 @@ class TelephoneInfoFragment : BaseFragment() {
     }
 
     private fun addRequiredPermissionTelephoneInfo(list: ArrayList<CommonDto>) {
-        if (activity == null) {
-            return
-        }
-        if (ContextCompat.checkSelfPermission(activity!!, Manifest.permission.READ_PHONE_STATE)
+        if (ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.READ_PHONE_STATE)
                 != PackageManager.PERMISSION_GRANTED
-                || ContextCompat.checkSelfPermission(activity!!, Manifest.permission.ACCESS_COARSE_LOCATION)
+                || ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.ACCESS_COARSE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
             val permissions: Array<String> = arrayOf(Manifest.permission.READ_PHONE_STATE, Manifest.permission.ACCESS_COARSE_LOCATION)
             requestPermissions(
@@ -201,6 +196,9 @@ class TelephoneInfoFragment : BaseFragment() {
         if (deviceSoftwareVersion != null) {
             list.add(CommonDto("deviceSoftwareVersion", deviceSoftwareVersion))
         }
+
+        val networkType = telephonyManager.networkType
+        list.add(CommonDto("networkType", networkType.toString()))
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val imei = telephonyManager.imei

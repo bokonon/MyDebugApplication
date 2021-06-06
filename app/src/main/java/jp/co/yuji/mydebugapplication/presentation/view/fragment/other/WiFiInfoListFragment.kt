@@ -4,14 +4,14 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.net.wifi.ScanResult
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.LinearLayoutManager
+import androidx.fragment.app.Fragment
+import androidx.core.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import jp.co.yuji.mydebugapplication.R
 import jp.co.yuji.mydebugapplication.presentation.presenter.other.WiFiInfoListPresenter
 import jp.co.yuji.mydebugapplication.presentation.view.adapter.WiFiInfoListRecyclerViewAdapter
@@ -64,7 +64,7 @@ class WiFiInfoListFragment : BaseFragment() {
         val itemDecoration = DividerItemDecoration(activity, DividerItemDecoration.VERTICAL)
         view.recyclerView.addItemDecoration(itemDecoration)
 
-        if (activity != null && ContextCompat.checkSelfPermission(activity!!, Manifest.permission.ACCESS_COARSE_LOCATION)
+        if (activity != null && ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.ACCESS_COARSE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
             val permissions: Array<String> = arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION)
             requestPermissions(
@@ -97,7 +97,7 @@ class WiFiInfoListFragment : BaseFragment() {
         if (activity == null) {
             return
         }
-        presenter.getWiFiInfoList(activity!!, object: WiFiInfoListPresenter.OnGetWiFiInfoListListener {
+        presenter.getWiFiInfoList(requireActivity(), object: WiFiInfoListPresenter.OnGetWiFiInfoListListener {
             override fun onGetWiFiInfoList(wifiInfoList: List<ScanResult>) {
                 list?.addAll(wifiInfoList)
                 adapter?.notifyDataSetChanged()

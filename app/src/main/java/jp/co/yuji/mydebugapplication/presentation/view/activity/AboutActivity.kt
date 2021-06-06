@@ -25,8 +25,10 @@ class AboutActivity : BaseActivity() {
         setContentView(R.layout.activity_about)
 
         // init view
-        val url = intent.getStringExtra(ARG_KEY)
-        val fragment = AboutFragment.newInstance(url)
-        supportFragmentManager.beginTransaction().replace(R.id.container, fragment).commit()
+        intent.getStringExtra(ARG_KEY)?.let {
+            val fragment = AboutFragment.newInstance(it)
+            supportFragmentManager.beginTransaction().replace(R.id.container, fragment).commit()
+        }
+
     }
 }

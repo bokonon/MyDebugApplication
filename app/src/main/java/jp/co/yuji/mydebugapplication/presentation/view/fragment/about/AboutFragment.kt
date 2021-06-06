@@ -1,7 +1,7 @@
 package jp.co.yuji.mydebugapplication.presentation.view.fragment.about
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,8 +27,9 @@ class AboutFragment : BaseFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         val view = inflater.inflate(R.layout.fragment_about, container, false)
-        val url = arguments?.getString(ARG_KEY)
-        view.webView.loadUrl(url)
+        arguments?.getString(ARG_KEY).let {
+            view.webView.loadUrl(it!!)
+        }
         return view
     }
 

@@ -2,8 +2,7 @@ package jp.co.yuji.mydebugapplication.presentation.view.fragment.hard
 
 import android.annotation.TargetApi
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +13,7 @@ import java.util.ArrayList
 import android.media.AudioManager
 import android.content.Context
 import android.os.Build
+import androidx.recyclerview.widget.LinearLayoutManager
 import jp.co.yuji.mydebugapplication.presentation.view.adapter.SoundInfoRecyclerViewAdapter
 
 
@@ -37,7 +37,7 @@ class SoundInfoFragment : BaseFragment() {
         view.recyclerView.layoutManager = LinearLayoutManager(activity)
 
         if (activity != null) {
-            adapter = SoundInfoRecyclerViewAdapter(activity!!, getSoundInfo())
+            adapter = SoundInfoRecyclerViewAdapter(requireActivity(), getSoundInfo())
             view.recyclerView.adapter = adapter
         }
 

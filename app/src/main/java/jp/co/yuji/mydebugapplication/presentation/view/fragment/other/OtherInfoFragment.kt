@@ -1,11 +1,11 @@
 package jp.co.yuji.mydebugapplication.presentation.view.fragment.other
 
 import android.os.Bundle
-import android.support.annotation.Nullable
-import android.support.v4.app.Fragment
-import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.LinearLayoutManager
+import androidx.annotation.Nullable
+import androidx.fragment.app.Fragment
 import android.view.*
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.ads.AdRequest
 import jp.co.yuji.mydebugapplication.R
 import jp.co.yuji.mydebugapplication.presentation.view.activity.AboutActivity
@@ -117,7 +117,7 @@ class OtherInfoFragment : BaseFragment() {
     private fun startActivity(url: String, contentType: String) {
         postLogEvent(contentType)
         if (activity != null) {
-            AboutActivity.startActivity(activity!!, url)
+            AboutActivity.startActivity(requireActivity(), url)
         }
     }
 

@@ -4,12 +4,12 @@ import android.app.AlarmManager
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentActivity
-import android.support.v7.widget.LinearLayoutManager
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import jp.co.yuji.mydebugapplication.R
 import jp.co.yuji.mydebugapplication.domain.model.CommonDto
 import jp.co.yuji.mydebugapplication.presentation.view.adapter.common.CommonRecyclerViewAdapter
@@ -34,7 +34,7 @@ class AlarmManagerFragment : BaseFragment() {
         view.recyclerView.layoutManager = LinearLayoutManager(activity)
 
         if (activity != null) {
-            val adapter = CommonRecyclerViewAdapter(activity!!, getAlarmManagerInfo(activity!!))
+            val adapter = CommonRecyclerViewAdapter(requireActivity(), getAlarmManagerInfo(requireActivity()))
             view.recyclerView.adapter = adapter
 
             if (adapter.items.isEmpty()) {
