@@ -1,24 +1,23 @@
 package jp.co.yuji.mydebugapplication.presentation.view.fragment.hard
 
 import android.Manifest
-import android.annotation.SuppressLint
+import android.content.Context.TELEPHONY_SERVICE
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.telephony.TelephonyManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import jp.co.yuji.mydebugapplication.R
 import jp.co.yuji.mydebugapplication.domain.model.CommonDto
 import jp.co.yuji.mydebugapplication.presentation.view.adapter.common.CommonSelectableRecyclerViewAdapter
 import jp.co.yuji.mydebugapplication.presentation.view.fragment.BaseFragment
 import kotlinx.android.synthetic.main.fragment_common.view.*
-import java.util.ArrayList
-import android.content.Context.TELEPHONY_SERVICE
-import android.content.pm.PackageManager
-import android.os.Build
-import androidx.core.content.ContextCompat
-import android.telephony.TelephonyManager
-import androidx.recyclerview.widget.LinearLayoutManager
+import java.util.*
 
 
 class TelephoneInfoFragment : BaseFragment() {
@@ -192,6 +191,15 @@ class TelephoneInfoFragment : BaseFragment() {
         }
         val telephonyManager = activity?.getSystemService(TELEPHONY_SERVICE) as TelephonyManager
 
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+            val deviceId = telephonyManager.deviceId
+            if (deviceId != null) {
+                list.add(CommonDto("deviceId", deviceId))
+            }
+        } else {
+            list.add(CommonDto("deviceId", "for only apps preloaded on this device"))
+        }
+
         val deviceSoftwareVersion = telephonyManager.deviceSoftwareVersion
         if (deviceSoftwareVersion != null) {
             list.add(CommonDto("deviceSoftwareVersion", deviceSoftwareVersion))
@@ -201,14 +209,23 @@ class TelephoneInfoFragment : BaseFragment() {
         list.add(CommonDto("networkType", networkType.toString()))
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val imei = telephonyManager.imei
-            if (imei != null) {
-                list.add(CommonDto("imei", imei))
+
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+                val imei = telephonyManager.imei
+                if (imei != null) {
+                    list.add(CommonDto("imei", imei))
+                }
+            } else {
+                list.add(CommonDto("imei", "for only apps preloaded on this device"))
             }
 
-            val meid = telephonyManager.meid
-            if (meid != null) {
-                list.add(CommonDto("meid", meid))
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+                val meid = telephonyManager.meid
+                if (meid != null) {
+                    list.add(CommonDto("meid", meid))
+                }
+            } else {
+                list.add(CommonDto("meid", "for only apps preloaded on this device"))
             }
 
             val carrierConfig = telephonyManager.carrierConfig
@@ -225,14 +242,22 @@ class TelephoneInfoFragment : BaseFragment() {
             list.add(CommonDto("voiceNetworkType", voiceNetworkType.toString()))
         }
 
-        val simSerialNumber = telephonyManager.simSerialNumber
-        if (simSerialNumber != null) {
-            list.add(CommonDto("simSerialNumber", simSerialNumber))
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+            val simSerialNumber = telephonyManager.simSerialNumber
+            if (simSerialNumber != null) {
+                list.add(CommonDto("simSerialNumber", simSerialNumber))
+            }
+        } else {
+            list.add(CommonDto("simSerialNumber", "for only apps preloaded on this device"))
         }
 
-        val subscriberId = telephonyManager.subscriberId
-        if (subscriberId != null) {
-            list.add(CommonDto("subscriberId", subscriberId))
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+            val subscriberId = telephonyManager.subscriberId
+            if (subscriberId != null) {
+                list.add(CommonDto("subscriberId", subscriberId))
+            }
+        } else {
+            list.add(CommonDto("subscriberId", "for only apps preloaded on this device"))
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
@@ -258,19 +283,25 @@ class TelephoneInfoFragment : BaseFragment() {
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            val allCellInfo = telephonyManager.allCellInfo
-            if (allCellInfo != null && allCellInfo.size > 0) {
-                list.add(CommonDto("=== CellInfo ===", ""))
-                for ((num, cellInfo) in allCellInfo.withIndex()) {
-                    list.add(CommonDto(num.toString(), ""))
-                    val isRegistered = cellInfo.isRegistered
-                    val isRegisteredString = if (isRegistered) "true" else "false"
-                    list.add(CommonDto("isRegistered", isRegisteredString))
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+                val allCellInfo = telephonyManager.allCellInfo
+                if (allCellInfo != null && allCellInfo.size > 0) {
+                    list.add(CommonDto("=== CellInfo ===", ""))
+                    for ((num, cellInfo) in allCellInfo.withIndex()) {
+                        list.add(CommonDto(num.toString(), ""))
+                        val isRegistered = cellInfo.isRegistered
+                        val isRegisteredString = if (isRegistered) "true" else "false"
+                        list.add(CommonDto("isRegistered", isRegisteredString))
 
-                    val timeStamp = cellInfo.timeStamp
-                    list.add(CommonDto("timeStamp", timeStamp.toString()))
+                        val timeStamp = cellInfo.timeStamp
+                        list.add(CommonDto("timeStamp", timeStamp.toString()))
+                    }
                 }
+            } else {
+                list.add(CommonDto("=== CellInfo ===", ""))
+                list.add(CommonDto("", "Not allowed to access cell info"))
             }
+
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
