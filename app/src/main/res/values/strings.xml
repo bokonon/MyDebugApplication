@@ -26,10 +26,11 @@
     <string name="screen_name_storage_info">Storage Info</string>
     <string name="screen_name_telephone_info">Telephone Info</string>
     <string name="screen_name_other_info">Other Info</string>
+    <string name="screen_name_system_properties">System Properties</string>
     <string name="screen_name_log_detail">Log Detail</string>
     <string name="screen_name_wifi_info_list">Wi-Fi Info List</string>
     <string name="screen_name_wifi_info_detail">Wi-Fi Info Detail</string>
-    <string name="screen_name_adb_shell">Adb Shell</string>
+    <string name="screen_name_exec_shell">Exec Shell</string>
     <string name="screen_name_pinning">Pinning</string>
     <string name="screen_name_lock_task">LockTask</string>
     <string name="screen_name_network_info">Network Info</string>

@@ -103,7 +103,7 @@ class ApplicationListFragment : BaseFragment() {
     private fun addApplicationList(actionTypePosition: Int, recyclerView: RecyclerView, emptyView: TextView) {
         val actionType: ApplicationInfoFragment.ActionType? = ApplicationInfoFragment.ActionType.find(actionTypePosition)
         if (activity != null && actionType != null) {
-            presenter.getApplicationList(activity!!, actionType, object: ApplicationListPresenter.OnGetApplicationListListener {
+            presenter.getApplicationList(requireActivity(), actionType, object: ApplicationListPresenter.OnGetApplicationListListener {
                 override fun onGetApplicationList(appList: List<ApplicationListDto>) {
                     adapter?.updateList(appList)
                     progressBar?.visibility = View.GONE

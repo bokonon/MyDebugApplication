@@ -3,19 +3,20 @@ package jp.co.yuji.mydebugapplication.presentation.presenter.other
 import jp.co.yuji.mydebugapplication.domain.usecase.ExecShellUseCase
 
 /**
- * Port Detail Presenter.
+ * System Properties Presenter.
  */
-class AdbShellPresenter {
+class SystemPropertiesPresenter {
 
-    interface OnExecShellListener {
-        fun onExecShell(result: String)
+    interface OnGetSystemPropertiesListener {
+        fun onGetSystemProperties(result: String)
     }
 
-    fun execShell(command: String, listener: OnExecShellListener) {
+    fun getSystemProperties(listener: OnGetSystemPropertiesListener) {
+        val command = "getprop"
         val useCase = ExecShellUseCase()
         useCase.exec(command, object : ExecShellUseCase.OnExecShellListener {
             override fun onExecShell(result: String) {
-                listener.onExecShell(result)
+                listener.onGetSystemProperties(result)
             }
         })
     }
