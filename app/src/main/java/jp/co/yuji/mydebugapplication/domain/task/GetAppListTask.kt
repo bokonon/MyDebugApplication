@@ -3,7 +3,6 @@ package jp.co.yuji.mydebugapplication.domain.task
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
-import android.os.AsyncTask
 import android.os.Build
 import android.provider.*
 import com.google.android.gms.actions.NoteIntents
@@ -15,24 +14,9 @@ import java.util.*
 /**
  * Get AppList Task.
  */
-class GetAppListTask(private val packageManager: PackageManager, private val actionType: ApplicationInfoFragment.ActionType, private val listener: OnGetApplicationListListener) : AsyncTask<Void, Void, List<ApplicationListDto>>() {
+class GetAppListTask(private val packageManager: PackageManager) {
 
-    interface OnGetApplicationListListener {
-        fun onGetApplicationList(appList : List<ApplicationListDto>)
-    }
-
-    override fun doInBackground(vararg params: Void?): List<ApplicationListDto> {
-        return getApplicationList()
-    }
-
-    override fun onPostExecute(appList: List<ApplicationListDto>?) {
-        super.onPostExecute(appList)
-        if (appList != null) {
-            listener.onGetApplicationList(appList)
-        }
-    }
-
-    private fun getApplicationList() : List<ApplicationListDto> {
+    suspend fun exec(actionType: ApplicationInfoFragment.ActionType): List<ApplicationListDto> {
         val list = ArrayList<ApplicationListDto>()
         when (actionType) {
             ApplicationInfoFragment.ActionType.INSTALLED -> {

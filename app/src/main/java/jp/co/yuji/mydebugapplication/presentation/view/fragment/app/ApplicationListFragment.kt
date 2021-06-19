@@ -1,15 +1,15 @@
 package jp.co.yuji.mydebugapplication.presentation.view.fragment.app
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.SearchView
+import androidx.fragment.app.Fragment
+import androidx.appcompat.widget.SearchView
 import android.view.*
 import android.view.inputmethod.EditorInfo
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import jp.co.yuji.mydebugapplication.BuildConfig
 import jp.co.yuji.mydebugapplication.R
 import jp.co.yuji.mydebugapplication.domain.model.ApplicationListDto
@@ -103,7 +103,7 @@ class ApplicationListFragment : BaseFragment() {
     private fun addApplicationList(actionTypePosition: Int, recyclerView: RecyclerView, emptyView: TextView) {
         val actionType: ApplicationInfoFragment.ActionType? = ApplicationInfoFragment.ActionType.find(actionTypePosition)
         if (activity != null && actionType != null) {
-            presenter.getApplicationList(activity!!, actionType, object: ApplicationListPresenter.OnGetApplicationListListener {
+            presenter.getApplicationList(requireActivity(), actionType, object: ApplicationListPresenter.OnGetApplicationListListener {
                 override fun onGetApplicationList(appList: List<ApplicationListDto>) {
                     adapter?.updateList(appList)
                     progressBar?.visibility = View.GONE

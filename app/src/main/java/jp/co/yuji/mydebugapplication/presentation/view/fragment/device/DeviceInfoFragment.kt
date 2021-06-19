@@ -10,13 +10,13 @@ import android.net.wifi.WifiManager
 import android.os.Bundle
 import android.os.SystemClock
 import android.provider.Settings
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
+import androidx.fragment.app.Fragment
 import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import jp.co.yuji.mydebugapplication.R
 import jp.co.yuji.mydebugapplication.domain.model.CommonDto
 import jp.co.yuji.mydebugapplication.presentation.view.adapter.common.CommonRecyclerViewAdapter
@@ -45,7 +45,7 @@ class DeviceInfoFragment : BaseFragment() {
 
         view.recyclerView.layoutManager = LinearLayoutManager(activity)
         if (activity != null) {
-            val adapter = CommonRecyclerViewAdapter(activity!!, getDeviceInfo())
+            val adapter = CommonRecyclerViewAdapter(requireActivity(), getDeviceInfo())
             view.recyclerView.adapter = adapter
         }
 

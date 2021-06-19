@@ -3,12 +3,12 @@ package jp.co.yuji.mydebugapplication.presentation.view.fragment.other
 import android.content.Context
 import android.net.wifi.ScanResult
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.LinearLayoutManager
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import jp.co.yuji.mydebugapplication.R
 import jp.co.yuji.mydebugapplication.domain.model.CommonDto
 import jp.co.yuji.mydebugapplication.presentation.presenter.other.WiFiInfoDetailPresenter
@@ -45,7 +45,7 @@ class WiFiInfoDetailFragment : BaseFragment() {
         val scanResult = arguments?.getParcelable<ScanResult>(ARG_KEY)
 
         if (activity != null && scanResult != null) {
-            val adapter = WiFiInfoDetailRecyclerViewAdapter(activity!!, getWiFiInfoDetail(activity!!, scanResult))
+            val adapter = WiFiInfoDetailRecyclerViewAdapter(requireActivity(), getWiFiInfoDetail(requireActivity(), scanResult))
             view.recyclerView.adapter = adapter
         }
 

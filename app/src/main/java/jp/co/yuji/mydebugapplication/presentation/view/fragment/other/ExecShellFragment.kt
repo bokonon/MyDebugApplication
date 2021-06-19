@@ -2,29 +2,29 @@ package jp.co.yuji.mydebugapplication.presentation.view.fragment.other
 
 import android.content.Context
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.ProgressBar
+import androidx.fragment.app.Fragment
 import jp.co.yuji.mydebugapplication.R
-import jp.co.yuji.mydebugapplication.presentation.presenter.other.AdbShellPresenter
+import jp.co.yuji.mydebugapplication.presentation.presenter.other.ExecShellPresenter
 import jp.co.yuji.mydebugapplication.presentation.view.fragment.BaseFragment
 import kotlinx.android.synthetic.main.fragment_adb_shell.view.*
 
 /**
- * Adb Shell Fragment.
+ * Exec Shell Fragment.
  */
-class AdbShellFragment : BaseFragment() {
+class ExecShellFragment : BaseFragment() {
 
     companion object {
         fun newInstance() : Fragment {
-            return AdbShellFragment()
+            return ExecShellFragment()
         }
     }
 
-    private val presenter = AdbShellPresenter()
+    private val presenter = ExecShellPresenter()
 
     private var progressBar: ProgressBar? = null
 
@@ -47,7 +47,7 @@ class AdbShellFragment : BaseFragment() {
             progressBar?.visibility = View.VISIBLE
 
             val command = view.adbShellEditText.text.toString()
-            presenter.execShell(command, object : AdbShellPresenter.OnExecShellListener {
+            presenter.execShell(command, object : ExecShellPresenter.OnExecShellListener {
                 override fun onExecShell(result: String) {
                     view.adbShellResultText.text = getExecuteText(result)
                     view.hideKeyboard()
@@ -61,7 +61,7 @@ class AdbShellFragment : BaseFragment() {
     }
 
     override fun getTitle(): Int {
-        return R.string.screen_name_adb_shell
+        return R.string.screen_name_exec_shell
     }
 
     private fun getExecuteText(result: String) : String {

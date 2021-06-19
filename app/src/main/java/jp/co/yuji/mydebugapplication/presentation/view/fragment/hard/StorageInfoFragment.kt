@@ -4,11 +4,11 @@ import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import jp.co.yuji.mydebugapplication.R
 import jp.co.yuji.mydebugapplication.domain.model.CommonDto
 import jp.co.yuji.mydebugapplication.presentation.view.adapter.common.CommonDetailRecyclerViewAdapter
@@ -36,7 +36,7 @@ class StorageInfoFragment : BaseFragment() {
         view.recyclerView.layoutManager = LinearLayoutManager(activity)
 
         if (activity != null) {
-            adapter = CommonDetailRecyclerViewAdapter(activity!!, getStorageInfo())
+            adapter = CommonDetailRecyclerViewAdapter(requireActivity(), getStorageInfo())
             view.recyclerView.adapter = adapter
         }
 

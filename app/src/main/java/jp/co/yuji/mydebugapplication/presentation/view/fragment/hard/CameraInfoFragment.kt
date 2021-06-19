@@ -1,12 +1,12 @@
 package jp.co.yuji.mydebugapplication.presentation.view.fragment.hard
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
+import androidx.recyclerview.widget.LinearLayoutManager
 import jp.co.yuji.mydebugapplication.R
 import jp.co.yuji.mydebugapplication.domain.model.CommonDto
 import jp.co.yuji.mydebugapplication.presentation.presenter.hard.CameraInfoPresenter
@@ -40,7 +40,7 @@ class CameraInfoFragment : BaseFragment() {
 
         val list = ArrayList<CommonDto>()
         if (activity != null) {
-            adapter = CommonSelectableRecyclerViewAdapter(activity!!, list)
+            adapter = CommonSelectableRecyclerViewAdapter(requireActivity(), list)
             view.recyclerView.adapter = adapter
         }
 
@@ -58,7 +58,7 @@ class CameraInfoFragment : BaseFragment() {
 
     private fun addCameraInfo(list : ArrayList<CommonDto>) {
         if (activity != null) {
-            presenter.getCameraInfo(activity!!, object: CameraInfoPresenter.OnGetCameraInfoListener {
+            presenter.getCameraInfo(requireActivity(), object: CameraInfoPresenter.OnGetCameraInfoListener {
                 override fun onGetCameraInfo(cameraList: List<CommonDto>) {
                     list.addAll(cameraList)
                     if (adapter != null) {

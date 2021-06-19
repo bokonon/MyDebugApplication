@@ -1,11 +1,11 @@
 package jp.co.yuji.mydebugapplication.presentation.view.fragment.other
 
 import android.os.Bundle
-import android.support.annotation.Nullable
-import android.support.v4.app.Fragment
-import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.LinearLayoutManager
 import android.view.*
+import androidx.annotation.Nullable
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.ads.AdRequest
 import jp.co.yuji.mydebugapplication.R
 import jp.co.yuji.mydebugapplication.presentation.view.activity.AboutActivity
@@ -32,9 +32,10 @@ class OtherInfoFragment : BaseFragment() {
             var fragment: Fragment? = null
             val type = Type.find(position)
             when (type) {
+                Type.SYSTEM_PROPERTIES -> fragment = SystemPropertiesFragment.newInstance()
                 Type.LOG -> fragment = LogDetailFragment.newInstance()
                 Type.WI_FI -> fragment = WiFiInfoListFragment.newInstance()
-                Type.ADB_SHELL -> fragment = AdbShellFragment.newInstance()
+                Type.EXEC_SHELL -> fragment = ExecShellFragment.newInstance()
                 Type.PINNING -> fragment = PinningFragment.newInstance()
                 Type.NETWORK_INFO -> fragment = NetworkInfoFragment.newInstance()
                 Type.ACTIVITY_MANAGER -> fragment = ActivityManagerFragment.newInstance()
@@ -117,19 +118,20 @@ class OtherInfoFragment : BaseFragment() {
     private fun startActivity(url: String, contentType: String) {
         postLogEvent(contentType)
         if (activity != null) {
-            AboutActivity.startActivity(activity!!, url)
+            AboutActivity.startActivity(requireActivity(), url)
         }
     }
 
     enum class Type(val title: String, val position: Int)  {
-        LOG("Log", 0),
-        WI_FI("Wi-Fi", 1),
-        ADB_SHELL("Adb Shell", 2),
-        PINNING("Pinning", 3),
-        NETWORK_INFO("Network Info", 4),
-        ACTIVITY_MANAGER("Activity Manager", 5),
-        ALARM_MANAGER("Alarm Manager", 6),
-        PORT("Port", 7);
+        SYSTEM_PROPERTIES("System Properties", 0),
+        LOG("Log", 1),
+        WI_FI("Wi-Fi", 2),
+        EXEC_SHELL("Exec Shell", 3),
+        PINNING("Pinning", 4),
+        NETWORK_INFO("Network Info", 5),
+        ACTIVITY_MANAGER("Activity Manager", 6),
+        ALARM_MANAGER("Alarm Manager", 7),
+        PORT("Port", 8);
 
         companion object {
             @Nullable

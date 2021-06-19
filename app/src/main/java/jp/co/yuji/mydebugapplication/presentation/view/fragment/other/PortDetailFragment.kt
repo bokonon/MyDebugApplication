@@ -1,15 +1,14 @@
 package jp.co.yuji.mydebugapplication.presentation.view.fragment.other
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
+import androidx.fragment.app.Fragment
 import jp.co.yuji.mydebugapplication.R
 import jp.co.yuji.mydebugapplication.presentation.presenter.other.PortDetailPresenter
 import jp.co.yuji.mydebugapplication.presentation.view.fragment.BaseFragment
-import jp.co.yuji.mydebugapplication.presentation.view.fragment.about.AboutFragment
 import kotlinx.android.synthetic.main.fragment_common_log_progress.view.*
 
 class PortDetailFragment: BaseFragment() {
@@ -33,7 +32,7 @@ class PortDetailFragment: BaseFragment() {
                               savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         val view = inflater.inflate(R.layout.fragment_common_log_progress, container, false)
-        val command = arguments?.getString(AboutFragment.ARG_KEY)
+        val command = arguments?.getString(ARG_KEY)
         if (command != null) {
             progressBar = view.progressBar
             progressBar?.visibility = View.VISIBLE

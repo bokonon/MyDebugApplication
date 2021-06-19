@@ -3,9 +3,9 @@ package jp.co.yuji.mydebugapplication.presentation.presenter.other
 import jp.co.yuji.mydebugapplication.domain.usecase.ExecShellUseCase
 
 /**
- * Port Detail Presenter.
+ * Exec Shell Presenter.
  */
-class AdbShellPresenter {
+class ExecShellPresenter {
 
     interface OnExecShellListener {
         fun onExecShell(result: String)
@@ -13,7 +13,7 @@ class AdbShellPresenter {
 
     fun execShell(command: String, listener: OnExecShellListener) {
         val useCase = ExecShellUseCase()
-        useCase.execShell(command, object : ExecShellUseCase.OnExecShellListener {
+        useCase.exec(command, object : ExecShellUseCase.OnExecShellListener {
             override fun onExecShell(result: String) {
                 listener.onExecShell(result)
             }

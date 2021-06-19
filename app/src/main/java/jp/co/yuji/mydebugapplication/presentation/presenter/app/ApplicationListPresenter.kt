@@ -16,7 +16,7 @@ class ApplicationListPresenter {
 
     fun getApplicationList(context: Context, actionType: ApplicationInfoFragment.ActionType, listener: OnGetApplicationListListener) {
         val useCase = GetAppListUseCase()
-        useCase.getApplicationList(context, actionType, object : GetAppListUseCase.OnGetApplicationListListener {
+        useCase.exec(context, actionType, object : GetAppListUseCase.OnGetApplicationListListener {
             override fun onGetApplicationList(appList: List<ApplicationListDto>) {
                 listener.onGetApplicationList(appList)
             }

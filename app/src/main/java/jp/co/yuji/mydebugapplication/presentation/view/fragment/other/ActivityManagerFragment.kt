@@ -5,11 +5,11 @@ import android.content.Context
 import android.content.pm.ConfigurationInfo
 import android.os.Build
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import jp.co.yuji.mydebugapplication.R
 import jp.co.yuji.mydebugapplication.domain.model.CommonDto
 import jp.co.yuji.mydebugapplication.presentation.view.adapter.common.CommonDetailRecyclerViewAdapter
@@ -33,7 +33,7 @@ class ActivityManagerFragment : BaseFragment() {
         view.recyclerView.layoutManager = LinearLayoutManager(activity)
 
         if (activity != null) {
-            val adapter = CommonDetailRecyclerViewAdapter(activity!!, getActivityManagerInfo())
+            val adapter = CommonDetailRecyclerViewAdapter(requireActivity(), getActivityManagerInfo())
             view.recyclerView.adapter = adapter
         }
 
@@ -58,7 +58,7 @@ class ActivityManagerFragment : BaseFragment() {
                     list.add(CommonDto("baseActivity", taskInfo.baseActivity?.toString().orEmpty()))
                 }
 
-                list.add(CommonDto("baseIntent", taskInfo.baseIntent?.toString().orEmpty()))
+                list.add(CommonDto("baseIntent", taskInfo.baseIntent.toString().orEmpty()))
                 list.add(CommonDto("description", taskInfo.description?.toString().orEmpty()))
                 list.add(CommonDto("id", taskInfo.id.toString()))
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -66,7 +66,7 @@ class ActivityManagerFragment : BaseFragment() {
                 }
                 list.add(CommonDto("origActivity", taskInfo.origActivity?.toString().orEmpty()))
                 list.add(CommonDto("persistentId", taskInfo.persistentId.toString()))
-                list.add(CommonDto("taskDescription label", taskInfo.taskDescription.label?.toString().orEmpty()))
+                list.add(CommonDto("taskDescription label", taskInfo.taskDescription?.label?.toString().orEmpty()))
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     list.add(CommonDto("topActivity", taskInfo.topActivity?.toString().orEmpty()))

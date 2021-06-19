@@ -15,7 +15,7 @@ class WiFiInfoListPresenter {
 
     fun getWiFiInfoList(context: Context, listener: OnGetWiFiInfoListListener) {
         val useCase = GetWiFiInfoListUseCase()
-        useCase.getWiFiInfoList(context, object : GetWiFiInfoListUseCase.OnGetWiFiInfoListListener {
+        useCase.exec(context, object : GetWiFiInfoListUseCase.OnGetWiFiInfoListListener {
             override fun onGetWiFiInfoList(wifiInfoList : List<ScanResult>) {
                 listener.onGetWiFiInfoList(wifiInfoList)
             }

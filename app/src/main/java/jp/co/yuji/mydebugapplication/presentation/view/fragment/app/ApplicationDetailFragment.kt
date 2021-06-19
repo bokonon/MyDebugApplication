@@ -2,12 +2,12 @@ package jp.co.yuji.mydebugapplication.presentation.view.fragment.app
 
 import android.os.Build
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.LinearLayoutManager
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import jp.co.yuji.mydebugapplication.R
 import jp.co.yuji.mydebugapplication.domain.model.CommonDto
 import jp.co.yuji.mydebugapplication.presentation.view.adapter.common.CommonDetailRecyclerViewAdapter
@@ -42,7 +42,7 @@ class ApplicationDetailFragment : BaseFragment() {
         val packageName = arguments?.getString(ARG_KEY)
 
         if (activity != null && packageName != null) {
-            val adapter = CommonDetailRecyclerViewAdapter(activity!!, getApplicationDetail(packageName))
+            val adapter = CommonDetailRecyclerViewAdapter(requireActivity(), getApplicationDetail(packageName))
             view.recyclerView.adapter = adapter
         }
 
@@ -68,7 +68,7 @@ class ApplicationDetailFragment : BaseFragment() {
                 list.add(CommonDto("processName", applicationInfo.processName?.toString().orEmpty()))
                 list.add(CommonDto("className", applicationInfo.className?.toString().orEmpty()))
                 if (applicationInfo.descriptionRes > 0) {
-                    list.add(CommonDto("descriptionRes", activity!!.getString(applicationInfo.descriptionRes)))
+                    list.add(CommonDto("descriptionRes", requireActivity().getString(applicationInfo.descriptionRes)))
                 } else {
                     list.add(CommonDto("descriptionRes", "no resource"))
                 }

@@ -4,11 +4,11 @@ import android.content.Context
 import android.graphics.Point
 import android.os.Build
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.LinearLayoutManager
+import androidx.fragment.app.Fragment
 import android.util.DisplayMetrics
 import android.view.*
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import jp.co.yuji.mydebugapplication.R
 import jp.co.yuji.mydebugapplication.domain.model.CommonDto
 import jp.co.yuji.mydebugapplication.presentation.view.adapter.common.CommonDetailRecyclerViewAdapter

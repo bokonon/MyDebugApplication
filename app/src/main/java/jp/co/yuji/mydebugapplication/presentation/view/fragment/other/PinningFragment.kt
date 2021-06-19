@@ -7,7 +7,7 @@ import android.content.ComponentName
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -47,7 +47,7 @@ class PinningFragment : BaseFragment() {
         val view = inflater.inflate(R.layout.fragment_pinning, container, false)
 
         devicePolicyManager = activity?.getSystemService(Context.DEVICE_POLICY_SERVICE) as DevicePolicyManager?
-        deviceAdmin = ComponentName(activity, MyDeviceAdminReceiver::class.java)
+        deviceAdmin = ComponentName(requireActivity(), MyDeviceAdminReceiver::class.java)
 
         activityManager = activity?.getSystemService(
                 Context.ACTIVITY_SERVICE) as ActivityManager
@@ -108,7 +108,7 @@ class PinningFragment : BaseFragment() {
 
     private fun startPinningActivity() {
         if (activity != null) {
-            PinningActivity.startActivity(activity!!, PinningActivityFragment.PinningType.PINNING)
+            PinningActivity.startActivity(requireActivity(), PinningActivityFragment.PinningType.PINNING)
         }
     }
 
@@ -124,8 +124,8 @@ class PinningFragment : BaseFragment() {
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private fun startLockTask() {
-        if (devicePolicyManager != null && devicePolicyManager!!.isDeviceOwnerApp(activity?.packageName)) {
-            devicePolicyManager?.setLockTaskPackages(deviceAdmin, arrayOf(activity?.packageName))
+        if (devicePolicyManager != null && devicePolicyManager!!.isDeviceOwnerApp(activity?.packageName) && deviceAdmin != null) {
+            devicePolicyManager?.setLockTaskPackages(deviceAdmin!!, arrayOf(activity?.packageName))
             startPinning()
         }
     }
@@ -137,7 +137,7 @@ class PinningFragment : BaseFragment() {
 
     private fun startLockTaskActivity() {
         if (activity != null) {
-            PinningActivity.startActivity(activity!!, PinningActivityFragment.PinningType.LOCK_TASK)
+            PinningActivity.startActivity(requireActivity(), PinningActivityFragment.PinningType.LOCK_TASK)
         }
     }
 
