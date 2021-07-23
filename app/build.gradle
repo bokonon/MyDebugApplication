@@ -1,7 +1,5 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
 
 def rootProject = project.rootProject
@@ -16,8 +14,8 @@ android {
         applicationId "jp.co.yuji.mydebugapplication"
         minSdkVersion 16
         targetSdkVersion 30
-        versionCode 27
-        versionName "1.11.0"
+        versionCode 28
+        versionName "1.11.1"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true

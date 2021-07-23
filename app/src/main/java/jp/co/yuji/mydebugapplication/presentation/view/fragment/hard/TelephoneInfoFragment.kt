@@ -56,11 +56,22 @@ class TelephoneInfoFragment : BaseFragment() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
         if (requestCode == PERMISSIONS_REQUEST_CODE_READ_PHONE_STATE
-                && grantResults.isNotEmpty()
-                && grantResults[0] == PackageManager.PERMISSION_GRANTED
-                && grantResults.size > 1
-                && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
-            addRequiredPermissionTelephoneInfo(adapter.getItems())
+                && grantResults.isNotEmpty()) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED
+                        && grantResults.size > 3
+                        && grantResults[1] == PackageManager.PERMISSION_GRANTED
+                        && grantResults[2] == PackageManager.PERMISSION_GRANTED
+                        && grantResults[3] == PackageManager.PERMISSION_GRANTED) {
+                    addRequiredPermissionTelephoneInfo(adapter.getItems())
+                }
+            } else {
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED
+                        && grantResults.size > 1
+                        && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+                    addRequiredPermissionTelephoneInfo(adapter.getItems())
+                }
+            }
 
             adapter.notifyDataSetChanged()
         }
@@ -179,16 +190,36 @@ class TelephoneInfoFragment : BaseFragment() {
     }
 
     private fun addRequiredPermissionTelephoneInfo(list: ArrayList<CommonDto>) {
-        if (ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.READ_PHONE_STATE)
-                != PackageManager.PERMISSION_GRANTED
-                || ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.ACCESS_COARSE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-            val permissions: Array<String> = arrayOf(Manifest.permission.READ_PHONE_STATE, Manifest.permission.ACCESS_COARSE_LOCATION)
-            requestPermissions(
-                    permissions,
-                    PERMISSIONS_REQUEST_CODE_READ_PHONE_STATE)
-            return
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            if (ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.READ_PHONE_STATE)
+                    != PackageManager.PERMISSION_GRANTED
+                    || ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.READ_PHONE_NUMBERS)
+                    != PackageManager.PERMISSION_GRANTED
+                    || ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.READ_SMS)
+                    != PackageManager.PERMISSION_GRANTED
+                    || ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.ACCESS_COARSE_LOCATION)
+                    != PackageManager.PERMISSION_GRANTED
+            ) {
+                val permissions: Array<String> = arrayOf(Manifest.permission.READ_PHONE_STATE, Manifest.permission.READ_PHONE_NUMBERS, Manifest.permission.READ_SMS, Manifest.permission.ACCESS_COARSE_LOCATION)
+                requestPermissions(
+                        permissions,
+                        PERMISSIONS_REQUEST_CODE_READ_PHONE_STATE)
+                return
+            }
+        } else {
+            if (ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.READ_PHONE_STATE)
+                    != PackageManager.PERMISSION_GRANTED
+                    || ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.ACCESS_COARSE_LOCATION)
+                    != PackageManager.PERMISSION_GRANTED
+            ) {
+                val permissions: Array<String> = arrayOf(Manifest.permission.READ_PHONE_STATE, Manifest.permission.ACCESS_COARSE_LOCATION)
+                requestPermissions(
+                        permissions,
+                        PERMISSIONS_REQUEST_CODE_READ_PHONE_STATE)
+                return
+            }
         }
+
         val telephonyManager = activity?.getSystemService(TELEPHONY_SERVICE) as TelephonyManager
 
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {

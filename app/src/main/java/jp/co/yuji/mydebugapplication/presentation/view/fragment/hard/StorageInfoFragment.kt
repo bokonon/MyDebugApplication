@@ -4,17 +4,17 @@ import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import jp.co.yuji.mydebugapplication.R
 import jp.co.yuji.mydebugapplication.domain.model.CommonDto
 import jp.co.yuji.mydebugapplication.presentation.view.adapter.common.CommonDetailRecyclerViewAdapter
 import jp.co.yuji.mydebugapplication.presentation.view.fragment.BaseFragment
 import kotlinx.android.synthetic.main.fragment_common.view.*
-import java.util.ArrayList
+import java.util.*
 
 /**
  * Storage Info Fragment.
@@ -67,6 +67,18 @@ class StorageInfoFragment : BaseFragment() {
             list.add(CommonDto("Context.getExternalCacheDir()", externalCacheDir))
         }
 
+        addExternalMediaDir(context, list)
+
+        val obbDir = context.obbDir.absolutePath
+        list.add(CommonDto("Context.getObbDir()", obbDir))
+
+        addObbDirs(context, list)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            val codeCacheDir = context.codeCacheDir.absolutePath
+            list.add(CommonDto("Context.getCodeCacheDir()", codeCacheDir))
+        }
+
         return list
     }
 
@@ -82,6 +94,30 @@ class StorageInfoFragment : BaseFragment() {
                             list.add(CommonDto("Environment.isExternalStorageRemovable(File path)", path))
                         }
                     }
+                }
+            }
+        }
+    }
+
+    private fun addExternalMediaDir(context: Context, list: ArrayList<CommonDto>) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            val dirs = context.externalMediaDirs
+            for (dir in dirs) {
+                if (dir != null) {
+                    val path = dir.absolutePath
+                    list.add(CommonDto("Context.getExternalMediaDirs()", path))
+                }
+            }
+        }
+    }
+
+    private fun addObbDirs(context: Context, list: ArrayList<CommonDto>) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            val dirs = context.obbDirs
+            for (dir in dirs) {
+                if (dir != null) {
+                    val path = dir.absolutePath
+                    list.add(CommonDto("Context.getObbDirs()", path))
                 }
             }
         }
