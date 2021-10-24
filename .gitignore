@@ -47,6 +47,7 @@ captures/
 .idea/vcs.xml
 .idea/caches/
 .idea/codeStyles
+.idea/deploymentTargetDropDown.xml
 
 # Keystore files
 *.jks

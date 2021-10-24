@@ -4,12 +4,13 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.net.wifi.ScanResult
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import androidx.core.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
+import android.widget.TextView
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import jp.co.yuji.mydebugapplication.R
@@ -36,6 +37,8 @@ class WiFiInfoListFragment : BaseFragment() {
     private var adapter: WiFiInfoListRecyclerViewAdapter? = null
 
     private var progressBar: ProgressBar? = null
+
+    private var emptyView: TextView? = null
 
     private val listener = object: WiFiInfoListRecyclerViewAdapter.OnItemClickListener {
         override fun onItemClick(scanResult: ScanResult) {
@@ -64,15 +67,24 @@ class WiFiInfoListFragment : BaseFragment() {
         val itemDecoration = DividerItemDecoration(activity, DividerItemDecoration.VERTICAL)
         view.recyclerView.addItemDecoration(itemDecoration)
 
-        if (activity != null && ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.ACCESS_COARSE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-            val permissions: Array<String> = arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION)
-            requestPermissions(
-                    permissions,
-                    PERMISSIONS_REQUEST_CODE_ACCESS_COARSE_LOCATION)
-        } else {
+        if (ContextCompat.checkSelfPermission(requireActivity(),
+                Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
+            && ContextCompat.checkSelfPermission(requireActivity(),
+                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+            && ContextCompat.checkSelfPermission(requireActivity(),
+                Manifest.permission.CHANGE_WIFI_STATE) != PackageManager.PERMISSION_GRANTED) {
             addWiFiList(list)
+        } else {
+            val permissions: Array<String> = arrayOf(
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.CHANGE_WIFI_STATE)
+            requestPermissions(
+                permissions,
+                PERMISSIONS_REQUEST_CODE_ACCESS_COARSE_LOCATION)
         }
+
+        emptyView = view.emptyView
 
         return view
     }
@@ -90,17 +102,19 @@ class WiFiInfoListFragment : BaseFragment() {
         } else {
             progressBar?.visibility = View.GONE
         }
-
     }
 
     private fun addWiFiList(list : ArrayList<ScanResult>?) {
-        if (activity == null) {
-            return
-        }
         presenter.getWiFiInfoList(requireActivity(), object: WiFiInfoListPresenter.OnGetWiFiInfoListListener {
             override fun onGetWiFiInfoList(wifiInfoList: List<ScanResult>) {
-                list?.addAll(wifiInfoList)
-                adapter?.notifyDataSetChanged()
+                if (wifiInfoList.isEmpty()) {
+                    emptyView?.setText(R.string.wifi_info_no_results_text)
+                    emptyView?.visibility = View.VISIBLE
+                } else {
+                    list?.addAll(wifiInfoList)
+                    adapter?.notifyDataSetChanged()
+                    emptyView?.visibility = View.GONE
+                }
                 progressBar?.visibility = View.GONE
             }
         })
