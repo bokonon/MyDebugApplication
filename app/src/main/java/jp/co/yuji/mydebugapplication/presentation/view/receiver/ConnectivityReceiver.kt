@@ -7,7 +7,7 @@ import android.net.ConnectivityManager
 import android.net.NetworkInfo
 
 
-class ConnectivityReceiver(val listener : OnConnectivityListener) : BroadcastReceiver() {
+class ConnectivityReceiver(val listener: OnConnectivityListener) : BroadcastReceiver() {
 
     interface OnConnectivityListener {
         fun onConnectivityReceive(networkInfo : NetworkInfo?)

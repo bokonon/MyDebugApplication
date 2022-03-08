@@ -7,7 +7,7 @@ import android.os.BatteryManager
 import jp.co.yuji.mydebugapplication.domain.model.MyBatteryInfo
 
 
-class BatteryReceiver(val listener : BatteryReceiver.OnBatteryChangeListener) : BroadcastReceiver() {
+class BatteryReceiver(val listener: BatteryReceiver.OnBatteryChangeListener) : BroadcastReceiver() {
 
     companion object {
         const val DEFAULT_VALUE = -1

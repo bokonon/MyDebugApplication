@@ -6,10 +6,10 @@ import android.content.IntentFilter
 import android.os.BatteryManager
 import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import jp.co.yuji.mydebugapplication.R
 import jp.co.yuji.mydebugapplication.domain.model.CommonDto
@@ -33,8 +33,8 @@ class BatteryInfoFragment : BaseFragment() {
 
     private lateinit var adapter: CommonRecyclerViewAdapter
 
-    private val receiver = BatteryReceiver(object : BatteryReceiver.OnBatteryChangeListener {
-        override fun onBatteryChange(myBatteryInfo : MyBatteryInfo) {
+    private val receiver = BatteryReceiver(object: BatteryReceiver.OnBatteryChangeListener {
+        override fun onBatteryChange(myBatteryInfo: MyBatteryInfo) {
             updateView(myBatteryInfo)
         }
     })
@@ -42,7 +42,7 @@ class BatteryInfoFragment : BaseFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        val view = inflater!!.inflate(R.layout.fragment_common, container, false)
+        val view = inflater.inflate(R.layout.fragment_common, container, false)
         view.recyclerView.layoutManager = LinearLayoutManager(activity)
 
         if (activity != null) {

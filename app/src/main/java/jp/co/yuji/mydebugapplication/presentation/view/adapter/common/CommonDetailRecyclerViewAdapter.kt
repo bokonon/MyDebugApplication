@@ -1,11 +1,11 @@
 package jp.co.yuji.mydebugapplication.presentation.view.adapter.common
 
 import android.content.Context
-import androidx.core.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import jp.co.yuji.mydebugapplication.R
 import jp.co.yuji.mydebugapplication.domain.model.CommonDto
@@ -13,7 +13,7 @@ import jp.co.yuji.mydebugapplication.domain.model.CommonDto
 /**
  * Common Detail RecyclerView Adapter.
  */
-class CommonDetailRecyclerViewAdapter (private val context: Context, private val items: List<CommonDto>) : RecyclerView.Adapter<CommonDetailRecyclerViewAdapter.ViewHolder>() {
+class CommonDetailRecyclerViewAdapter (private val context: Context, val items: ArrayList<CommonDto>) : RecyclerView.Adapter<CommonDetailRecyclerViewAdapter.ViewHolder>() {
 
     override fun getItemCount(): Int = items.size
 

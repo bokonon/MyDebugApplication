@@ -41,6 +41,7 @@ class OtherInfoFragment : BaseFragment() {
                 Type.ACTIVITY_MANAGER -> fragment = ActivityManagerFragment.newInstance()
                 Type.ALARM_MANAGER -> fragment = AlarmManagerFragment.newInstance()
                 Type.PORT -> fragment = PortListFragment.newInstance()
+                Type.BROADCAST -> fragment = BroadcastInfoFragment.newInstance()
             }
             if (fragment != null) {
                 activity?.supportFragmentManager?.beginTransaction()
@@ -131,7 +132,8 @@ class OtherInfoFragment : BaseFragment() {
         NETWORK_INFO("Network Info", 5),
         ACTIVITY_MANAGER("Activity Manager", 6),
         ALARM_MANAGER("Alarm Manager", 7),
-        PORT("Port", 8);
+        PORT("Port", 8),
+        BROADCAST("Broadcast", 9);
 
         companion object {
             @Nullable

@@ -38,6 +38,7 @@
     <string name="screen_name_alarm_manager">Alarm Manager</string>
     <string name="screen_name_port_list">Port List</string>
     <string name="screen_name_port_detail">Port Detail</string>
+    <string name="screen_name_broadcast_info">Broadcast Info</string>
     <string name="screen_name_about">About</string>
 
     <!-- WiFi info -->

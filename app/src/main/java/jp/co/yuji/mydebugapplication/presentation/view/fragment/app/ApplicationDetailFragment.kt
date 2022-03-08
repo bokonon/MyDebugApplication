@@ -2,10 +2,10 @@ package jp.co.yuji.mydebugapplication.presentation.view.fragment.app
 
 import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import jp.co.yuji.mydebugapplication.R
@@ -56,7 +56,7 @@ class ApplicationDetailFragment : BaseFragment() {
         return R.string.screen_name_application_detail
     }
 
-    private fun getApplicationDetail(packageName: String): List<CommonDto> {
+    private fun getApplicationDetail(packageName: String): ArrayList<CommonDto> {
         val list = ArrayList<CommonDto>()
 
         try {
